@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/demo_page.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/demo_table.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/demo_table_jui.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/themes/base/jquery-ui.css" type="text/css" charset="utf-8"/>
+    <!--<link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/themes/smoothness/jquery-ui-1.7.2.custom.css" type="text/css" charset="utf-8"/>-->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="raminame/movies/styles.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="raminame/movies/iphone-style/style.css"/>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+    <script type="text/javascript" src="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/js/jquery.dataTables.editable.js"></script>
+    <script type="text/javascript" src="http://datatables.net/release-datatables/extras/KeyTable/js/KeyTable.js"></script>
+    <script type="text/javascript" src="raminame/movies/dataTableInit.js"></script>
+    <script src="raminame/movies/iphone-style/iphone-style-checkboxes.js"></script>
+    <style>
+      .image {
+          width: 300px;
+      }
+      .table {
+      }
+    </style>
+
+  </head>
+  <body style="height:2000px;">
+    <div>
+      <table>
+        <tr>
+          <td valign="top">
+            <div id="sidebar" class="ui-widget ui-widget-content ui-corner-all ui-dialog-buttons">
+              <div style="width: 100%; text-align: center; border: none;" class="fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">Filters</div>
+              <div>
+                <div class="filter">
+                  <div style="padding-bottom: 2px;">Cumulative filter</div>
+                  <input type="checkbox"/>
+                </div>
+                <div id="filters" style="display: none;"></div>
+              </div>
+            </div>
+          </td>
+          <td valign="top" style="width: 100%">
+            <div id="table" class="table" ></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
