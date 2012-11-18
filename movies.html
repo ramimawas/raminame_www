@@ -17,7 +17,9 @@
     <script type="text/javascript" src="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/js/jquery.validate.js"></script>
     <script type="text/javascript" src="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/js/jquery.dataTables.editable.js"></script>
     <script type="text/javascript" src="http://datatables.net/release-datatables/extras/KeyTable/js/KeyTable.js"></script>
+    <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript" src="movies/dataTableInit.js"></script>
+    <script type="text/javascript" src="movies/dataTablePlugin.js"></script>
     <script src="movies/iphone-style/iphone-style-checkboxes.js"></script>
     <style>
       .image {
@@ -37,10 +39,14 @@
               <div style="width: 100%; text-align: center; border: none;" class="fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">Filters</div>
               <div>
                 <div class="filter">
-                  <div style="padding-bottom: 2px;">Cumulative filter</div>
-                  <input type="checkbox"/>
+                  <div style="padding-bottom: 2px;">Show filters</div>
+                  <input  id="showFilters"  type="checkbox"/>
                 </div>
-                <div id="filters" style="display: none;"></div>
+                <div class="filter">
+                  <div style="padding-bottom: 2px;">Cumulative filter</div>
+                  <input id="cumulativeFilters" type="checkbox"/>
+                </div>
+                <div id="filters"></div>
               </div>
             </div>
           </td>

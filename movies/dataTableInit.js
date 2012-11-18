@@ -1,3 +1,5 @@
+var oTable;
+
 $(document).ready(function() {
   var mongoDb = {
     host: "https://api.mongohq.com/databases",
@@ -25,7 +27,10 @@ $(document).ready(function() {
     table: "#table"
   };
   
-  var cumulativeFilterFlag = false;
+  var settings = {
+    cumulativeFiltersFlag: false,
+    showFiltersFlag: false
+  };
 
   var buildUrl = function() {
     console.log(query);
@@ -138,6 +143,15 @@ $(document).ready(function() {
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
     {"sTitle": "Added", "mDataProp": "added", "sWidth": "170px"}
   ];
+  
+  
+  function fnCreateSelect( aData ) {
+    var r='<select class="filterOptions"><option value="">All</option>', i, iLen=aData.length;
+    for ( i=0 ; i<iLen ; i++ ) {
+      r += '<option value="'+aData[i]+'">'+aData[i]+'</option>';
+    }
+    return r+'</select>';
+  }
 
   var load = function() {
     console.log("LOAD");
@@ -148,7 +162,7 @@ $(document).ready(function() {
         console.log(data);
         if(data && data.constructor == Array) {
           $(tagIds.table).html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="'+ tableId + '"></table>');
-          $('#' + tableId).dataTable( {
+          oTable = $('#' + tableId).dataTable( {
             "aaData": data,
             "aoColumns": structure,
             bJQueryUI: true,
@@ -156,13 +170,27 @@ $(document).ready(function() {
             "iDisplayLength": -1, 
             "bLengthChange": false,
             "bPaginate": false,
-            "aaSorting": [[ 0, "desc" ]]
+            "aaSorting": [[ 0, "desc" ]],
+            "oLanguage": {  
+              "sZeroRecords": "No records to display"
+            }
           });
+          
+          $("thead th").each( function (i) {
+            $(this).append(fnCreateSelect( _.unique(_.flatten(_.pluck(data, structure[i].mDataProp)))));
+            $('select', this).change( function () {
+              oTable.fnFilter( $(this).val(), i );
+            } );
+          } );
         }
       },
       "json"
     );
-  };
+  };  
+  
+  var unique = function (data, key) {
+    return _.unique(data[key]);
+  }
 
   $("button").live("click", function() {
     var _this = $(this),
@@ -170,20 +198,26 @@ $(document).ready(function() {
     if (filter == "clear")
       clearFilters();
     else
-      removeFilter(filter, _this.text().toLowerCase(), !cumulativeFilterFlag);
+      removeFilter(filter, _this.text().toLowerCase(), !settings.cumulativeFiltersFlag);
     load();
   });
 
   $(".link").live("click", function() {
     var _this = $(this);
-    addFilter(_this.attr("filter"), _this.text().toLowerCase(), !cumulativeFilterFlag);
+    addFilter(_this.attr("filter"), _this.text().toLowerCase(), !settings.cumulativeFiltersFlag);
     load();
   });
   
-  $(':checkbox').iphoneStyle({
+  $('#cumulativeFilters').iphoneStyle({
     onChange: function(button, value) {
-      cumulativeFilterFlag = value;
-      console.log(value);
+      settings.cumulativeFiltersFlag = value;
+    }
+  });
+  
+  $('#showFilters').iphoneStyle({
+    onChange: function(button, value) {
+      settings.showFilterFlag = value;
+      $('.filterOptions').toggle();
     }
   });
   

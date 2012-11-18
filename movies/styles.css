@@ -12,6 +12,14 @@
   padding: 10px;
 }
 
+#filtes {
+  display: none;
+}
+
+.filterOptions {
+  display: none;
+}
+
 #sidebar {
   width: 200px;
 }
