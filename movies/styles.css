@@ -12,11 +12,7 @@
   padding: 10px;
 }
 
-#filtes {
-  display: none;
-}
-
-.filterOptions {
+.hidden {
   display: none;
 }
 

@@ -19,16 +19,7 @@
     <script type="text/javascript" src="http://datatables.net/release-datatables/extras/KeyTable/js/KeyTable.js"></script>
     <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript" src="movies/dataTableInit.js"></script>
-    <script type="text/javascript" src="movies/dataTablePlugin.js"></script>
     <script src="movies/iphone-style/iphone-style-checkboxes.js"></script>
-    <style>
-      .image {
-          width: 300px;
-      }
-      .table {
-      }
-    </style>
-
   </head>
   <body style="height:2000px;">
     <div>
@@ -39,11 +30,15 @@
               <div style="width: 100%; text-align: center; border: none;" class="fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">Filters</div>
               <div>
                 <div class="filter">
+                  <div style="padding-bottom: 2px;">Slide Header</div>
+                  <input  id="slideHeader"  type="checkbox"/>
+                </div>
+                <div class="filter">
                   <div style="padding-bottom: 2px;">Show filters</div>
                   <input  id="showFilters"  type="checkbox"/>
                 </div>
                 <div class="filter">
-                  <div style="padding-bottom: 2px;">Cumulative filter</div>
+                  <div style="padding-bottom: 2px;">Cumulative filtering</div>
                   <input id="cumulativeFilters" type="checkbox"/>
                 </div>
                 <div id="filters"></div>

@@ -11,14 +11,20 @@ $(document).ready(function() {
   var tableId = "dataTable";
   
   var mongo = {
-    and: ["directors", "genres"],
-    or: ["year", "rating"]
+    and: ['directors', 'genres'],
+    or: ['title', 'year', 'rating', 'runtime']
+  };
+  
+  var types = {
+    string: ["directors", "genres", "title"],
+    integer: ['year', 'rating', 'runtime']
   };
 
   var query = {
     directors: null,
     genres: null,
     rating: null,
+    runtime: null,
     year: null
   };
   
@@ -27,9 +33,12 @@ $(document).ready(function() {
     table: "#table"
   };
   
+  var headerSliding = false;
+  
   var settings = {
     cumulativeFiltersFlag: false,
-    showFiltersFlag: false
+    showFiltersFlag: false,
+    slideHeader: false
   };
 
   var buildUrl = function() {
@@ -45,7 +54,7 @@ $(document).ready(function() {
       if (value != null && value.length > 0) {
         var values = [];
         $.each(value, function(key, value) {
-          if($.inArray(key, mongo.and) != -1)
+          if($.inArray(key, types.string) != -1)
             value = '"' + value + '"'
           values.push(value);
         });
@@ -57,11 +66,23 @@ $(document).ready(function() {
       qs.push('q=' + "{" + q.join(',') + "}");
     return qs.join("&");
   }
+  
+  var resetFilter = function(key) {
+    console.log('resetFilter: ' + key);
+    query[key] = null;
+    buildFilterButttons();
+  }
+  
+  var setFilter = function(key, value) {
+    console.log("setFilter: " + key + "/" + value);
+    query[key] = [value];
+    buildFilterButttons();
+  }
 
-  var addFilter = function(key, value, reset) {
-    console.log("addFilter: " + key + "/" + value + ", " + reset);
-    if (reset)
-      clearFilters(); 
+  var addFilter = function(key, value, resetAll) {
+    console.log("addFilter: " + key + "/" + value + ", " + resetAll);
+    if (resetAll)
+      clearFilters();
     if(query[key] == null)
       query[key] = [];
     if($.inArray(value, query[key]) == -1) {
@@ -91,19 +112,19 @@ $(document).ready(function() {
     var $filters = $(tagIds.filters).html(""),
         count = 0;
     $.each(query, function(key, value) {
-      console.log(key + ": " + value);
       if (value != null && value.length > 0) {
         var $filter = $('<div class="filter">').append($('<label>').text(cap(key))),
           $list = $('<div>');
         $.each(value, function(index, item) {
-          $list.append($('<button filter="' + key +'">').text(cap(item)));
+          $list.append($('<button filter="' + key +'" value="' + item + '">').text(cap(item)));
           count++;
         });
         $filters.append($filter.append($list));
       }
     });
     if (count>0) {
-      $filters.append($('<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix" style="padding:5px;">').append($('<button style="width: 100%;" filter="clear">').text("Clear")));
+      $filters.append($('<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix" style="padding:5px;">')
+              .append($('<button style="width: 100%;" filter="clear">').text("Clear")));
       $("button").button();
       $filters.show();
     } else
@@ -113,10 +134,8 @@ $(document).ready(function() {
   var clearFilters = function () {
     console.log("clearFilters:");
     $(tagIds.filters).hide();
-    query.director = null;
-    query.genres = null;
-    query.rating = null;
-    query.year = null;
+    for(var key in query)
+      query[key] = null;
   }
 
   var render = function(filter) {
@@ -126,7 +145,7 @@ $(document).ready(function() {
       if(filterValue.constructor != Array)
         filterValue = [filterValue];
       filterValue.forEach(function(value, index, array) {
-        strArray.push('<div class="link" filter="' + filter +'">' + cap(value) + '</div>');
+        strArray.push('<div class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</div>');
       });
       return strArray.join(', ');
     }
@@ -145,12 +164,16 @@ $(document).ready(function() {
   ];
   
   
-  function fnCreateSelect( aData ) {
-    var r='<select class="filterOptions"><option value="">All</option>', i, iLen=aData.length;
-    for ( i=0 ; i<iLen ; i++ ) {
-      r += '<option value="'+aData[i]+'">'+aData[i]+'</option>';
+  function fnCreateSelect( key, values ) {
+    var hiddenClass = settings.showFiltersFlag? '': ' hidden';
+    var $select = $('<select filter="' + key + '" class="filterOptions' + hiddenClass + '">');
+    $select.append($('<option value="">All</option>'));
+    for (var i=0 ; i<values.length ; i++) {
+      $select.append($('<option value="' + values[i] + '">' + values[i] + '</option>'));
     }
-    return r+'</select>';
+    if (query[key] != null && ($.inArray(key, mongo.or) != -1 || ($.inArray(key, mongo.and) != -1 && query[key].length == 1)))
+      $select.val(query[key]);
+    return $select;
   }
 
   var load = function() {
@@ -177,9 +200,15 @@ $(document).ready(function() {
           });
           
           $("thead th").each( function (i) {
-            $(this).append(fnCreateSelect( _.unique(_.flatten(_.pluck(data, structure[i].mDataProp)))));
+            var key = structure[i].mDataProp;
+            $(this).append(fnCreateSelect(key, _.unique(_.flatten(_.pluck(data, key)))));
             $('select', this).change( function () {
-              oTable.fnFilter( $(this).val(), i );
+              var value = $(this).val();
+              if (value != '')
+                setFilter(key, value);
+              else
+                resetFilter(key);              
+              load();
             } );
           } );
         }
@@ -195,16 +224,18 @@ $(document).ready(function() {
   $("button").live("click", function() {
     var _this = $(this),
       filter = _this.attr("filter");
+      value = _this.attr("value");
     if (filter == "clear")
-      clearFilters();
-    else
-      removeFilter(filter, _this.text().toLowerCase(), !settings.cumulativeFiltersFlag);
+-     clearFilters();
+    removeFilter(filter, value, !settings.cumulativeFiltersFlag);
     load();
   });
 
   $(".link").live("click", function() {
     var _this = $(this);
-    addFilter(_this.attr("filter"), _this.text().toLowerCase(), !settings.cumulativeFiltersFlag);
+    var filter = _this.attr("filter")
+        value = _this.attr("value");
+    addFilter(filter, value, !settings.cumulativeFiltersFlag);
     load();
   });
   
@@ -216,8 +247,18 @@ $(document).ready(function() {
   
   $('#showFilters').iphoneStyle({
     onChange: function(button, value) {
-      settings.showFilterFlag = value;
+      settings.showFiltersFlag = value;
       $('.filterOptions').toggle();
+    }
+  });
+  
+  $('#slideHeader').iphoneStyle({
+    onChange: function(button, value) {
+      settings.slideHeader = value;
+      if (settings.slideHeader)
+        $('thead').addClass('fixed');
+      else
+        $('thead').removeClass('fixed');
     }
   });
   
@@ -230,6 +271,18 @@ $(document).ready(function() {
       $sidebar.addClass('fixed');
     else
       $sidebar.removeClass('fixed');
+  });
+  
+  $(window).scroll(function (event) {
+    if (settings.slideHeader) {
+      if(!headerSliding && window.scrollY > 100) {
+        $('thead').addClass('fixed');
+        headerSliding = true;
+      } else if (headerSliding && window.scrollY < 100) {
+        $('thead').removeClass('fixed');
+        headerSliding = false;
+      }
+    }
   });
 
   load();
