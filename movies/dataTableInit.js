@@ -1,5 +1,3 @@
-var oTable;
-
 $(document).ready(function() {
   var mongoDb = {
     host: "https://api.mongohq.com/databases",
@@ -32,6 +30,7 @@ $(document).ready(function() {
     filters: "#filters",
     table: "#table"
   };
+  var progress = $("#progressbar");
   
   var headerSliding = false;
   
@@ -41,15 +40,17 @@ $(document).ready(function() {
     slideHeader: false
   };
 
-  var buildUrl = function() {
+  var buildUrl = function(skip, limit) {
     console.log(query);
-    return [mongoDb.host, mongoDb.dbName, "collections", mongoDb.collectionName, "documents"].join("/") + "?" + buildQs();
+    return [mongoDb.host, mongoDb.dbName, "collections", mongoDb.collectionName, "documents"].join("/") + "?" + buildQs(skip, limit);
   }
 
-  var buildQs = function() {
+  var buildQs = function(skip, limit) {
     var q = [],
         qs = [];
     qs.push("_apikey=" + mongoDb.token);
+    qs.push("skip=" + skip);
+    qs.push("limit=" + 100);
     $.each(query, function(key, value) {
       if (value != null && value.length > 0) {
         var values = [];
@@ -145,7 +146,7 @@ $(document).ready(function() {
       if(filterValue.constructor != Array)
         filterValue = [filterValue];
       filterValue.forEach(function(value, index, array) {
-        strArray.push('<div class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</div>');
+        strArray.push('<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>');
       });
       return strArray.join(', ');
     }
@@ -169,53 +170,77 @@ $(document).ready(function() {
     var $select = $('<select filter="' + key + '" class="filterOptions' + hiddenClass + '">');
     $select.append($('<option value="">All</option>'));
     for (var i=0 ; i<values.length ; i++) {
-      $select.append($('<option value="' + values[i] + '">' + values[i] + '</option>'));
+      $select.append($('<option value="' + values[i] + '">' + cap(values[i]) + '</option>'));
     }
     if (query[key] != null && ($.inArray(key, mongo.or) != -1 || ($.inArray(key, mongo.and) != -1 && query[key].length == 1)))
       $select.val(query[key]);
     return $select;
-  }
+  };
 
-  var load = function() {
-    console.log("LOAD");
+  var allData = [];
+  
+  var multiload = function(skip, limit) {
+    console.log('LOAD skip: ', skip, ' limit: ', limit);
     $.get(
-      buildUrl(),
+      buildUrl(skip, limit),
       {},
       function(data) {
-        console.log(data);
-        if(data && data.constructor == Array) {
-          $(tagIds.table).html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="'+ tableId + '"></table>');
-          oTable = $('#' + tableId).dataTable( {
-            "aaData": data,
-            "aoColumns": structure,
-            bJQueryUI: true,
-            sPaginationType: "full_numbers",
-            "iDisplayLength": -1, 
-            "bLengthChange": false,
-            "bPaginate": false,
-            "aaSorting": [[ 0, "desc" ]],
-            "oLanguage": {  
-              "sZeroRecords": "No records to display"
-            }
-          });
-          
-          $("thead th").each( function (i) {
-            var key = structure[i].mDataProp;
-            $(this).append(fnCreateSelect(key, _.unique(_.flatten(_.pluck(data, key)))));
-            $('select', this).change( function () {
-              var value = $(this).val();
-              if (value != '')
-                setFilter(key, value);
-              else
-                resetFilter(key);              
-              load();
-            } );
-          } );
-        }
+        if (data != null) {}
+        allData = _.union(allData, data);
+          if (data.length == limit) {
+            multiload(skip+data.length, limit);
+            progress.progressbar('value', progress.progressbar('value')+10);
+          } else {
+            for(var i=progress.progressbar('value'); i<100; i++)
+              progress.progressbar('value', 100);
+            buildTable(allData);
+            allData = [];
+            progress.fadeOut(1000);
+          }
       },
       "json"
     );
-  };  
+  };
+  
+  var load = function() {
+    console.log(progress);
+    progress.show();
+    progress.progressbar({value: 10});
+    multiload(0, 100);
+  };
+  
+  var buildTable = function (data) {
+    console.log(data);
+    if(data && data.constructor == Array) {
+      $(tagIds.table).html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="'+ tableId + '"></table>');
+      oTable = $('#' + tableId).dataTable( {
+        "aaData": data,
+        "aoColumns": structure,
+        bJQueryUI: true,
+        sPaginationType: "full_numbers",
+        "iDisplayLength": -1, 
+        "bLengthChange": false,
+        "bPaginate": false,
+        "aaSorting": [[ 0, "desc" ]],
+        "oLanguage": {  
+          "sZeroRecords": "No records to display"
+        }
+      });
+
+      $("thead th").each( function (i) {
+        var key = structure[i].mDataProp;
+        $(this).append(fnCreateSelect(key, _.sortBy(_.unique(_.flatten(_.pluck(data, key))), function(v){return v;})));
+        $('select', this).change( function () {
+          var value = $(this).val();
+          if (value != '')
+            setFilter(key, value);
+          else
+            resetFilter(key);              
+          load();
+        } );
+      } );
+    }
+  }  
   
   var unique = function (data, key) {
     return _.unique(data[key]);
@@ -256,9 +281,9 @@ $(document).ready(function() {
     onChange: function(button, value) {
       settings.slideHeader = value;
       if (settings.slideHeader)
-        $('thead').addClass('fixed');
+        enableHeaderSliding()
       else
-        $('thead').removeClass('fixed');
+        disableHeaderSliding()
     }
   });
   
@@ -273,16 +298,29 @@ $(document).ready(function() {
       $sidebar.removeClass('fixed');
   });
   
-  $(window).scroll(function (event) {
-    if (settings.slideHeader) {
-      if(!headerSliding && window.scrollY > 100) {
-        $('thead').addClass('fixed');
-        headerSliding = true;
-      } else if (headerSliding && window.scrollY < 100) {
-        $('thead').removeClass('fixed');
-        headerSliding = false;
-      }
+  var enableHeaderSliding = function() {
+    if(!headerSliding && window.scrollY > 100) {
+      $('thead').clone().addClass('temp').appendTo($('thead').parent());
+      $('thead').not('.temp').addClass('fixed2');
+      return headerSliding = true;
     }
+    return false;
+  }
+  
+  var disableHeaderSliding = function() {
+    if (headerSliding && window.scrollY < 100) {
+      $('thead').removeClass('fixed2');
+      $('.temp').remove();
+      return headerSliding = false;
+    }
+    return false;
+  }
+  
+  
+  
+  $(window).scroll(function (event) {
+    if (settings.slideHeader)
+      enableHeaderSliding() || disableHeaderSliding();
   });
 
   load();

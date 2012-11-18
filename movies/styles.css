@@ -20,8 +20,15 @@
   width: 200px;
 }
 
+
 .fixed {
   margin-left: 0px !important;
+  position: fixed;
+  top: 0;
+}
+
+.fixed2 {
+  width: 100%;
   position: fixed;
   top: 0;
 }
