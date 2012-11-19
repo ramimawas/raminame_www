@@ -17,6 +17,8 @@
 
 <?php
 
+include("mongohq.php");
+
 if ( isset($_POST["submit"]) ) {
   if ( isset($_FILES["file"])) {
     //if there was an error uploading the file
@@ -107,37 +109,12 @@ if ( isset($_POST["submit"]) ) {
           $rows[$i] = $object;
           $i++;
         }
-        storeInDB($fields, $rows);
+        $db = new MongoHQ(array('collectionName'=>'watched'));
+        $db->saveMany($rows);
       }
     }
   } else {
     echo "No file selected <br />";
   }
 }
-
-function storeInDB($keys, $rows) {
-  $username = "rami";
-  $password = "rami.name";
-  $host = "alex.mongohq.com";
-  $port = "10091";
-  $dbName = "Movies";
-  $collectionName = "watched";
-  $options = "mongodb://${username}:${password}@${host}:${port}/${dbName}";
-
-  echo "<p>mongoHQ mongodb: [${options}]</p>";
-  
-  foreach ($rows as $row) {
-    try {
-      $m = new Mongo($options);
-      $db = $m->selectDB("Movies");
-      $collection = $db->watched;
-      $collection->insert($row);
-      echo"<br/><br/>";
-      var_dump($row);
-    } catch (Exception $e) {
-      var_dump($e);
-    }
-  }
-}
-
 ?>

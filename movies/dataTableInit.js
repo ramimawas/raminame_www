@@ -1,4 +1,14 @@
 $(document).ready(function() {
+  
+//$.fn.dataTableExt.sErrMode = 'throw';
+
+  $.fn.dataTableExt.afnFiltering.push(
+    function(oSettings, aData, iDataIndex ) {
+      console.log(oSettings, aData, iDataIndex);
+      return true;
+    }
+  );
+  
   var mongoDb = {
     host: "https://api.mongohq.com/databases",
     dbName: "Movies",
@@ -10,12 +20,12 @@ $(document).ready(function() {
   
   var mongo = {
     and: ['directors', 'genres'],
-    or: ['title', 'year', 'rating', 'runtime']
+    or: ['title', 'year', 'rating', 'runtime', 'rotten_critics_score']
   };
   
   var types = {
     string: ["directors", "genres", "title"],
-    integer: ['year', 'rating', 'runtime']
+    integer: ['year', 'rating', 'runtime', 'rotten_critics_score']
   };
 
   var query = {
@@ -143,6 +153,8 @@ $(document).ready(function() {
     return function(obj) {
       var filterValue = obj.aData[filter],
           strArray = [];
+      if (filterValue == null)
+        return '_';
       if(filterValue.constructor != Array)
         filterValue = [filterValue];
       filterValue.forEach(function(value, index, array) {
@@ -161,7 +173,8 @@ $(document).ready(function() {
     {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres')},
     {"sTitle": "Title Type", "mDataProp": "type", "sWidth": "90px"},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
-    {"sTitle": "Added", "mDataProp": "added", "sWidth": "170px"}
+    {"sTitle": "RT score", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score')},
+    {"sTitle": "Added", "mDataProp": "added", "sWidth": "170px"},
   ];
   
   
@@ -251,7 +264,7 @@ $(document).ready(function() {
       filter = _this.attr("filter");
       value = _this.attr("value");
     if (filter == "clear")
--     clearFilters();
+      clearFilters();
     removeFilter(filter, value, !settings.cumulativeFiltersFlag);
     load();
   });
@@ -261,6 +274,7 @@ $(document).ready(function() {
     var filter = _this.attr("filter")
         value = _this.attr("value");
     addFilter(filter, value, !settings.cumulativeFiltersFlag);
+    //oTable.fnFilter( value, 5 );
     load();
   });
   

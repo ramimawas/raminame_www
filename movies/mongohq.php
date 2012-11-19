@@ -1,41 +1,81 @@
 <?php
 
 class MongoHQ {
+  private $m;
+  private $db;
   private $config = array(
     'username' => 'rami',
     'password' => 'rami.name',
-    'host' => 'alex.mongohq.com"',
+    'host' => 'alex.mongohq.com',
     'port' => '10091',
     'dbName' => 'Movies',
     'collectionName' => 'watched'
    );
 
-  private function buildUrl () {
-    //"mongodb://rami:rami.name@alex.mongohq.com:10092/Movies";
-    return "mongodb://${config['username']}:${config['password']}@${config['host']}:${config['port']}/${config['dbName']}";
+  public function buildUrl () {
+    return "mongodb://" . $this->config['username'] . ":" . $this->config['password'] . "@" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
+  }
+  
+  function __construct($config) {
+    if($config == null)
+      $config = $this->config;
+    foreach($config as $key => $val)
+      if ($val != null)
+        $this->config[$key] = $val;
+    $this->m = new Mongo($this->buildUrl());
+    $this->db = $this->m->selectDB($this->config['dbName']);
+  }
+  
+  public function setCollectionName($collectionName) {
+    $this->config['collectionName'] = $collectionName;
   }
 
-  private function getCollection($colelction=null) {
-    $m = new Mongo(buildUrl());
-    $db = $m->selectDB($mongoHQ[$dbName]);
-    var_dump($db);
+  private function getCollection($collection=null) {
     if ($collection==null)
-      $collection = $config['$collectionName'];
-    return $db[$collection];
-    //return $db->watched;
+      $collection = $this->config['collectionName'];
+    return $this->db->selectCollection($collection);
   }
 
-  public static function find($query=null) {
+  public function find($query, $collection, $limit=-1) {
     $results = array();
+    if($query == null)
+      $query = array();
+    var_dump($query);
     try {
-      $collection = $this->getCollection('watched');
-      $cursor = $collection->find();
+      $collection = $this->getCollection($collection);
+      if ($limit != null && $limit != -1)
+        $cursor = $collection->find($query)->limit($limit);
+      else
+        $cursor = $collection->find($query);
       foreach ($cursor as $obj)
-        $results[] = $obj["title"];
+        $results[] = $obj;
     } catch (Exception $e) {
       var_dump($e);
     }
+    echo "<p>fetched " . count($results) . " items</p></br>";
     return $results;
   }
+  
+  public function save($row, $collection=null) {
+    $this->saveMany(array($row), $collection);
+  }
+  
+  public function saveMany($rows, $collection=null) {
+    $collection = $this->getCollection($collection);
+    foreach ($rows as $row) {
+      try {
+        $collection->save($row);
+      } catch (Exception $e) {
+        var_dump($e);
+      }
+    }
+  }
 }
+/*
+$mongoHq = new MongoHQ();
+$results = $mongoHq->find();
+foreach ($results as $movie) {
+  echo "<p>movie title: " . $movie['title'] . "</p></br>";
+}
+*/    
 ?>
