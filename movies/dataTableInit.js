@@ -1,13 +1,26 @@
 $(document).ready(function() {
   
 //$.fn.dataTableExt.sErrMode = 'throw';
-
+  $.fn.dataTableExt.afnFiltering = [];
   $.fn.dataTableExt.afnFiltering.push(
     function(oSettings, aData, iDataIndex ) {
-      console.log(oSettings, aData, iDataIndex);
-      return true;
+      var found = true;
+      for (var key in allData[iDataIndex])
+        found = found && filter(key, allData[iDataIndex][key]);
+      return found;
     }
   );
+    
+  var filter = function(key, value) {
+    var match = true;
+    if ($.inArray(key, mongo.and)!=-1 && query[key] != null) {
+      match = _.intersection(query[key], value).length == query[key].length;
+    } else if ($.inArray(key, mongo.or)!=-1 && query[key] != null) {
+      match = $.inArray(value, query[key]) != -1;
+    }
+    //console.log('filter [', key, '] ', value, ' == ', query[key], ' : ', match);
+    return match;
+  }
   
   var mongoDb = {
     host: "https://api.mongohq.com/databases",
@@ -49,10 +62,13 @@ $(document).ready(function() {
     showFiltersFlag: false,
     slideHeader: false
   };
+  
+  var globalLimit = 99;
 
   var buildUrl = function(skip, limit) {
-    console.log(query);
-    return [mongoDb.host, mongoDb.dbName, "collections", mongoDb.collectionName, "documents"].join("/") + "?" + buildQs(skip, limit);
+    url = [mongoDb.host, mongoDb.dbName, "collections", mongoDb.collectionName, "documents"].join("/") + "?" + buildQs(skip, limit)
+    console.log(url);
+    return url;
   }
 
   var buildQs = function(skip, limit) {
@@ -60,7 +76,7 @@ $(document).ready(function() {
         qs = [];
     qs.push("_apikey=" + mongoDb.token);
     qs.push("skip=" + skip);
-    qs.push("limit=" + 100);
+    qs.push("limit=" + limit);
     $.each(query, function(key, value) {
       if (value != null && value.length > 0) {
         var values = [];
@@ -86,12 +102,16 @@ $(document).ready(function() {
   
   var setFilter = function(key, value) {
     console.log("setFilter: " + key + "/" + value);
+    if($.inArray(key, types.integer) != -1)
+      value = parseInt(value);
     query[key] = [value];
     buildFilterButttons();
   }
 
   var addFilter = function(key, value, resetAll) {
     console.log("addFilter: " + key + "/" + value + ", " + resetAll);
+    if($.inArray(key, types.integer) != -1)
+      value = parseInt(value);
     if (resetAll)
       clearFilters();
     if(query[key] == null)
@@ -173,7 +193,7 @@ $(document).ready(function() {
     {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres')},
     {"sTitle": "Title Type", "mDataProp": "type", "sWidth": "90px"},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
-    {"sTitle": "RT score", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score')},
+    //{"sTitle": "RT score", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score')},
     {"sTitle": "Added", "mDataProp": "added", "sWidth": "170px"},
   ];
   
@@ -195,21 +215,24 @@ $(document).ready(function() {
   var multiload = function(skip, limit) {
     console.log('LOAD skip: ', skip, ' limit: ', limit);
     $.get(
-      buildUrl(skip, limit),
+      buildUrl(skip, limit+1),
       {},
       function(data) {
-        if (data != null) {}
-        allData = _.union(allData, data);
-          if (data.length == limit) {
-            multiload(skip+data.length, limit);
+        if (data != null) {
+          var more = data.length > limit;          
+          if (more)
+            data = _.initial(data);
+          allData = _.union(allData, data);
+          if (more) {
+            multiload(skip+limit, limit);
             progress.progressbar('value', progress.progressbar('value')+10);
           } else {
             for(var i=progress.progressbar('value'); i<100; i++)
               progress.progressbar('value', 100);
             buildTable(allData);
-            allData = [];
             progress.fadeOut(1000);
           }
+        }
       },
       "json"
     );
@@ -219,7 +242,7 @@ $(document).ready(function() {
     console.log(progress);
     progress.show();
     progress.progressbar({value: 10});
-    multiload(0, 100);
+    multiload(0, globalLimit);
   };
   
   var buildTable = function (data) {
@@ -237,7 +260,8 @@ $(document).ready(function() {
         "aaSorting": [[ 0, "desc" ]],
         "oLanguage": {  
           "sZeroRecords": "No records to display"
-        }
+        },
+        sDom: 'lfrtip'
       });
 
       $("thead th").each( function (i) {
@@ -248,34 +272,24 @@ $(document).ready(function() {
           if (value != '')
             setFilter(key, value);
           else
-            resetFilter(key);              
-          load();
+            resetFilter(key);
+          oTable.fnFilter('');
         } );
       } );
     }
   }  
   
-  var unique = function (data, key) {
-    return _.unique(data[key]);
-  }
-
   $("button").live("click", function() {
     var _this = $(this),
       filter = _this.attr("filter");
-      value = _this.attr("value");
-    if (filter == "clear")
-      clearFilters();
-    removeFilter(filter, value, !settings.cumulativeFiltersFlag);
-    load();
+    filter == "clear"? clearFilters(): removeFilter(filter, _this.attr("value"), !settings.cumulativeFiltersFlag);
+    oTable.fnFilter('');
   });
 
   $(".link").live("click", function() {
     var _this = $(this);
-    var filter = _this.attr("filter")
-        value = _this.attr("value");
-    addFilter(filter, value, !settings.cumulativeFiltersFlag);
-    //oTable.fnFilter( value, 5 );
-    load();
+    addFilter(_this.attr("filter"), _this.attr("value"), !settings.cumulativeFiltersFlag);
+    oTable.fnFilter('');
   });
   
   $('#cumulativeFilters').iphoneStyle({
