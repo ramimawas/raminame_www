@@ -16,9 +16,12 @@ function builUrl() {
 }
 
 $url = builUrl();
-echo "<p>${url}</p><br/>";
-$response = http_get($url, array("timeout"=>1), $info);
-var_dump($response);
+$ch = curl_init( $url );
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$result =  curl_exec($ch); // Getting jSON result string
+echo "<p>" . gettype($result) . "</p>";
+$json = json_decode($result, true);
+var_dump($json);
 
 //$results = MongoHQ.find();
 
