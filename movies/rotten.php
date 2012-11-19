@@ -23,7 +23,6 @@ echo "<p>" . gettype($result) . "</p>";
 $json = json_decode($result, true);
 var_dump($json);
 
-
 //$results = MongoHQ.find();
 
 ?>
