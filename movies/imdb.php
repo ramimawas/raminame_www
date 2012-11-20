@@ -2,7 +2,7 @@
 
 class IMDB {
   
-  private $name_map = array (
+  private static $name_map = array (
     "position" => "position",
     "const" => "imdb_id",
     "Runtime (mins)" => "runtime",
@@ -17,15 +17,23 @@ class IMDB {
   
   public static function clean($array) {
     $cleanArray = array();
-    foreach ($values as $key => $value) {
-      $skip = IMDB::clean($key, $value);
-      if (!$skip)
-        $cleanArray[$key] = $value;
+    foreach ($array as $index => $row) {
+      $cleanObject = array();
+      $unknown = true;
+      foreach ($row as $key => $value) {
+        $skip = IMDB::cleanOne($key, $value);
+        if (!$skip) {
+          $cleanObject[$key] = $value;
+          $unknown = false;
+        }
+      }
+      if (!$unknown)
+        $cleanArray[] = $cleanObject;
     }
   }
   
-  public static function clean($key, $value) {
-    global $name_map;
+  public static function cleanOne($key, $value) {
+    echo "${key}: ${value}";
     $unknown = false;
     switch ($key) {
       case "position": // int
@@ -52,8 +60,7 @@ class IMDB {
         break;
     }
     if (!$unknown) {
-      $key = $name_map[$key];
-      $value = $value;
+      $key = IMDB::$name_map[$key];
     }
     return $unknown;
   }

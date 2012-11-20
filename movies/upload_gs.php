@@ -45,7 +45,9 @@ if ( isset($_POST["submit"]) ) {
       
       $csv = new parseCSV();
       $csv->auto('upload/' . $storagename);
-      $rows = IMDB::clean($csv->data);
+      $data = $csv->data;
+      //print_r($data);
+      $rows = IMDB::clean($data);
       print_r($rows);
     }
   } else {
