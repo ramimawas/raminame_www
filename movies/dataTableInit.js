@@ -13,11 +13,10 @@ $(document).ready(function() {
     
   var filter = function(key, value) {
     var match = true;
-    if ($.inArray(key, mongo.and)!=-1 && query[key] != null) {
+    if ($.inArray(key, mongo.and)!=-1 && query[key] != null)
       match = _.intersection(query[key], value).length == query[key].length;
-    } else if ($.inArray(key, mongo.or)!=-1 && query[key] != null) {
+    else if ($.inArray(key, mongo.or)!=-1 && query[key] != null)
       match = $.inArray(value, query[key]) != -1;
-    }
     //console.log('filter [', key, '] ', value, ' == ', query[key], ' : ', match);
     return match;
   }
@@ -33,12 +32,12 @@ $(document).ready(function() {
   
   var mongo = {
     and: ['directors', 'genres'],
-    or: ['title', 'year', 'rating', 'runtime', 'rotten_critics_score']
+    or: ['title', 'year', 'rating', 'runtime', 'rotten_critics_score', 'position', 'type']
   };
   
   var types = {
-    string: ["directors", "genres", "title"],
-    integer: ['year', 'rating', 'runtime', 'rotten_critics_score']
+    string: ['directors', 'genres', 'title', 'type'],
+    integer: ['year', 'rating', 'runtime', 'rotten_critics_score', 'position']
   };
 
   var query = {
@@ -46,6 +45,8 @@ $(document).ready(function() {
     genres: null,
     rating: null,
     runtime: null,
+    title: null,
+    type: null,
     year: null
   };
   
