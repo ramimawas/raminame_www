@@ -18,6 +18,7 @@
 <?php
 
 include("mongohq.php");
+include("imdb.php");
 require_once('parsecsv.lib.php');
 
 if ( isset($_POST["submit"]) ) {
@@ -44,7 +45,8 @@ if ( isset($_POST["submit"]) ) {
       
       $csv = new parseCSV();
       $csv->auto('upload/' . $storagename);
-      print_r($csv->data);
+      $rows = IMDB::clean($csv->data);
+      print_r($rows);
     }
   } else {
     echo "No file selected <br />";
