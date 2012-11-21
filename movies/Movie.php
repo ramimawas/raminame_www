@@ -4,37 +4,47 @@
 Class Movie extends ArrayObject{
   private $movie;
   
+  private static $DEFAULTS = array (
+    'int'=> -1,
+    'string' => ''
+  );
+  
   public static $FIELDS = array(
     'ID' => '_id',
      
     // PERSONAL
-    'RATING'     => 'rating',
-    'DATE_ADDED' => 'added',
+    'RATING'     => array('rating', -1),
+    'DATE_ADDED' => array('added', '_'),
     
     // GENERIC
-    'TITLE'        => 'title',
-    'YEAR'         => 'year',
-    'RELEASE_DATE' => 'released',
-    'DIRECTORS'    => 'directors',
-    'RUNTIME'      => 'runtime',
-    'GENRES'       => 'genres',
-    'MPAA_RATING'  => 'mpaa_rating',
-    'CAST'         => 'cast',
-    'TYPE'         => 'type',
+    'TITLE'        => array('title', '_'),
+    'YEAR'         => array('year', -1),
+    'RELEASE_DATE' => array('released', '_'),
+    'DIRECTORS'    => array('directors', '_'),
+    'RUNTIME'      => array('runtime', -1),
+    'GENRES'       => array('genres', '_'),
+    'MPAA_RATING'  => array('mpaa_rating', '_'),
+    'CAST'         => array('cast', '_'),
+    'TYPE'         => array('type', '_'),
     
     // IMDB
-    'IMDB_ID'       => 'imdb_id',
-    'IMDB_RATING'   => 'imdb_rating',
-    'IMDB_POSITION' => 'position',
+    'IMDB_ID'       => array('imdb_id', '_'),
+    'IMDB_RATING'   => array('imdb_rating', -1),
+    'IMDB_POSITION' => array('position', -1),
       
     // ROTTEN
-    'ROTTEN_ID'             => 'rotten_id',
-    'ROTTEN_CRITICS_SCORE'  => 'rotten_critics_score',
-    'ROTTEN_AUDIENCE_SCORE' => 'rotten_audience_score'
+    'ROTTEN_ID'             => array('rotten_id', -1),
+    'ROTTEN_CRITICS_SCORE'  => array('rotten_critics_score', -1),
+    'ROTTEN_AUDIENCE_SCORE' => array('rotten_audience_score', -1)
   );
   
-  function __construct($movie=array()) {
-   $this->movie = $movie;
+  function __construct($movie=null) {
+    $this->movie = $movie;
+    if (!isset($movie)) {
+    foreach(Movie::$FIELDS as $key => $val)
+      if($key != 'ID')
+        $this[$key] = $val[1];
+    }
   }
   
   public static function toMovies($movies_db) {
@@ -92,13 +102,13 @@ Class Movie extends ArrayObject{
           $value = $value->get();
           break;
       }
-      $this->movie[Movie::$FIELDS[$key]] = $value;
+      $this->movie[Movie::$FIELDS[$key][0]] = $value;
     }
   }
   
   public function __get($key) {
     if (array_key_exists($key, Movie::$FIELDS)) {
-      return $this->movie[Movie::$FIELDS[$key]];
+      return $this->movie[Movie::$FIELDS[$key][0]];
     }
     return null;
   }

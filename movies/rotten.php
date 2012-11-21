@@ -146,8 +146,8 @@ class RottenTomatoes {
         $cast->addDetail($one['name'], $one['id'], in_array($one['name'], $abridged_cast_names));
       $movie->CAST = $cast->get();
       //print_r($db_movie);
-      //$db->save($db_movie);
-      //echo "----> movies updated.";
+      $db->save($db_movie);
+      echo "----> movies updated.";
     } else {
       //echo "<div>ERROR while searching rotten tomatoes!!!!!!!!</div><br/>";
       $info['missing'][] = $movie['title'];
@@ -158,7 +158,7 @@ class RottenTomatoes {
     if($info != null)
       $info = array('titleMismatch'=> array(), 'mismatch' => array(), 'missing' => array());
     $title = $movie->TITLE;
-    //echo "<div>processing movie title: " . $title . "</div>";
+    echo "<div>processing movie title: " . $title . "</div>";
     $search_json = $this->runMoviesSearch($title);
     $rotten_movies = $search_json['movies'];
     $this->dispatchMovie($rotten_movies, $movie, $info);
@@ -167,7 +167,7 @@ class RottenTomatoes {
   public function augmentMovies(&$movies, &$info=null) {
     $count = 1;
     foreach ($movies as &$movie) {
-      //echo "<div>[${count}] "; $count++;
+      echo "<div>[${count}] "; $count++;
       $this->augmentMovie($movie, $info);
     }
   }
@@ -183,17 +183,15 @@ $movie_db = $db->findOne();
 var_dump($movie_db); echo "<br/><br/>";
 $movie = new Movie($movie_db);
 var_dump($movie->get()); echo "<br/><br/>";;
-$rotten->dispatchDbMovie($movie, $info);
+$rotten->augmentMovie($movie, $info);
 var_dump($movie->get());
+*/
 
-
-$movies_db = $db->find(null, null, 1);
+$movies_db = $db->find(null, null, 5);
 var_dump($movies_db); echo "<br/><br/>";
 $movies = Movie::toMovies($movies_db);
-$rotten->dispatchDbMovies($movies, $info);
+$rotten->augmentMovies($movies, $info);
 var_dump(Movie::toMoviesDB($movies));
- * *
- */
 
 
 if (isset($info)) {
