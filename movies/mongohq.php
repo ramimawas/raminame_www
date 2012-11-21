@@ -48,7 +48,6 @@ class MongoHQ {
     $results = array();
     if($query == null)
       $query = array();
-    var_dump($query);
     try {
       $collection = $this->getCollection($collection);
       if ($limit != null && $limit != -1)
@@ -60,7 +59,6 @@ class MongoHQ {
     } catch (Exception $e) {
       var_dump($e);
     }
-    echo "<p>fetched " . count($results) . " items</p></br>";
     return $results;
   }
   

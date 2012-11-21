@@ -1,5 +1,6 @@
 <?php
-include("mongohq.php");
+include_once("mongohq.php");
+include_once("movie.php");
 
 class RottenTomatoes {
   
@@ -46,13 +47,13 @@ class RottenTomatoes {
 
   private function runCastInfo($id) {
     $url = $this->buildCastInfoUrl($id);
-    echo "<div>${url}</div>";
+    //echo "<div>${url}</div>";
     return $this->fetchJsonResults($url);
   }
 
   private function runMoviesSearch($title) {
     $url = $this->buildMoviesSearchUrl($this->transliterateString($title));
-    echo "<div>${url}</div>";
+    //echo "<div>${url}</div>";
     return $this->fetchJsonResults($url);
   }
 
@@ -73,7 +74,7 @@ class RottenTomatoes {
 
     for($i=0; $i<$count; $i++) {
       $alternate_ids = $rotten_movies[$i]['alternate_ids'];
-      if (!$imdbfound && $alternate_ids != null) {
+      if ($imdb_id != null && !$imdbfound && $alternate_ids != null) {
         $imddb = "tt" . $alternate_ids['imdb'];
         if($imdb_id == $imddb) {
           $rotten_movie_imdb = $rotten_movies[$i];
@@ -91,7 +92,7 @@ class RottenTomatoes {
     }
 
     if(!$found) {
-      echo "<div>Titles NOT EQUAL!!!</div>";
+      //echo "<div>Titles NOT EQUAL!!!</div>";
       $max = 0;
       $maxIndex = 0;
       foreach($percentages as $index => $percent) {
@@ -101,115 +102,127 @@ class RottenTomatoes {
         }
       }
       $rotten_movie = $rotten_movies[$maxIndex];
+      /*
       echo "<div>Maximum percentage is ${max} at index ${maxIndex}</div>";
-      if($count==1)
-        echo "<div>Only title: [" . $rotten_movie['title'] . "]</div>";
-      else 
-        echo "<div>Best title: [" . $rotten_movie['title'] . "]</div>";
+      if($count==1) echo "<div>Only title: [" . $rotten_movie['title'] . "]</div>";
+      else echo "<div>Best title: [" . $rotten_movie['title'] . "]</div>";
+      */
       if($imdbfound) {
-        echo "<div>IMDB ids matched ${imdb_id}: [" . $rotten_movie_imdb['title'] . "]</div>";
+        //echo "<div>IMDB ids matched ${imdb_id}: [" . $rotten_movie_imdb['title'] . "]</div>";
         $rotten_movie = $rotten_movie_imdb;
-      } else
-        $info['mismatch'][] = array($title, $rotten_movie['title']);
-      $info['titleMismatch'][] = array($title, $rotten_movie['title'], $rotten_movies[$maxIndex]['title'], $max, $imdbfound);
+      } else {
+        if (info != null)
+          $info['mismatch'][] = array($title, $rotten_movie['title']);
+      }
+      if (info != null)
+        $info['titleMismatch'][] = array($title, $rotten_movie['title'], $rotten_movies[$maxIndex]['title'], $max, $imdbfound);
     }
     return $rotten_movie;
   }
 
-  public function augmentMovie($db_movie, $rotten_movies, &$info) {
+  public function augmentMovie($rotten_movies, &$movie, &$info) {
     if (count($rotten_movies) >= 1) {
-      $rotten_movie = $this->findBestMatch($rotten_movies, $db_movie['title'], $db_movie['imdb_id'], $info);
+      $rotten_movie = $this->findBestMatch($rotten_movies, $movie->TITLE, $movie->IMDB_ID, $info);
 
       $rotten_id = $rotten_movie['id'];
-      $db_movie['rotten_id'] = $rotten_id;
+      $movie->ROTTEN_ID = $rotten_id;
 
-      $db_movie['mpaa_rating'] = $rotten_movie['mpaa_rating'];
+      $movie->MPAA_RATING = $rotten_movie['mpaa_rating'];
 
       $ratings = $rotten_movie['ratings'];
-      $db_movie['rotten_critics_score'] = $ratings['critics_score'];
-      $db_movie['rotten_audience_score'] = $ratings['audience_score'];
+      $movie->ROTTEN_CRITICS_SCORE = $ratings['critics_score'];
+      $movie->ROTTEN_AUDIENCE_SCORE = $ratings['audience_score'];
 
       $abridged_cast = $rotten_movie['abridged_cast'];
       $abridged_cast_names = array();
       foreach($abridged_cast as $cast)
         $abridged_cast_names[] = $cast['name'];
 
-      /*$cast_json = $this->runCastInfo($rotten_id);
+      $cast_json = $this->runCastInfo($rotten_id);
+      $cast = new Cast();
       $full_cast = $cast_json['cast'];
-      $full_cast_details = array();
-      foreach($full_cast as $cast) {
-        $cast_detail['rotten_id'] = $cast['id'];
-        $cast_detail['name'] = $cast['name'];
-        $cast_detail['main'] = in_array($cast['name'], $abridged_cast_names);
-        $full_cast_details[] = $cast_detail;
-      }
-      $db_movie['cast'] = $full_cast_details;*/
+      foreach($full_cast as $one)
+        $cast->addDetail($one['name'], $one['id'], in_array($one['name'], $abridged_cast_names));
+      $movie->CAST = $cast->get();
       //print_r($db_movie);
       //$db->save($db_movie);
       //echo "----> movies updated.";
     } else {
-      echo "<div>ERROR while searching rotten tomatoes!!!!!!!!</div><br/>";
-      $info['missing'][] = $db_movie['title'];
+      //echo "<div>ERROR while searching rotten tomatoes!!!!!!!!</div><br/>";
+      $info['missing'][] = $movie['title'];
     }
-    echo "</br>";
-    return $db_movie;
+    return $movie;
   }
   
-  public function dispatchDbMovie($db_movie, &$info=null) {
-    $info = array('titleMismatch'=> array(), 'mismatch' => array(), 'missing' => array());
-    return $this->dispatchDbMovies(array($db_movie));
+  public function dispatchDbMovie(&$movie, &$info=null) {
+    if($info != null)
+      $info = array('titleMismatch'=> array(), 'mismatch' => array(), 'missing' => array());
+    $title = $movie->TITLE;
+    //echo "<div>processing movie title: " . $title . "</div>";
+    $search_json = $this->runMoviesSearch($title);
+    $rotten_movies = $search_json['movies'];
+    return $this->augmentMovie($rotten_movies, $movie, $info);
   }
 
-  public function dispatchDbMovies($db_movies, &$info=null) {
-    $info = array('titleMismatch'=> array(), 'mismatch' => array(), 'missing' => array());
-    $count = 0;
-    $db_movies_augmented = array();
-    foreach ($db_movies as $db_movie) {
-      $count++;
-      $title = $db_movie['title'];
-      echo "<div>[${count}] processing movie title: " . $title . "</div>";
-      $search_json = $this->runMoviesSearch($title);
-      $rotten_movies = $search_json['movies'];
-      $db_movies_augmented[] = $this->augmentMovie($db_movie, $rotten_movies, $info);
+  public function dispatchDbMovies(&$movies, &$info=null) {
+    $count = 1;
+    foreach ($movies as &$movie) {
+      echo "<div>[${count}] "; $count++;
+      $this->dispatchDbMovie($movie, $info);
     }
-    return $db_movies_augmented;
+    return $movies_augmented;
   }
 }
 
-  
+
 $db = new MongoHQ(array('collectionName'=>'watched'));
 
-$movie_db = $db->findOne();
-var_dump($movie_db);
 $rotten = new RottenTomatoes();
-$info = array();
-$movie_db_augmented = $rotten->dispatchDbMovie($movie_db, $info);
-var_dump($movie_db_augmented);
 
-//$query = array('position' => 236);
-//$results = $db->find();
-//$info = dispatchDbMovies($results);
+/*
+$movie_db = $db->findOne();
+var_dump($movie_db); echo "<br/><br/>";
+$movie = new Movie($movie_db);
+var_dump($movie->get()); echo "<br/><br/>";;
+$rotten->dispatchDbMovie($movie, $info);
+var_dump($movie->get());
+*/
 
-echo "<div>Total number of missing titles: " . count($info['missing']) . "</div>";
-foreach($info['missing'] as $val) {
-  echo "<div>[${val}]</div>";
-}
+$movies_db = $db->find(null, null, 1);
+var_dump($movies_db); echo "<br/><br/>";
+$movies = Movie::toMovies($movies_db);
+$rotten->dispatchDbMovies($movies, $info);
+var_dump(Movie::toMoviesDB($movies));
 
-echo "<br/><br/><div>Total number of mismatched titles: " . count($info['titleMismatch']) . " [db/rotten]</div>";
-foreach($info['titleMismatch'] as $val) {
-  echo "<div>[" . $val[0] . "]</div>";
-  echo "<div>[" . $val[1] . "]</div>";
-  echo "<div>[" . $val[2] . "]</div>";
-  echo "<div>[" . $val[3] . "]</div>";
-  echo "<div>[" . $val[4] . "]</div>";
-  echo "<br/>";
-}
 
-echo "<br/><br/><div>Total number of overall mismatched movies: " . count($info['mismatch']) . " [db/rotten]</div>";
-foreach($info['mismatch'] as $val) {
-  echo "<div>[" . $val[0] . "]</div>";
-  echo "<div>[" . $val[1] . "]</div>";
-  echo "<br/>";
+if (isset($info)) {
+  if (isset($info['missing'])) {
+    echo "<div>Total number of missing titles: " . count($info['missing']) . "</div>";
+    foreach($info['missing'] as $val) {
+      echo "<div>[${val}]</div>";
+    }
+  }
+
+  if (isset($info['titleMismatch'])) {
+    echo "<br/><br/><div>Total number of mismatched titles: " . count($info['titleMismatch']) . " [db/rotten]</div>";
+    foreach($info['titleMismatch'] as $val) {
+      echo "<div>[" . $val[0] . "]</div>";
+      echo "<div>[" . $val[1] . "]</div>";
+      echo "<div>[" . $val[2] . "]</div>";
+      echo "<div>[" . $val[3] . "]</div>";
+      echo "<div>[" . $val[4] . "]</div>";
+      echo "<br/>";
+    }
+  }
+
+  if (isset($info['mismatch'])) {
+    echo "<br/><br/><div>Total number of overall mismatched movies: " . count($info['mismatch']) . " [db/rotten]</div>";
+    foreach($info['mismatch'] as $val) {
+      echo "<div>[" . $val[0] . "]</div>";
+      echo "<div>[" . $val[1] . "]</div>";
+      echo "<br/>";
+    }
+  }
 }
 
 ?>
