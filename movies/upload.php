@@ -24,6 +24,7 @@
 
 include("mongohq.php");
 include("imdb.php");
+include("movie.php");
 require_once('parsecsv.lib.php');
 
 $source = null;
@@ -79,22 +80,21 @@ if($fileName != null) {
   $data = $csv->data;
   //print_r($data);
   if ($source == "imdb") {
-    $rows = IMDB::clean($data);
-    //echo "[" . $rows  . "]<br/>";
-    //print_r($rows);
-    $db->saveMany($rows);
+    $movies = IMDB::buildMovies($data);
+    var_dump(Movie::toMoviesDB($movies));
+    $db->saveMany(Movie::toMoviesDB($movies));
   } else if ($source == "google") {
     $hashMap = buildHash($data);
     $db_movies = $db->find();
     $mismatched = array();
-    foreach ($db_movies as $db_movie) {
-      $title = $db_movie['title'];
-      //echo "<br/><div>[${db_movie['position']}] processing movie title: " . $title . " [db/rotten]</div>";
+    foreach (Movie::toMovies($db_movies) as $movie) {
+      $title = $movie->TITLE;
+      //echo "<br/><div>[" . $$movie->POSITION . "] processing movie title: " . $title . " [db/rotten]</div>";
       if (isset($hashMap[hkey($title)])) {
         $rating = intval($hashMap[hkey($title)]['Rate']);
-        //echo "<div>${rating}</div>";
-        $db_movie['rating'] = $rating;
-        $db->save($db_movie);
+        $movie->RATING = $rating;
+        //echo "<div>" . $movie->RATING . "</div>";
+        $db->save($movie->get());
       } else {
         $mismatched[] = $title;
       }
