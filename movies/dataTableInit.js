@@ -32,18 +32,19 @@ $(document).ready(function() {
   
   var mongo = {
     and: ['directors', 'genres'],
-    or: ['title', 'year', 'rating', 'runtime', 'rotten_critics_score', 'position', 'type']
+    or: ['title', 'year', 'rating', 'imdb_rating', 'runtime', 'rotten_critics_score', 'position', 'type']
   };
   
   var types = {
     string: ['directors', 'genres', 'title', 'type'],
-    integer: ['year', 'rating', 'runtime', 'rotten_critics_score', 'position']
+    integer: ['year', 'rating', 'imdb_rating', 'runtime', 'rotten_critics_score', 'position']
   };
 
   var query = {
     directors: null,
     genres: null,
     rating: null,
+    imdb_rating: null,
     runtime: null,
     title: null,
     type: null,
@@ -189,7 +190,8 @@ $(document).ready(function() {
     {"sTitle": "Position", "mDataProp": "position", "sWidth": "75px"},
     {"sTitle": "Title", "mDataProp": "title"},
     {"sTitle": "Rating", "mDataProp": "rating", fnRender: render('rating'), "sWidth": "65px"},
-    {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "65px"},
+    {"sTitle": "IMDB", "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "65px"},
+    {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "75px"},
     {"sTitle": "Runtime", "mDataProp": "runtime", fnRender: render('runtime'), "sWidth": "80px"},
     {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres')},
     {"sTitle": "Title Type", "mDataProp": "type", "sWidth": "90px"},

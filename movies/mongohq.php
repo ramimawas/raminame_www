@@ -35,8 +35,16 @@ class MongoHQ {
       $collection = $this->config['collectionName'];
     return $this->db->selectCollection($collection);
   }
-
-  public function find($query, $collection, $limit=-1) {
+  
+  public function findOne($query=null, $collection=null) {
+    $results = $this->find($query, $collection, 1);
+    $one = null;
+    if ($results != null && count($results) > 0)
+      $one = $results[0];
+    return $one;
+  }
+  
+  public function find($query=null, $collection=null, $limit=-1) {
     $results = array();
     if($query == null)
       $query = array();

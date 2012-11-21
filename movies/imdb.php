@@ -8,7 +8,7 @@ class IMDB {
     "Runtime (mins)" => "runtime",
     "Year" => "year",
     "Title" => "title",
-    "IMDb Rating" => "rating",
+    "IMDb Rating" => "imdb_rating",
     "Title type" => "type",
     "created" => "added",
     "Directors" => "directors",
@@ -19,29 +19,32 @@ class IMDB {
     $cleanArray = array();
     foreach ($array as $index => $row) {
       $cleanObject = array();
-      $unknown = true;
+      $empty = true;
       foreach ($row as $key => $value) {
-        $skip = IMDB::cleanOne($key, $value);
-        if (!$skip) {
+        if (!IMDB::cleanOne($key, $value)) {
+          //echo "<div>${key} =====> ${value}</div>";
           $cleanObject[$key] = $value;
-          $unknown = false;
+          $empty = false;
         }
       }
-      if (!$unknown)
+      if (!$empty)
         $cleanArray[] = $cleanObject;
     }
+    return $cleanArray;
   }
   
-  public static function cleanOne($key, $value) {
-    echo "${key}: ${value}";
-    $unknown = false;
+  public static function cleanOne(&$key, &$value) {
+    $skip = false;
     switch ($key) {
       case "position": // int
       case "Year":
       case "Runtime (mins)":
-      case "IMDb Rating":
       case "Year":
+        $value = floatval($value);
         $value = intval($value);
+        break;
+      case "IMDb Rating":
+        $value = floatval($value);
         break;
       case "const": //string
       case "Title":
@@ -56,13 +59,13 @@ class IMDB {
         $value = explode(", ", $value);
         break;
       default:
-        $unknown = true;
+        $skip = true;
         break;
     }
-    if (!$unknown) {
+    if (!$skip) {
       $key = IMDB::$name_map[$key];
     }
-    return $unknown;
+    return $skip;
   }
 }
 
