@@ -34,7 +34,7 @@ class API {
     return $movie;
   }
   
-  private function addMovie($imdb_id, $rating) {
+  public function addMovie($imdb_id, $rating) {
     $response = new Response();
     try {  
       if (isset($_GET["imdb_id"])) {
