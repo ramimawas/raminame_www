@@ -120,7 +120,7 @@ class RottenTomatoes {
     return $rotten_movie;
   }
 
-  public function augmentMovie($rotten_movies, &$movie, &$info) {
+  public function dispatchMovie($rotten_movies, &$movie, &$info) {
     if (count($rotten_movies) >= 1) {
       $rotten_movie = $this->findBestMatch($rotten_movies, $movie->TITLE, $movie->IMDB_ID, $info);
 
@@ -141,6 +141,7 @@ class RottenTomatoes {
       $cast_json = $this->runCastInfo($rotten_id);
       $cast = new Cast();
       $full_cast = $cast_json['cast'];
+      $cast_list = array();
       foreach($full_cast as $one)
         $cast->addDetail($one['name'], $one['id'], in_array($one['name'], $abridged_cast_names));
       $movie->CAST = $cast->get();
@@ -151,26 +152,24 @@ class RottenTomatoes {
       //echo "<div>ERROR while searching rotten tomatoes!!!!!!!!</div><br/>";
       $info['missing'][] = $movie['title'];
     }
-    return $movie;
   }
   
-  public function dispatchDbMovie(&$movie, &$info=null) {
+  public function augmentMovie(&$movie, &$info=null) {
     if($info != null)
       $info = array('titleMismatch'=> array(), 'mismatch' => array(), 'missing' => array());
     $title = $movie->TITLE;
     //echo "<div>processing movie title: " . $title . "</div>";
     $search_json = $this->runMoviesSearch($title);
     $rotten_movies = $search_json['movies'];
-    return $this->augmentMovie($rotten_movies, $movie, $info);
+    $this->dispatchMovie($rotten_movies, $movie, $info);
   }
 
-  public function dispatchDbMovies(&$movies, &$info=null) {
+  public function augmentMovies(&$movies, &$info=null) {
     $count = 1;
     foreach ($movies as &$movie) {
-      echo "<div>[${count}] "; $count++;
-      $this->dispatchDbMovie($movie, $info);
+      //echo "<div>[${count}] "; $count++;
+      $this->augmentMovie($movie, $info);
     }
-    return $movies_augmented;
   }
 }
 
@@ -186,13 +185,15 @@ $movie = new Movie($movie_db);
 var_dump($movie->get()); echo "<br/><br/>";;
 $rotten->dispatchDbMovie($movie, $info);
 var_dump($movie->get());
-*/
+
 
 $movies_db = $db->find(null, null, 1);
 var_dump($movies_db); echo "<br/><br/>";
 $movies = Movie::toMovies($movies_db);
 $rotten->dispatchDbMovies($movies, $info);
 var_dump(Movie::toMoviesDB($movies));
+ * *
+ */
 
 
 if (isset($info)) {

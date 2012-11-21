@@ -9,6 +9,7 @@ class IMDB {
     "Year" => "YEAR",
     "Title" => "TITLE",
     "IMDb Rating" => "IMDB_RATING",
+    "Release Date (month/day/year)" => 'RELEASE_DATE',
     "Title type" => "TYPE",
     "created" => "DATE_ADDED",
     "Directors" => "DIRECTORS",

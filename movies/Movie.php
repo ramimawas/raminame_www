@@ -89,6 +89,7 @@ Class Movie extends ArrayObject{
           break;
         case "CAST":
           $value = new Cast($value);
+          $value = $value->get();
           break;
       }
       $this->movie[Movie::$FIELDS[$key]] = $value;
@@ -131,15 +132,15 @@ class Cast {
   
   function __construct($value=null) {
     //echo $actors;
-    if(get_class($value) == "Cast") {
+    if(is_object($value ) && get_class($value) == "Cast") {
       $this->set($value->get());
     } else {
       if (is_string($value))
         $value = explode(", ", $value);
       if (is_array($value)) {
-        foreach($value as $actor) {
+        foreach($value as $index => $actor) {
           if (is_array($actor)) {
-           $one = $actor;
+            $one = $actor;
           } else {
             $one = array();
             $one[Cast::$FIELDS['NAME']] = $actor;
