@@ -1,18 +1,18 @@
 <?php
 
 class OMDB {
-  private $omdb_url = 'http://www.omdbapi.com/?i=';
+  private static $URL = 'http://www.omdbapi.com/?i=';
   
-  private function fetchJsonResults($id) {
-    $ch = curl_init($this->omdb_url . $id);
+  private static function fetchJsonResults($id) {
+    $ch = curl_init(OMDB::$URL . $id);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $result =  curl_exec($ch); // Getting jSON result string
     $json = json_decode($result, true);
     return $json;
   }
 
-  private static function getMovie($imdb_id) {
-    $omdb_json = $this->fetchJsonResults($imdb_id);
+  public static function getMovie($imdb_id) {
+    $omdb_json = OMDB::fetchJsonResults($imdb_id);
     $movie = null;
     if(array_key_exists('imdbID', $omdb_json) && array_key_exists('Title', $omdb_json)) {
       $movie = new Movie();

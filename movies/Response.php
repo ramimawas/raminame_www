@@ -1,61 +1,46 @@
 <?php
 
 Class Response {
-  private $status;
-  private $data;
+  public $status;
+  public $data;
   
-  function __construct() {
-    $this->status = new Status();
-    $this->data = null;
-  }
-  
-  function __construct($status, $data) {
+  function __construct($status=null, $data=null) {
+    if ($status)
+      $status = new Status();
     $this->status = $status;
     $this->data = $data;
   }
   
-  function set($status, $data) {
+  public function set($status, $data) {
     $this->status = $status;
     $this->data = $data;
-  }
-  
-  function setStatus() {
-    $this->status = $status;
-  }
-  
-  function getStatus() {
-    return $this->status;
-  }
-  
-  function setData() {
-    $this->data = $data;
-  }
-  
-  function getData() {
-    return $this->data;
   }
 }
 
-Class Response {
-  private $text;
-  private $code;
+Class Status {
+  public $code;
+  public $text;
   
   function __construct($code=501) {
-    $this->status = $status;
     if (!array_key_exists($code, $this->map))
       $code = 501;
+    $this->code = $code;
     $this->text = $this->map[$code];
   }
   
-  function setError($error) {
-    $this->text = $this->text . ': ' $error;
+  public function setError($error) {
+    $this->text = $this->text . ': ' . $error;
   }
   
   private $map = array (
-    200: 'ok',
+    200=> 'ok',
     
     //NOT FOUND
-    300=>'movie not found',
+    300=>'imdb_id is missing',
+    301=>'rating is missing',
+    302=>'rating must be between 1 and 5',
+    400=>'movie not found',
+    
     
     //ERRORS
     500 => 'Exception',

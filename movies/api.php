@@ -13,15 +13,7 @@ class API {
   private $DEFAULT_RATING = 3;
   
   function __construct() {
-   $db = new MongoHQ(array('collectionName'=>'watched'));
-  }
-
-  private  function fetchJsonResults($url) {
-    $ch = curl_init( $url );
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result =  curl_exec($ch); // Getting jSON result string
-    $json = json_decode($result, true);
-    return $json;
+    $db = new MongoHQ(array('collectionName'=>'watched'));
   }
 
   private function getMovie($imdb_id, $rating) {
@@ -36,22 +28,38 @@ class API {
   
   public function addMovie($imdb_id, $rating) {
     $response = new Response();
-    try {  
-      if (isset($_GET["imdb_id"])) {
-        $rating = isset($_GET["rating"]) ? $_GET["rating"] : $this->DEFAULT_RATING;
-        $movie = $this->getMovie($imdb_id, $rating);
-        if($movie != null)
-          $response.set(new Response(new Status(200), $movie->get()));
-      } else
-        $response.setStatus(new Response(new Status(300)));
-    } catch (xcpetion $e) {
-      $response.getStatus.setError($e);
+    if (!isset($imdb_id))
+      throw new Exception("API", 300);
+    if(!isset($rating))
+      throw new Exception("API", 301);
+    if ($rating < 1 || $rating > 5)
+      throw new Exception("API", 302);
+    $movie = $this->getMovie($imdb_id, $rating);
+    if($movie == null)
+      throw new Exception("API", 400);
+    $response->set(new Status(200), $movie->get());
+    return $response;
+  }
+  
+  public function dispatch($api) {
+    $response = new Response();
+    try {
+      switch($api) {
+        case 'api/add':
+          $response = $this->addMovie($_GET["imdb_id"], $_GET["rating"]);
+          break;
+      }
+    } catch (Exception $e) {
+      if ($e->getMessage() == "API")
+         $response->status = new Status($e->getCode());
+      else
+        $response->getStatus.setError($e->getMessage());
     }
     echo json_encode($response);
   }
 }
 
 $api = new API();
-$api->addMovie($_GET["imdb_id"], $_GET["rating"]);
+$api->dispatch('api/add');
 
 ?>
