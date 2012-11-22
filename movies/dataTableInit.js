@@ -1,8 +1,45 @@
 $(document).ready(function() {
+    
+  var settings = {
+    resetAllFiltersFlag: false,
+    cumulativeFiltersFlag: false,
+    showFiltersFlag: false,
+    slideHeader: false,
+    limitPerRequest: 99,
+    maxLimit: 999,
+    allOptionsValue: '*'
+  };
   
 //$.fn.dataTableExt.sErrMode = 'throw';
   $.fn.dataTableExt.afnFiltering = [];
   
+  var afnFiltering = function() {
+    return function(oSettings, aData, iDataIndex ) {
+        var found = true;
+        for (var key in allData[iDataIndex])
+          if(!fnFilter(key, allData[iDataIndex][key])) {
+            found = false;
+            break;
+          }
+          //found = found && fnFilter(key, allData[iDataIndex][key]);
+        return found;
+      }
+      /*var found = true;
+      var interval = allData.length/5;
+      var count = 0;
+      for (var key in enabled) {
+        //console.log(count % interval);
+        if(!fnFilter(key, allData[iDataIndex][key])) {
+          found = false;
+          break;
+        }
+        //if(count++ % interval == 0)
+        //  progress.step(5);
+      }
+      console.log('iDataIndex: ', iDataIndex, found);
+      return found;
+    }*/
+  }
     
   var fnFilter = function(key, value) {
     var match = true;
@@ -39,6 +76,8 @@ $(document).ready(function() {
 
   var tableId = "dataTable";
   
+  var enabled = ['title', 'year', 'rotten_critics_score', 'imdb_rating', 'genres', 'directors', 'runtime', 'imdb_id', 'rotten_id', 'position'];
+  
   var mongo = {
     and: ['cast', 'directors', 'genres'],
     or: ['added', 'imdb_id', 'imdb_rating', 'mpaa_rating', 'position', 'rating', 'released', 'rotten_audience_score', 'rotten_critics_score', 'rotten_id', 'runtime', 'title', 'type', 'year']
@@ -73,20 +112,6 @@ $(document).ready(function() {
     filters: "#filters",
     table: "#table",
     progressBar: "#progressbar"
-  };
-  var progress = $(tagIds.progressBar);
-  
-  var headerSliding = false;
-  
-  var settings = {
-    resetAllFiltersFlag: false,
-    cumulativeFiltersFlag: false,
-    showFiltersFlag: false,
-    slideHeader: false,
-    limitPerRequest: 99,
-    maxLimit: 1000,
-    allOptionsValue: '*'
-    
   };
 
   var buildUrl = function(skip, limit) {
@@ -255,21 +280,11 @@ $(document).ready(function() {
           }
           if (more) {
             multiload(skip+limit, limit);
-            progress.progressbar('value', progress.progressbar('value')+10);
+            progress.step(10);
           } else {
             buildTable(allData);
-            $.fn.dataTableExt.afnFiltering.push(
-              function(oSettings, aData, iDataIndex ) {
-                var found = true;
-                console.log('iDataIndex: ', iDataIndex);
-                for (var key in allData[iDataIndex])
-                  found = found && fnFilter(key, allData[iDataIndex][key]);
-                return found;
-              }
-            );
-            for(var i=progress.progressbar('value'); i<100; i++)
-              progress.progressbar('value', 100);
-            progress.fadeOut(1000);
+            $.fn.dataTableExt.afnFiltering.push(afnFiltering());
+            progress.stop();
           }
          
         }
@@ -278,10 +293,24 @@ $(document).ready(function() {
     );
   };
   
+  var progress = {
+    $: $(tagIds.progressBar),
+    start: function() {
+      progress.$[0].style.display = 'block';
+      progress.$.progressbar({value: 10});
+    },
+    step: function(step) {
+      progress.$.progressbar('value', progress.$.progressbar('value') + step);
+    },
+    stop: function() {
+      for(var i = this.$.progressbar('value'); i<100; i++)
+        progress.$.progressbar('value', i);
+      progress.$.fadeOut(1000);
+    }
+  }
+  
   var load = function() {
-    console.log(progress);
-    progress.show();
-    progress.progressbar({value: 10});
+    progress.start();
     var limit = settings.maxLimit < settings.limitPerRequest? settings.maxLimit: settings.limitPerRequest;
     multiload(0, limit);
   };
@@ -295,14 +324,14 @@ $(document).ready(function() {
         "aoColumns": structure,
         bJQueryUI: true,
         sPaginationType: "full_numbers",
-        "iDisplayLength": -1, 
-        "bLengthChange": false,
-        "bPaginate": false,
+        "iDisplayLength": 50,
+        "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "bLengthChange": true,
+        "bPaginate": true,
         "aaSorting": [[10, "desc"]],
         "oLanguage": {  
           "sZeroRecords": "No records to display"
-        },
-        sDom: 'lfrtip'
+        }
       });
       refreshListFilters();
     }
@@ -345,20 +374,25 @@ $(document).ready(function() {
           } else {
             setFilter(filter, value);
           }
-          refreshListFilters(filter);
-          oTable.fnFilter('');
+          doFilter(filter);
         });
         $this.append($select);
       }
     });
   }
   
+  var doFilter = function(filter) {
+    progress.start();
+    oTable.fnFilter('');
+    refreshListFilters(filter);
+    progress.stop();
+  }
+  
   $("button").live("click", function() {
     var _this = $(this),
       filter = _this.attr("filter");
     filter == "clear"? clearFilters(): removeFilter(filter, _this.attr("value"));
-    oTable.fnFilter('');
-    //refreshListFilters();
+    doFilter();
   });
   
   $(".link").live("click", function() {
@@ -373,8 +407,7 @@ $(document).ready(function() {
     } else {
       setFilter(filter, value);
     }
-    oTable.fnFilter('');
-    //refreshListFilters();
+    doFilter();
   });
   
   var resetAllButton = $('#resetAllFilters').iphoneStyle({
@@ -419,19 +452,19 @@ $(document).ready(function() {
         offset = $sidebar.offset();
   
   var enableHeaderSliding = function() {
-    if(!headerSliding && window.scrollY > 100) {
+    if(!settings.slideHeader && window.scrollY > 100) {
       $('thead').clone().addClass('temp').appendTo($('thead').parent());
       $('thead').not('.temp').addClass('fixed2');
-      return headerSliding = true;
+      return settings.slideHeader = true;
     }
     return false;
   }
   
   var disableHeaderSliding = function() {
-    if (headerSliding && window.scrollY < 100) {
+    if (settings.slideHeader && window.scrollY < 100) {
       $('thead').removeClass('fixed2');
       $('.temp').remove();
-      return headerSliding = false;
+      return settings.slideHeader = false;
     }
     return false;
   }
