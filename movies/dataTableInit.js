@@ -451,20 +451,22 @@ $(document).ready(function() {
         $window = $(window),
         offset = $sidebar.offset();
   
+  var headerIsSliding = false;
+  
   var enableHeaderSliding = function() {
-    if(!settings.slideHeader && window.scrollY > 100) {
+    if(!headerIsSliding && window.scrollY > 100) {
       $('thead').clone().addClass('temp').appendTo($('thead').parent());
       $('thead').not('.temp').addClass('fixed2');
-      return settings.slideHeader = true;
+      return headerIsSliding = true;
     }
     return false;
   }
   
   var disableHeaderSliding = function() {
-    if (settings.slideHeader && window.scrollY < 100) {
+    if (headerIsSliding && window.scrollY < 100) {
       $('thead').removeClass('fixed2');
       $('.temp').remove();
-      return settings.slideHeader = false;
+      return headerIsSliding = false;
     }
     return false;
   }
