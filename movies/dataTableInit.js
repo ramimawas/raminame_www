@@ -92,7 +92,7 @@ $(document).ready(function() {
     showFiltersFlag: false,
     slideHeader: false,
     limitPerRequest: 99,
-    maxLimit: 20,
+    maxLimit: 5,
     allOptionsValue: '*'
     
   };
@@ -212,7 +212,6 @@ $(document).ready(function() {
       if(filterValue.constructor != Array)
         filterValue = [filterValue];
       filterValue.forEach(function(value, index, array) {
-        console.log(filter);
         if (filter == 'imdb_id' || filter == 'rotten_id') {
           var url = filter == 'imdb_id' ? 'http://www.imdb.com/title/': 'http://www.rottentomatoes.com/m/';
           var img = value == -1 ? '': '<img src="movies/external.png" style="width: 30px">';
