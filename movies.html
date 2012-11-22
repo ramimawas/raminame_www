@@ -27,30 +27,37 @@
     </style>
     
   </head>
-  <body style="height:2000px;">
+  <body id="top">
     <div>
       <table>
         <tr>
           <td valign="top">
-            <div id="sidebar" class="ui-widget ui-widget-content ui-corner-all ui-dialog-buttons">
-              <div style="width: 100%; text-align: center; border: none;" class="fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">Filters</div>
-              <div>
-                <div class="filter">
-                  <div style="padding-bottom: 2px;">Slide Header</div>
-                  <input  id="slideHeader"  type="checkbox"/>
+            <div id="sidebar" class="fixed">
+              <div class="ui-widget ui-widget-content ui-corner-all ui-dialog-buttons">
+                <div style="width: 100%; text-align: center; border: none;" class="fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">Filters</div>
+                <div>
+                  <div class="filter">
+                    <div style="padding-bottom: 2px;">Slide Header</div>
+                    <input  id="slideHeader"  type="checkbox"/>
+                  </div>
+                  <div class="filter">
+                    <div style="padding-bottom: 2px;">Show Header filters</div>
+                    <input  id="showFilters"  type="checkbox"/>
+                  </div>
+                  <div class="filter">
+                    <div style="padding-bottom: 2px;">One Active Filter</div>
+                    <input id="resetAllFilters" type="checkbox"/>
+                  </div>
+                  <div class="filter">
+                    <div style="padding-bottom: 2px;">Cumulative filtering</div>
+                    <input id="cumulativeFilters" type="checkbox"/>
+                  </div>
+                  <div id="filters"></div>
                 </div>
-                <div class="filter">
-                  <div style="padding-bottom: 2px;">Show filters</div>
-                  <input  id="showFilters"  type="checkbox"/>
-                </div>
-                <div class="filter">
-                  <div style="padding-bottom: 2px;">Cumulative filtering</div>
-                  <input id="cumulativeFilters" type="checkbox"/>
-                </div>
-                <div id="filters"></div>
               </div>
             </div>
             <div id="progressbar" style="height: 23px; margin-top: 10px"></div>
+            <div id="back-top"><a href="#top"><span></span>Back to Top</a></div>
           </td>
           <td valign="top" style="width: 100%">
             <div id="table" class="table" ></div>

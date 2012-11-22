@@ -14,23 +14,23 @@ Class Movie extends ArrayObject{
      
     // PERSONAL
     'RATING'     => array('rating', -1),
-    'DATE_ADDED' => array('added', '_'),
+    'DATE_ADDED' => array('added', ''),
     
     // GENERIC
-    'TITLE'        => array('title', '_'),
+    'TITLE'        => array('title', ''),
     'YEAR'         => array('year', -1),
-    'RELEASE_DATE' => array('released', '_'),
-    'DIRECTORS'    => array('directors', '_'),
+    'RELEASE_DATE' => array('released', ''),
+    'DIRECTORS'    => array('directors', ''),
     'RUNTIME'      => array('runtime', -1),
-    'GENRES'       => array('genres', '_'),
-    'MPAA_RATING'  => array('mpaa_rating', '_'),
-    'CAST'         => array('cast', '_'),
-    'TYPE'         => array('type', '_'),
+    'GENRES'       => array('genres', ''),
+    'MPAA_RATING'  => array('mpaa_rating', ''),
+    'CAST'         => array('cast', ''),
+    'TYPE'         => array('type', ''),
     
     // IMDB
-    'IMDB_ID'       => array('imdb_id', '_'),
+    'IMDB_ID'       => array('imdb_id', ''),
     'IMDB_RATING'   => array('imdb_rating', -1),
-    'IMDB_POSITION' => array('position', -1),
+    'IMDB_POSITION' => array('imdb_position', -1),
       
     // ROTTEN
     'ROTTEN_ID'             => array('rotten_id', -1),
@@ -90,16 +90,15 @@ Class Movie extends ArrayObject{
         case "DATE_ADDED":
         case "RELEASE_DATE":
         case "MPAA_RATING":
-        case "MPAA_RATING":
           $value = (string)$value;
           break;
-        case "DIRECTORS": //array
+        case "CAST": //array
+        case "DIRECTORS": 
         case "GENRES":
-          $value = explode(", ", $value);
-          break;
-        case "CAST":
-          $value = new Cast($value);
-          $value = $value->get();
+          if (is_string)
+            $value = explode(", ", $value);
+          if(!is_array($value))
+            $value = array();
           break;
       }
       $this->movie[Movie::$FIELDS[$key][0]] = $value;
@@ -107,9 +106,8 @@ Class Movie extends ArrayObject{
   }
   
   public function __get($key) {
-    if (array_key_exists($key, Movie::$FIELDS)) {
+    if (array_key_exists($key, Movie::$FIELDS))
       return $this->movie[Movie::$FIELDS[$key][0]];
-    }
     return null;
   }
   
@@ -130,8 +128,8 @@ Class Movie extends ArrayObject{
   }
 }
 
+// not being used currently
 class Cast {
-  
   private $data = array();
   
   public static $FIELDS = array(
@@ -142,7 +140,7 @@ class Cast {
   
   function __construct($value=null) {
     //echo $actors;
-    if(is_object($value ) && get_class($value) == "Cast") {
+    if(is_object($value) && get_class($value) == "Cast") {
       $this->set($value->get());
     } else {
       if (is_string($value))

@@ -143,13 +143,11 @@ class RottenTomatoes {
       $full_cast = $cast_json['cast'];
       $cast_list = array();
       foreach($full_cast as $one)
-        $cast->addDetail($one['name'], $one['id'], in_array($one['name'], $abridged_cast_names));
-      $movie->CAST = $cast->get();
-      //print_r($db_movie);
-      $db->save($db_movie);
-      echo "----> movies updated.";
+        $cast_list[] = $one['name'];
+      $movie->CAST = $cast_list;
+      echo "----> movie updated.";
     } else {
-      //echo "<div>ERROR while searching rotten tomatoes!!!!!!!!</div><br/>";
+      echo "<div>ERROR while searching rotten tomatoes!!!!!!!!</div><br/>";
       $info['missing'][] = $movie['title'];
     }
   }
@@ -187,11 +185,13 @@ $rotten->augmentMovie($movie, $info);
 var_dump($movie->get());
 */
 
-$movies_db = $db->find(null, null, 5);
-var_dump($movies_db); echo "<br/><br/>";
+//$movies_db = $db->find(null, null, 5);
+$movies_db = $db->find();
+//var_dump($movies_db); echo "<br/><br/>";
 $movies = Movie::toMovies($movies_db);
 $rotten->augmentMovies($movies, $info);
-var_dump(Movie::toMoviesDB($movies));
+//var_dump(Movie::toMoviesDB($movies));
+$db->saveMany(Movie::toMoviesDB($movies));
 
 
 if (isset($info)) {

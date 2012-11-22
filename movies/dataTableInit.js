@@ -5,13 +5,14 @@ $(document).ready(function() {
   $.fn.dataTableExt.afnFiltering.push(
     function(oSettings, aData, iDataIndex ) {
       var found = true;
+      //console.log('query: ', query);
       for (var key in allData[iDataIndex])
-        found = found && filter(key, allData[iDataIndex][key]);
+        found = found && fnFilter(key, allData[iDataIndex][key]);
       return found;
     }
   );
     
-  var filter = function(key, value) {
+  var fnFilter = function(key, value) {
     var match = true;
     if ($.inArray(key, mongo.and)!=-1 && query[key] != null)
       match = _.intersection(query[key], value).length == query[key].length;
@@ -19,6 +20,22 @@ $(document).ready(function() {
       match = $.inArray(value, query[key]) != -1;
     //console.log('filter [', key, '] ', value, ' == ', query[key], ' : ', match);
     return match;
+  }
+  
+  var calculateFilteredLists = function() {
+    var fitleredLists = [];
+    $.each(query, function(key, value) {
+      fitleredLists[key] = _.filter(allData, _fnFilter, key);
+    });
+    return fitleredLists;
+  }
+
+  var _fnFilter = function(row, currentKey) {
+    var found = true;
+    for (var key in row)
+      if (currentKey != key)
+        found = found && fnFilter(key, row[key]);    
+    return found;
   }
   
   var mongoDb = {
@@ -31,21 +48,30 @@ $(document).ready(function() {
   var tableId = "dataTable";
   
   var mongo = {
-    and: ['directors', 'genres'],
-    or: ['title', 'year', 'rating', 'imdb_rating', 'runtime', 'rotten_critics_score', 'position', 'type']
+    and: ['cast', 'directors', 'genres'],
+    or: ['added', 'imdb_id', 'imdb_rating', 'mpaa_rating', 'position', 'rating', 'released', 'rotten_audience_score', 'rotten_critics_score', 'rotten_id', 'runtime', 'title', 'type', 'year']
   };
   
   var types = {
-    string: ['directors', 'genres', 'title', 'type'],
-    integer: ['year', 'rating', 'imdb_rating', 'runtime', 'rotten_critics_score', 'position']
+    string: ['added', 'cast', 'directors', 'genres', 'imdb_id', 'mpaa_rating', 'released', 'title', 'type'],
+    integer: ['imdb_rating', 'position', 'rating', 'rotten_audience_score', 'rotten_critics_score', 'rotten_id', 'runtime', 'year']
   };
 
   var query = {
+    added: null,
+    cast: null,
     directors: null,
     genres: null,
-    rating: null,
+    imdb_id: null,
     imdb_rating: null,
+    mpaa_rating:  null,
+    position: null,
+    rating: null,
+    released: null,
     runtime: null,
+    rotten_audience_score: null,
+    rotten_critics_score: null,
+    rotten_id: null,
     title: null,
     type: null,
     year: null
@@ -53,19 +79,23 @@ $(document).ready(function() {
   
   var tagIds = {
     filters: "#filters",
-    table: "#table"
+    table: "#table",
+    progressBar: "#progressbar"
   };
-  var progress = $("#progressbar");
+  var progress = $(tagIds.progressBar);
   
   var headerSliding = false;
   
   var settings = {
+    resetAllFiltersFlag: false,
     cumulativeFiltersFlag: false,
     showFiltersFlag: false,
-    slideHeader: false
+    slideHeader: false,
+    limitPerRequest: 99,
+    maxLimit: 20,
+    allOptionsValue: '*'
+    
   };
-  
-  var globalLimit = 99;
 
   var buildUrl = function(skip, limit) {
     url = [mongoDb.host, mongoDb.dbName, "collections", mongoDb.collectionName, "documents"].join("/") + "?" + buildQs(skip, limit)
@@ -132,6 +162,8 @@ $(document).ready(function() {
       query[key] = $.grep(query[key], function(item) {
           return item != value;
       });
+      if (query[key] != null && query[key] == 0)
+        query[key] = null;
     }
     buildFilterButttons();
   }
@@ -180,39 +212,38 @@ $(document).ready(function() {
       if(filterValue.constructor != Array)
         filterValue = [filterValue];
       filterValue.forEach(function(value, index, array) {
-        strArray.push('<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>');
+        console.log(filter);
+        if (filter == 'imdb_id' || filter == 'rotten_id') {
+          var url = filter == 'imdb_id' ? 'http://www.imdb.com/title/': 'http://www.rottentomatoes.com/m/';
+          var img = value == -1 ? '': '<img src="movies/external.png" style="width: 30px">';
+          strArray.push('<span filter="' + filter +'" value="' + value + '"><a href="' + url + value + '/" target="_blank">' + img + '</a></span>');
+        } else
+          strArray.push('<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>');
       });
       return strArray.join(', ');
     }
   }
   
   var structure = [
-    {"sTitle": "Position", "mDataProp": "position", "sWidth": "75px"},
-    {"sTitle": "Title", "mDataProp": "title"},
+    {"sTitle": "Title", "mDataProp": "title", "sWidth": "150px"},
+    {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "65px"},
     {"sTitle": "Rating", "mDataProp": "rating", fnRender: render('rating'), "sWidth": "65px"},
+    {"sTitle": "RT", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "90px"},
     {"sTitle": "IMDB", "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "65px"},
-    {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "75px"},
     {"sTitle": "Runtime", "mDataProp": "runtime", fnRender: render('runtime'), "sWidth": "80px"},
     {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres')},
-    {"sTitle": "Title Type", "mDataProp": "type", "sWidth": "90px"},
+    //{"sTitle": "Cast", "mDataProp": "cast", fnRender: render('cast')},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
-    //{"sTitle": "RT score", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score')},
-    {"sTitle": "Added", "mDataProp": "added", "sWidth": "170px"},
+    //{"sTitle": "RT Aud", "mDataProp": "rotten_audience_score", fnRender: render('rotten_audience_score'), "sWidth": "90px"},
+    {"sTitle": "MPAA", "mDataProp": "mpaa_rating", fnRender: render('mpaa_rating'), "sWidth": "70px" },
+    //{"sTitle": "Added", "mDataProp": "added", "sWidth": "170px"},
+    {"sTitle": "Title Type", "mDataProp": "type", "sWidth": "90px", fnRender: render('type')},
+    {"sTitle": "IMDB", "mDataProp": "imdb_id", "sWidth": "30px", fnRender: render('imdb_id')},
+    {"sTitle": "RT", "mDataProp": "rotten_id", "sWidth": "30px", fnRender: render('rotten_id')},
+    //{"sTitle": "Released", "mDataProp": "released", "sWidth": "170px"},
+    {"sTitle": "P", "mDataProp": "position", "sWidth": "75px"}
   ];
   
-  
-  function fnCreateSelect( key, values ) {
-    var hiddenClass = settings.showFiltersFlag? '': ' hidden';
-    var $select = $('<select filter="' + key + '" class="filterOptions' + hiddenClass + '">');
-    $select.append($('<option value="">All</option>'));
-    for (var i=0 ; i<values.length ; i++) {
-      $select.append($('<option value="' + values[i] + '">' + cap(values[i]) + '</option>'));
-    }
-    if (query[key] != null && ($.inArray(key, mongo.or) != -1 || ($.inArray(key, mongo.and) != -1 && query[key].length == 1)))
-      $select.val(query[key]);
-    return $select;
-  };
-
   var allData = [];
   
   var multiload = function(skip, limit) {
@@ -222,10 +253,15 @@ $(document).ready(function() {
       {},
       function(data) {
         if (data != null) {
-          var more = data.length > limit;          
+          var more = data.length > limit;
           if (more)
             data = _.initial(data);
           allData = _.union(allData, data);
+          console.log(allData.length);
+          if(allData.length >= settings.maxLimit) {
+            allData = _.first(allData, settings.maxLimit);
+            more = false;
+          }
           if (more) {
             multiload(skip+limit, limit);
             progress.progressbar('value', progress.progressbar('value')+10);
@@ -245,7 +281,8 @@ $(document).ready(function() {
     console.log(progress);
     progress.show();
     progress.progressbar({value: 10});
-    multiload(0, globalLimit);
+    var limit = settings.maxLimit < settings.limitPerRequest? settings.maxLimit: settings.limitPerRequest;
+    multiload(0, limit);
   };
   
   var buildTable = function (data) {
@@ -266,38 +303,96 @@ $(document).ready(function() {
         },
         sDom: 'lfrtip'
       });
-
-      $("thead th").each( function (i) {
-        var key = structure[i].mDataProp;
-        $(this).append(fnCreateSelect(key, _.sortBy(_.unique(_.flatten(_.pluck(data, key))), function(v){return v;})));
-        $('select', this).change( function () {
-          var value = $(this).val();
-          if (value != '')
-            setFilter(key, value);
-          else
-            resetFilter(key);
-          oTable.fnFilter('');
-        } );
-      } );
+      refreshListFilters();
     }
-  }  
+  }
+  
+  function fnCreateSelect(key, values) {
+    var hiddenClass = settings.showFiltersFlag? '': ' hidden';
+    var $select = $('<select filter="' + key + '" class="filterOptions' + hiddenClass + '">');
+    $select.append($('<option value="' + settings.allOptionsValue + '">All</option>'));
+    for (var i=0 ; i<values.length ; i++) {
+      $select.append($('<option value="' + values[i] + '">' + cap(values[i]) + '</option>'));
+    }
+    //console.log(query[key], settings.resetAllFiltersFlag, settings.cumulativeFiltersFlag)
+    if (query[key] != null) {
+      if(settings.resetAllFiltersFlag || !settings.cumulativeFiltersFlag)
+        $select.val(query[key]);
+    }
+    return $select;
+  }
+  
+  var refreshListFilters = function(doNotFilter) {
+    var filteredLists = calculateFilteredLists();
+    doNotFilter = doNotFilter || '';
+    $("thead th").each( function (i) {
+      var filter = structure[i].mDataProp;
+      if(doNotFilter != filter) {
+        $this = $(this);
+        $this.children('select').remove();
+        var $select = fnCreateSelect(filter, _.sortBy(_.unique(_.flatten(_.pluck(filteredLists[filter], filter))), function(v){return v;}));
+        $select.change( function () {
+          var value = $(this).val();
+          if (value == settings.allOptionsValue)
+            resetFilter(filter);
+          else if(settings.resetAllFiltersFlag) {
+            clearFilters();
+            setFilter(filter, value);
+          } else if(settings.cumulativeFiltersFlag) {
+            addFilter(filter, value);
+            $(this).val('');
+          } else {
+            setFilter(filter, value);
+          }
+          refreshListFilters(filter);
+          oTable.fnFilter('');
+        });
+        $this.append($select);
+      }
+    });
+  }
   
   $("button").live("click", function() {
     var _this = $(this),
       filter = _this.attr("filter");
-    filter == "clear"? clearFilters(): removeFilter(filter, _this.attr("value"), !settings.cumulativeFiltersFlag);
+    filter == "clear"? clearFilters(): removeFilter(filter, _this.attr("value"));
     oTable.fnFilter('');
-  });
-
-  $(".link").live("click", function() {
-    var _this = $(this);
-    addFilter(_this.attr("filter"), _this.attr("value"), !settings.cumulativeFiltersFlag);
-    oTable.fnFilter('');
+    refreshListFilters();
   });
   
-  $('#cumulativeFilters').iphoneStyle({
+  $(".link").live("click", function() {
+    var _this = $(this),
+      filter = _this.attr("filter"),
+      value = _this.attr("value");
+    if(settings.resetAllFiltersFlag) {
+      clearFilters();
+      setFilter(filter, value);
+    } else  if(settings.cumulativeFiltersFlag) {
+      addFilter(filter, value);
+    } else {
+      setFilter(filter, value);
+    }
+    oTable.fnFilter('');
+    refreshListFilters();
+  });
+  
+  var resetAllButton = $('#resetAllFilters').iphoneStyle({
+    onChange: function(button, value) {
+      settings.resetAllFiltersFlag = value;
+      if(value) {
+        settings.cumulativeFiltersFlag = false;
+        cumulitiveButton.attr('checked', false).iphoneStyle("refresh");
+        cumulitiveButton.attr('disabled', 'disabled').iphoneStyle("refresh");
+      } else
+        cumulitiveButton.removeAttr('disabled').iphoneStyle("refresh");
+    }
+  });
+  
+  var cumulitiveButton = $('#cumulativeFilters').iphoneStyle({
     onChange: function(button, value) {
       settings.cumulativeFiltersFlag = value;
+      if (value)
+        refreshListFilters();
     }
   });
   
@@ -321,13 +416,6 @@ $(document).ready(function() {
   var $sidebar = $("#sidebar"),
         $window = $(window),
         offset = $sidebar.offset();
-
-  $window.scroll(function() {
-    if ($window.scrollTop() > offset.top)
-      $sidebar.addClass('fixed');
-    else
-      $sidebar.removeClass('fixed');
-  });
   
   var enableHeaderSliding = function() {
     if(!headerSliding && window.scrollY > 100) {
@@ -347,12 +435,32 @@ $(document).ready(function() {
     return false;
   }
   
-  
-  
   $(window).scroll(function (event) {
     if (settings.slideHeader)
       enableHeaderSliding() || disableHeaderSliding();
   });
+
+  //$("#back-top").hide();
+	
+  $(function () {
+    $(window).scroll(0);
+    $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                    $('#back-top').fadeIn();
+            } else {
+                    $('#back-top').fadeOut();
+            }
+    });
+
+    // scroll body to 0px on click
+    $('#back-top a').click(function () {
+            $('body,html').animate({
+                    scrollTop: 0
+            }, 800);
+            return false;
+    });
+  });
+
 
   load();
 });
