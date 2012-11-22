@@ -92,7 +92,7 @@ $(document).ready(function() {
     showFiltersFlag: false,
     slideHeader: false,
     limitPerRequest: 99,
-    maxLimit: 5,
+    maxLimit: 1000,
     allOptionsValue: '*'
     
   };
