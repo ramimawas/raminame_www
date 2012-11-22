@@ -2,15 +2,7 @@ $(document).ready(function() {
   
 //$.fn.dataTableExt.sErrMode = 'throw';
   $.fn.dataTableExt.afnFiltering = [];
-  $.fn.dataTableExt.afnFiltering.push(
-    function(oSettings, aData, iDataIndex ) {
-      var found = true;
-      //console.log('query: ', query);
-      for (var key in allData[iDataIndex])
-        found = found && fnFilter(key, allData[iDataIndex][key]);
-      return found;
-    }
-  );
+  
     
   var fnFilter = function(key, value) {
     var match = true;
@@ -226,17 +218,17 @@ $(document).ready(function() {
   var structure = [
     {"sTitle": "Title", "mDataProp": "title", "sWidth": "150px"},
     {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "65px"},
-    {"sTitle": "Rating", "mDataProp": "rating", fnRender: render('rating'), "sWidth": "65px"},
-    {"sTitle": "RT", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "90px"},
-    {"sTitle": "IMDB", "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "65px"},
-    {"sTitle": "Runtime", "mDataProp": "runtime", fnRender: render('runtime'), "sWidth": "80px"},
+    {"sTitle": String.fromCharCode(0x2764), "mDataProp": "rating", fnRender: render('rating'), "sWidth": "10px"},
+    {"sTitle": "RT", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "10px"},
+    {"sTitle": "IMDB", "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "10px"},
     {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres')},
     //{"sTitle": "Cast", "mDataProp": "cast", fnRender: render('cast')},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
+    {"sTitle": "Min", "mDataProp": "runtime", fnRender: render('runtime'), "sWidth": "10px"},
     //{"sTitle": "RT Aud", "mDataProp": "rotten_audience_score", fnRender: render('rotten_audience_score'), "sWidth": "90px"},
-    {"sTitle": "MPAA", "mDataProp": "mpaa_rating", fnRender: render('mpaa_rating'), "sWidth": "70px" },
+    //{"sTitle": "MPAA", "mDataProp": "mpaa_rating", fnRender: render('mpaa_rating'), "sWidth": "70px" },
     //{"sTitle": "Added", "mDataProp": "added", "sWidth": "170px"},
-    {"sTitle": "Title Type", "mDataProp": "type", "sWidth": "90px", fnRender: render('type')},
+    //{"sTitle": "Title Type", "mDataProp": "type", fnRender: render('type'), "sWidth": "70px" },
     {"sTitle": "IMDB", "mDataProp": "imdb_id", "sWidth": "30px", fnRender: render('imdb_id')},
     {"sTitle": "RT", "mDataProp": "rotten_id", "sWidth": "30px", fnRender: render('rotten_id')},
     //{"sTitle": "Released", "mDataProp": "released", "sWidth": "170px"},
@@ -265,11 +257,21 @@ $(document).ready(function() {
             multiload(skip+limit, limit);
             progress.progressbar('value', progress.progressbar('value')+10);
           } else {
+            buildTable(allData);
+            $.fn.dataTableExt.afnFiltering.push(
+              function(oSettings, aData, iDataIndex ) {
+                var found = true;
+                console.log('iDataIndex: ', iDataIndex);
+                for (var key in allData[iDataIndex])
+                  found = found && fnFilter(key, allData[iDataIndex][key]);
+                return found;
+              }
+            );
             for(var i=progress.progressbar('value'); i<100; i++)
               progress.progressbar('value', 100);
-            buildTable(allData);
             progress.fadeOut(1000);
           }
+         
         }
       },
       "json"
@@ -296,7 +298,7 @@ $(document).ready(function() {
         "iDisplayLength": -1, 
         "bLengthChange": false,
         "bPaginate": false,
-        "aaSorting": [[ 0, "desc" ]],
+        "aaSorting": [[10, "desc"]],
         "oLanguage": {  
           "sZeroRecords": "No records to display"
         },
@@ -356,7 +358,7 @@ $(document).ready(function() {
       filter = _this.attr("filter");
     filter == "clear"? clearFilters(): removeFilter(filter, _this.attr("value"));
     oTable.fnFilter('');
-    refreshListFilters();
+    //refreshListFilters();
   });
   
   $(".link").live("click", function() {
@@ -372,7 +374,7 @@ $(document).ready(function() {
       setFilter(filter, value);
     }
     oTable.fnFilter('');
-    refreshListFilters();
+    //refreshListFilters();
   });
   
   var resetAllButton = $('#resetAllFilters').iphoneStyle({
