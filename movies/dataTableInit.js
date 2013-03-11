@@ -233,6 +233,8 @@ $(document).ready(function() {
           var url = filter == 'imdb_id' ? 'http://www.imdb.com/title/': 'http://www.rottentomatoes.com/m/';
           var img = value == -1 ? '': '<img src="movies/external.png" style="width: 30px">';
           strArray.push('<span filter="' + filter +'" value="' + value + '"><a href="' + url + value + '/" target="_blank">' + img + '</a></span>');
+        } else if (filter == 'added') {
+          strArray.push(new Date(value*1000).toLocaleDateString());
         } else
           strArray.push('<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>');
       });
@@ -252,12 +254,12 @@ $(document).ready(function() {
     {"sTitle": "Min", "mDataProp": "runtime", fnRender: render('runtime'), "sWidth": "10px"},
     //{"sTitle": "RT Aud", "mDataProp": "rotten_audience_score", fnRender: render('rotten_audience_score'), "sWidth": "90px"},
     //{"sTitle": "MPAA", "mDataProp": "mpaa_rating", fnRender: render('mpaa_rating'), "sWidth": "70px" },
-    //{"sTitle": "Added", "mDataProp": "added", "sWidth": "170px"},
     //{"sTitle": "Title Type", "mDataProp": "type", fnRender: render('type'), "sWidth": "70px" },
     {"sTitle": "IMDB", "mDataProp": "imdb_id", "sWidth": "30px", fnRender: render('imdb_id')},
     {"sTitle": "RT", "mDataProp": "rotten_id", "sWidth": "30px", fnRender: render('rotten_id')},
     //{"sTitle": "Released", "mDataProp": "released", "sWidth": "170px"},
-    {"sTitle": "P", "mDataProp": "position", "sWidth": "75px"}
+    //{"sTitle": "P", "mDataProp": "position", "sWidth": "75px"}
+    {"sTitle": "Added", "mDataProp": "added", "sWidth": "100px", fnRender: render('added')}
   ];
   
   var allData = [];

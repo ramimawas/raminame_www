@@ -3,7 +3,7 @@
 class IMDB {
   
   private static $name_map = array (
-    "position" => 'IMDB_POSITION',
+    "position" => 'POSITION',
     "const" => "IMDB_ID",
     "Runtime (mins)" => "RUNTIME",
     "Year" => "YEAR",

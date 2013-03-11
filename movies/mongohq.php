@@ -13,7 +13,9 @@ class MongoHQ {
    );
 
   public function buildUrl () {
-    return "mongodb://" . $this->config['username'] . ":" . $this->config['password'] . "@" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
+    $url = "mongodb://" . $this->config['username'] . ":" . $this->config['password'] . "@" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
+    //echo $url;
+    return $url;
   }
   
   function __construct($config) {
@@ -60,6 +62,28 @@ class MongoHQ {
       var_dump($e);
     }
     return $results;
+  }
+  
+  public function count() {
+    return $this->getCollection($collection)->count();
+  }
+  
+  public function max($field, $collection=null) {
+    $max = null;
+    try {
+      $project = array();
+      $project[$field] = 1;
+      $sort = array();
+      $sort[$field] = -1;
+      $cursor = $this->getCollection($collection)->find(array(), $project)->sort($sort)->limit(1);
+      foreach ($cursor as $obj)
+        $results[] = $obj;
+      if (!empty($results) && isset($results[0][$field]))
+        $max = $results[0][$field];
+    } catch (Exception $e) {
+      var_dump($e);
+    }
+    return $max;
   }
   
   public function save($row, $collection=null) {

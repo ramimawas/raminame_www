@@ -11,6 +11,7 @@ Class Movie extends ArrayObject{
   
   public static $FIELDS = array(
     'ID' => '_id',
+    'POSITION' => array('position', -1),
      
     // PERSONAL
     'RATING'     => array('rating', -1),
@@ -20,17 +21,16 @@ Class Movie extends ArrayObject{
     'TITLE'        => array('title', ''),
     'YEAR'         => array('year', -1),
     'RELEASE_DATE' => array('released', ''),
-    'DIRECTORS'    => array('directors', ''),
+    'DIRECTORS'    => array('directors', array()),
     'RUNTIME'      => array('runtime', -1),
-    'GENRES'       => array('genres', ''),
+    'GENRES'       => array('genres', array()),
     'MPAA_RATING'  => array('mpaa_rating', ''),
-    'CAST'         => array('cast', ''),
+    'CAST'         => array('cast', array()),
     'TYPE'         => array('type', ''),
     
     // IMDB
     'IMDB_ID'       => array('imdb_id', ''),
     'IMDB_RATING'   => array('imdb_rating', -1),
-    'IMDB_POSITION' => array('imdb_position', -1),
       
     // ROTTEN
     'ROTTEN_ID'             => array('rotten_id', -1),
@@ -41,9 +41,11 @@ Class Movie extends ArrayObject{
   function __construct($movie=null) {
     $this->movie = $movie;
     if (!isset($movie)) {
-    foreach(Movie::$FIELDS as $key => $val)
-      if($key != 'ID')
-        $this[$key] = $val[1];
+      foreach(Movie::$FIELDS as $key => $val) {
+        if($key != 'ID')
+          $this[$key] = $val[1];
+      }
+      $this->DATE_ADDED = strtotime('now');
     }
   }
   
@@ -73,7 +75,7 @@ Class Movie extends ArrayObject{
     if (array_key_exists($key, Movie::$FIELDS)) {
       switch($key) {       
         case 'RATING': //int
-        case 'IMDB_POSITION':
+        case 'POSITION':
         case 'YEAR':
         case 'RUNTIME':
         case "ROTTEN_ID":
@@ -84,19 +86,28 @@ Class Movie extends ArrayObject{
         case "IMDb Rating": //float
           $value = floatval($value);
           break;
+        case "DATE_ADDED":  // int datetime
+          if (gettype($value) == "string") {
+            if (($value = strtotime($value)) === false)
+              $value = strtotime("now");
+          } else if(gettype($value) != "integer")
+            $value = strtotime("now");
+          break;
+        case "RELEASE_DATE":
         case "TITLE": //string
         case "TYPE":
         case 'IMDB_ID':
-        case "DATE_ADDED":
-        case "RELEASE_DATE":
         case "MPAA_RATING":
           $value = (string)$value;
           break;
         case "CAST": //array
         case "DIRECTORS": 
         case "GENRES":
-          if (is_string)
+          if (is_string($value)) {
+            if ($key == "GENRES")
+              $value = strtolower($value);
             $value = explode(", ", $value);
+          }
           if(!is_array($value))
             $value = array();
           break;

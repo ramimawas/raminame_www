@@ -39,6 +39,8 @@ Class Status {
     300=>'imdb_id is missing',
     301=>'rating is missing',
     302=>'rating must be between 1 and 5',
+    303=>'imdb_id or title must be specified',
+    304=>'method is missing',
     400=>'movie not found',
     
     
