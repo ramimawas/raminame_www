@@ -49,9 +49,9 @@ class API {
   
   public function findMovie($imdb_id, $rotten_id, $title) {
     $response = new Response();
-    if (!isset($imdb_id) && !isset($rotten_id) && !isset($title))
+    if ((!isset($imdb_id) || empty($imdb_id)) && (!isset($rotten_id) || empty($rotten_id)) && (!isset($title) || empty($title)))
       throw new Exception("API", 303);
-    else if(isset($imdb_id))
+    else if(isset($imdb_id) && !empty($imdb_id))
       $movie = OMDB::getMovieByImdbId($imdb_id);
     else if(isset($title))
       $movie = OMDB::getMovieByTitle($title);

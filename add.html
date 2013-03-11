@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" type="text/css" charset="utf-8"/>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="movies/dataTableInitAdd.js"></script>
+    <script src="movies/iphone-style/iphone-style-checkboxes.js"></script>
+    
+  </head>
+  <body id="top">
+    <div>
+      <div style="position: fixed; background-color: white;">
+        <span>Title</span>
+        <input id="title-text" type="text" name="title"/>
+        <input id="title-button" type="button" name="title" value="find title"/>
+        <input id="omdb-button" type="button" name="omdb" value="omdb"/>
+        <input id="rotten-button" type="button" name="rotten" value="rotten"/>
+        <span>imdbId/rottenId</span>
+        <input id="imdb-text" type="text" name="imdb_id"/>
+        <input id="rotten-text" type="text" name="rotten_id"/>
+        <input id="findById-button" type="button" name="search" value="find"/>
+        <span>Rating</span>
+        <input id="rating-text" type="text" name="rating"/>
+        <input id="add-button" type="button" name="add" value="add" style="background-color: red;"/>
+        <label id="confirmation" style="color: green;"/></label>
+      </div>
+      <div id="iframe" style="padding-top: 30px;">
+        <div style="float: left; width: 50%; height: 100%;"><iframe id="imdb" style="width: 100%; height: 100%;"></iframe></div>
+        <div style="float: right; width: 50%; height: 100%;"><iframe id="rotten" style="width: 100%; height: 100%;"></iframe></div>
+      </div>
+      <div id="table" class="table" ></div>
+    </div>
+  </body>
+</html>

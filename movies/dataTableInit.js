@@ -6,7 +6,7 @@ $(document).ready(function() {
     showFiltersFlag: false,
     slideHeader: false,
     limitPerRequest: 99,
-    maxLimit: 999,
+    maxLimit: 1999,
     allOptionsValue: '*'
   };
   
@@ -235,6 +235,7 @@ $(document).ready(function() {
           strArray.push('<span filter="' + filter +'" value="' + value + '"><a href="' + url + value + '/" target="_blank">' + img + '</a></span>');
         } else if (filter == 'added') {
           strArray.push(new Date(value*1000).toLocaleDateString());
+          //strArray.push(value*1000);
         } else
           strArray.push('<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>');
       });
@@ -275,7 +276,6 @@ $(document).ready(function() {
           if (more)
             data = _.initial(data);
           allData = _.union(allData, data);
-          console.log(allData.length);
           if(allData.length >= settings.maxLimit) {
             allData = _.first(allData, settings.maxLimit);
             more = false;
@@ -331,7 +331,7 @@ $(document).ready(function() {
         "bLengthChange": true,
         "bPaginate": true,
         "aaSorting": [[10, "desc"]],
-        "oLanguage": {  
+        "oLanguage": {
           "sZeroRecords": "No records to display"
         }
       });
