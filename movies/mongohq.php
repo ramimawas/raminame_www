@@ -46,6 +46,19 @@ class MongoHQ {
     return $one;
   }
   
+  public function aggregate($pipeline) {
+    $results = array();
+    try {
+      $collection = $this->getCollection($collection);
+      $cursor = $collection->aggregate($pipeline);
+      foreach ($cursor as $obj)
+        $results[] = $obj;
+    } catch (Exception $e) {
+      var_dump($e);
+    }
+    return $results;
+  }
+  
   public function find($query=null, $collection=null, $limit=-1) {
     $results = array();
     if($query == null)

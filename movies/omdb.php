@@ -50,15 +50,19 @@ class OMDB {
       $movie->IMDB_ID = $omdb_json['imdbID'];
       $movie->IMDB_RATING = $omdb_json['imdbRating'];
       $movie->TITLE = $omdb_json['Title'];
-      $movie->TYPE = $omdb_json['Type'];
+      if ($omdb_json['Rated'] != 'N/A')
+        $movie->TYPE = $omdb_json['Type'];
       $movie->YEAR = $omdb_json['Year'];
-      $movie->MPAA_RATING = $omdb_json['Rated'];
-      $movie->RELEASE_DATE = $omdb_json['Released'];
+      if ($omdb_json['Rated'] != 'N/A')
+        $movie->MPAA_RATING = $omdb_json['Rated'];
+      if ($omdb_json['Released'] != 'N/A')
+        $movie->RELEASE_DATE = $omdb_json['Released'];
       $movie->RUNTIME = OMDB::toMinutes($omdb_json['Runtime']);
       $movie->GENRES = preg_replace('/-/', '_', $omdb_json['Genre']);
       if ($omdb_json['Director'] != 'N/A')
         $movie->DIRECTORS = $omdb_json['Director'];
-      $movie->CAST = $omdb_json['Actors'];
+      if ($omdb_json['Actors'] != 'N/A')
+        $movie->CAST = $omdb_json['Actors'];
     }
     return $movie;
   }

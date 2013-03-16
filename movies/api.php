@@ -25,6 +25,100 @@ class API {
     $this->rotten = new RottenTomatoes();
   }
   
+  public function top($field, $minimumCount=0) {
+    $response = new Response();
+    if(empty($minimumCount))
+      $minimumCount = 0;
+    $minimumCount = intval($minimumCount);
+    //db.watched.aggregate({ $project : {cast: 1, title: 1} }, {$unwind: "$cast"}, {$group: {_id: "$cast", titles: { $addToSet: "$title"}, count: {$sum: 1} }}, {$sort: {count: -1}}, {$limit: 20})
+    
+    $project = array(
+          '$project' => array(
+              $field => 1
+          )
+      );
+    $unwind = array('$unwind' => '$' . $field);
+    $group = array(
+          '$group' => array(
+              '_id' => '$' . $field,
+              'count'=> array('$sum' => 1)
+          )
+      );
+    $match = array(
+          '$match'=> array(
+              'count' => array('$gte' => $minimumCount))
+      );
+    $sort = array('$sort'=> array('count' => -1));
+    
+    if (in_array($field, array('cast', 'directors', 'genres'))) {
+      $pipeline = array(
+        $project,
+        $unwind,
+        $group,
+        $match,
+        $sort
+      );
+    } else {
+      $pipeline = array(
+        $project,
+        $group,
+        $match,
+        $sort
+      );
+    }
+    
+    $results = $this->db->aggregate($pipeline);
+    if (!empty($results))
+      $results = $results[0];
+    else
+      throw new Exception("API", 501);
+    $response->set(new Status(200), $results);
+    return $response;
+  }
+  
+  public function fixMovie($imdb_ids) {
+    $response = new Response();
+    if (!isset($imdb_ids))
+      throw new Exception("API", 300);
+    
+    if($imdb_ids == "_fixall") {
+      $query = array();
+    } else {
+      $query = array("imdb_id"=>array('$in' => explode(',', $imdb_ids)));
+    }
+    if (!isset($query))
+      throw new Exception("API", 501);
+    $movies_db = $this->db->find($query);
+    foreach ($movies_db as $movie_db) {
+      $movieRami = new Movie($movie_db);
+      $imdb_id = $movieRami->IMDB_ID;
+      //echo "processing {$imdb_id}";
+      //echo "========= Original movie in DB: ";var_dump($movieRami);
+
+      $movieOMDB = OMDB::getMovieByImdbId($imdb_id);
+      //echo "========= omdb movie: ";var_dump($movieOMDB);
+      $fieldsStrInt = array("IMDB_RATING", "TITLE", "TYPE", "YEAR", "MPAA_RATING", "RELEASE_DATE", "RUNTIME");
+      foreach($fieldsStrInt as $field) {
+        if ($movieRami[$field] != $movieOMDB[$field])
+          $movieRami[$field] = $movieOMDB[$field];
+      }
+
+      $fieldsArray = array("CAST", "DIRECTORS", "GENRES");
+      foreach($fieldsArray as $field) {
+        $diff1 = array_diff($movieRami[$field], $movieOMDB[$field]);
+        $diff2 = array_diff($movieOMDB[$field], $movieRami[$field]);
+        if (!($diff1 != null && $diff2 != null && count($diff1)==0 && count($diff2)==0))
+          $movieRami[$field] = $movieOMDB[$field];
+      }
+      //echo "========= After omdb merge: ";var_dump($movieRami);
+      $this->rotten->augmentMovie($movieRami);
+      //echo "========= After rotten merge: ";var_dump($movieRami);
+      $this->db->save($movieRami->get());
+    }
+    $response->set(new Status(200), $movie->get());
+    return $response;
+  }
+  
   public function addMovie($imdb_id, $rotten_id, $rating) {
     $response = new Response();
     if (!isset($imdb_id))
@@ -33,16 +127,21 @@ class API {
       throw new Exception("API", 301);
     if ($rating < 1 || $rating > 5)
       throw new Exception("API", 302);
-    $movie = OMDB::getMovieByImdbId($imdb_id);
-    if (isset($rotten_id))
-      $movie->ROTTEN_ID = $rotten_id;
-    $movie->RATING = $rating;
-    $this->rotten->augmentMovie($movie);
-    if(empty($movie))
-      throw new Exception("API", 400);
-    $position = $this->db->count();
-    $movie->POSITION = $position+1;
-    $this->db->save($movie->get());
+    $movie_db = $this->db->findOne(array("imdb_id"=>$imdb_id  ));
+    if (empty($movie_db)) {
+      $movie = OMDB::getMovieByImdbId($imdb_id);
+      if (isset($rotten_id))
+        $movie->ROTTEN_ID = $rotten_id;
+      $movie->RATING = $rating;
+      $this->rotten->augmentMovie($movie);
+      if(empty($movie))
+        throw new Exception("API", 400);
+      $position = $this->db->count();
+      $movie->POSITION = $position+1;
+      $this->db->save($movie->get());
+    } else {
+      throw new Exception("API", 401);
+    }
     $response->set(new Status(200), $movie->get());
     return $response;
   }
@@ -77,6 +176,12 @@ class API {
             break;
           case 'find':
             $response = $this->findMovie($_GET["i"], $_GET["rid"], $_GET["t"]);
+            break;
+          case 'fix':
+            $response = $this->fixMovie($_GET["i"]);
+            break;
+          case 'top':
+            $response = $this->top($_GET["f"], $_GET["c"]);
             break;
           default:
             throw new Exception("API", 304);

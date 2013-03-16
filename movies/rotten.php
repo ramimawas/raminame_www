@@ -262,7 +262,7 @@ class RottenTomatoes {
       } else {
         $rotten_movie = $this->fetchMovieBySearch($title, $imdbId, $info);
       }
-      //var_dump($rotten_movie);
+      //echo "========= Rotten movie: ";var_dump($rotten_movie);
       $this->_augmentMovie($movie, $rotten_movie, $flagByAlias, $info);
     }
   }

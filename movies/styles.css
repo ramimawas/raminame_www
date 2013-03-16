@@ -5,6 +5,27 @@
   text-decoration: underline;
   cursor: pointer;
   color: blue;
+  #float: left;
+}
+
+.ui-accordion .ui-accordion-content {
+  padding: 0px;
+}
+
+.ui-accordion .ui-accordion-header {
+  padding-left: 2em;
+}
+
+.ui-helper-reset {
+  font-size: 95%;
+}
+
+.more {
+  display: inline;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  color: violet;
 }
 
 .filter {
@@ -19,8 +40,6 @@
 #sidebar {
   width: 205px;
 }
-
-
 
 .table {
   padding-left: 205px;

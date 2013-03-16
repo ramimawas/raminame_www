@@ -11,7 +11,7 @@ Class Response {
     $this->data = $data;
   }
   
-  public function set($status, $data) {
+  public function set($status, $data=null) {
     $this->status = $status;
     $this->data = $data;
   }
@@ -21,11 +21,13 @@ Class Status {
   public $code;
   public $text;
   
-  function __construct($code=501) {
+  function __construct($code=501, $text=null) {
     if (!array_key_exists($code, $this->map))
       $code = 501;
     $this->code = $code;
-    $this->text = $this->map[$code];
+    if (empty($text))
+      $text = $this->map[$code];
+    $this->text = $text;
   }
   
   public function setError($error) {
@@ -42,6 +44,8 @@ Class Status {
     303=>'imdb_id or title must be specified',
     304=>'method is missing',
     400=>'movie not found',
+    401=>'movie is already in DB',
+    402=>'movies not found',
     
     
     //ERRORS

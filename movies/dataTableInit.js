@@ -6,11 +6,14 @@ $(document).ready(function() {
     showFiltersFlag: false,
     slideHeader: false,
     limitPerRequest: 99,
+    //limitPerRequest: 25,
     maxLimit: 1999,
-    allOptionsValue: '*'
+    //maxLimit: 25,
+    allOptionsValue: '*',
+    maxVisibleCast: 3
   };
   
-//$.fn.dataTableExt.sErrMode = 'throw';
+  //$.fn.dataTableExt.sErrMode = 'throw';
   $.fn.dataTableExt.afnFiltering = [];
   
   var afnFiltering = function() {
@@ -73,6 +76,78 @@ $(document).ready(function() {
     collectionName: "watched",
     token: "cqebxoajr6eueff6j7ax"
   };
+  
+  var api = {
+    //host: "http://rami.name/localhost/api.php"
+    host: 'http://localhost/rami.name/movies/api.php'
+  };
+  
+  var buildApiUrl = function() {
+    url = [api.host] + "?" + buildApiQs()
+    console.log(url);
+    return url;
+  }
+
+  var buildApiQs = function() {
+    var qs = [];
+    $.each(apiQuery, function(key, value) {
+      if (value != null)
+        qs.push(key + "=" + encodeURIComponent(value));
+    });
+    return qs.join("&");
+  }
+  
+  var apiQuery = {
+    m: null,
+    l: null,
+    n: null,
+    f: null
+  };
+  
+  var call = function(fn) {
+    console.log('Call API: ', apiQuery);
+    $.get(
+      buildApiUrl(),
+      {},
+      fn,
+      "json"
+    );
+  };
+  
+  var reset = function() {
+    apiQuery.m = null;
+    apiQuery.c = null;
+    apiQuery.f = null;
+  }
+
+  var apiCallback = function(field) {
+    return function(data) {
+      if (data && data.status && data.status.code == 200 && data.data) {
+        data = data.data;
+        var html = [];
+        $.each(data, function(index, value) {
+          var name = value._id;
+          var count = value.count;
+          html.push('<div><span class="link" filter="' + field + '" value="' + name + '">' + cap(name) + '</span><span style="float: right; padding-right: 5px">' + count + '</span></div>');
+        });
+        $(tagIds[field]).html(html.join(''));
+      }
+    }
+  };
+  
+  var loadTop = function(field, count) {
+    reset();
+    apiQuery.m = 'top';
+    apiQuery.c = count;
+    apiQuery.f = field;
+    call(apiCallback(field));
+  }
+  
+  loadTop('cast', 8);
+  loadTop('directors', 4);
+  loadTop('genres', 0);
+  loadTop('year', 0);
+  
 
   var tableId = "dataTable";
   
@@ -111,7 +186,11 @@ $(document).ready(function() {
   var tagIds = {
     filters: "#filters",
     table: "#table",
-    progressBar: "#progressbar"
+    progressBar: "#progressbar",
+    cast: "#cast",
+    directors: "#directors",
+    genres: "#genres",
+    year: "#years"
   };
 
   var buildUrl = function(skip, limit) {
@@ -228,18 +307,35 @@ $(document).ready(function() {
         return '_';
       if(filterValue.constructor != Array)
         filterValue = [filterValue];
-      filterValue.forEach(function(value, index, array) {
+      var longList = false;
+      var maxVisibleList = settings.maxVisibleCast-1;
+      var strArrayExtra = [];
+      $.each(filterValue, function(index, value) {
         if (filter == 'imdb_id' || filter == 'rotten_id') {
           var url = filter == 'imdb_id' ? 'http://www.imdb.com/title/': 'http://www.rottentomatoes.com/m/';
           var img = value == -1 ? '': '<img src="movies/external.png" style="width: 30px">';
           strArray.push('<span filter="' + filter +'" value="' + value + '"><a href="' + url + value + '/" target="_blank">' + img + '</a></span>');
         } else if (filter == 'added') {
           strArray.push(new Date(value*1000).toLocaleDateString());
-          //strArray.push(value*1000);
-        } else
-          strArray.push('<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>');
+        } else {
+          if (filter == 'cast' && index == maxVisibleList)
+            longList = true;
+          var valueHtml = '<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>';
+          if (longList)
+            strArrayExtra.push(valueHtml);
+          else
+            strArray.push(valueHtml);
+        }
       });
-      return strArray.join(', ');
+      var allHtml = [];
+      allHtml.push(strArray.join(', '));
+      if (longList) {
+        allHtml.push('<div style="display:none;">');
+        allHtml.push(strArrayExtra.join(', '));
+        allHtml.push('</div>');
+        allHtml.push('<span class="more" state="hidden" style="padding-left: 5px">&rarr;</span>');
+      }
+      return allHtml.join('');
     }
   }
   
@@ -250,7 +346,7 @@ $(document).ready(function() {
     {"sTitle": "RT", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "10px"},
     {"sTitle": "IMDB", "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "10px"},
     {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres')},
-    //{"sTitle": "Cast", "mDataProp": "cast", fnRender: render('cast')},
+    {"sTitle": "Cast", "mDataProp": "cast", fnRender: render('cast')},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
     {"sTitle": "Min", "mDataProp": "runtime", fnRender: render('runtime'), "sWidth": "10px"},
     //{"sTitle": "RT Aud", "mDataProp": "rotten_audience_score", fnRender: render('rotten_audience_score'), "sWidth": "90px"},
@@ -318,7 +414,7 @@ $(document).ready(function() {
   };
   
   var buildTable = function (data) {
-    console.log(data);
+    //console.log(data);
     if(data && data.constructor == Array) {
       $(tagIds.table).html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="'+ tableId + '"></table>');
       oTable = $('#' + tableId).dataTable( {
@@ -330,12 +426,12 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "bLengthChange": true,
         "bPaginate": true,
-        "aaSorting": [[10, "desc"]],
+        "aaSorting": [[11, "desc"]],
         "oLanguage": {
           "sZeroRecords": "No records to display"
         }
       });
-      refreshListFilters();
+      //refreshListFilters();
     }
   }
   
@@ -386,9 +482,18 @@ $(document).ready(function() {
   var doFilter = function(filter) {
     progress.start();
     oTable.fnFilter('');
-    refreshListFilters(filter);
+    if(settings.showFiltersFlag)
+      refreshListFilters(filter);
     progress.stop();
   }
+  
+  $(".more").live("click", function() {
+    $this = $(this);
+    var hidden = $this.attr('state') == 'hidden';
+    var arrow = hidden ? '&larr;' : '&rarr;';
+    var state = hidden ? 'visible' : 'hidden';
+    $this.html(arrow).attr('state', state).prev().toggle();
+  });
   
   $("button").live("click", function() {
     var _this = $(this),
@@ -436,6 +541,8 @@ $(document).ready(function() {
     onChange: function(button, value) {
       settings.showFiltersFlag = value;
       $('.filterOptions').toggle();
+      if(value)
+        refreshListFilters();
     }
   });
   
@@ -496,6 +603,13 @@ $(document).ready(function() {
                     scrollTop: 0
             }, 800);
             return false;
+    });
+  });
+  
+  $(function() {
+    $( "#sidebar" ).accordion({
+      collapsible: true,
+      heightStyle: 'content'
     });
   });
 
