@@ -167,6 +167,7 @@ class API {
   
   public function dispatch() {
     $response = new Response();
+    header('Access-Control-Allow-Origin: *');
     try {
       $method = $_GET["m"];
       if(isset ($method) ) {
@@ -194,7 +195,13 @@ class API {
       else
         $response->getStatus.setError($e->getMessage());
     }
+    if ($_GET['callback']) {
+        print $_GET['callback']."(";
+    }
     echo json_encode($response);
+    if ($_GET['callback']) {
+        print ")";
+    }
   }
 }
 

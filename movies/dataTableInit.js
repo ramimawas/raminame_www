@@ -94,6 +94,7 @@ $(document).ready(function() {
       if (value != null)
         qs.push(key + "=" + encodeURIComponent(value));
     });
+    //qs.push('callback=?');
     return qs.join("&");
   }
   
@@ -108,16 +109,42 @@ $(document).ready(function() {
   //  console.log(arguments);
   //});
   
-  var call = function(fn) {
-    $.ajax( {
-      dataType: "json",
+  var call = function(fn)  {
+    
+    ///*
+    $.ajax({
       url: buildApiUrl(),
-      success: fn
-    }
-    ).done(function() { console.log("second success"); })
-.fail(function() { console.log("error"); console.log(arguments); })
-.always(function() { console.log("finished"); });
-  };  
+      //dataType: 'jsonp',
+      dataType: 'json',
+      success: function(result){
+        console.log("token recieved: " + result.token);
+      },
+      error: function(request, textStatus, errorThrown) {
+        console.log('error');
+        console.log(textStatus);
+      },
+      complete: function(request, textStatus) { //for additional info
+        console.log('complete');
+        console.log(request.responseText);
+        console.log(textStatus);
+        var data = $.parseJSON(request.responseText);
+        console.log(data);
+        if (textStatus=='success')
+          fn(data);
+      }
+    });
+    //*/
+    
+    /*
+    $.getJSON(
+      buildApiUrl(),
+      fn
+     ).done(function() { console.log("second success"); })
+      .fail(function() { console.log("error"); console.log(arguments); })
+      .always(function() { console.log("finished");
+    });
+    */
+  };
   
   var reset = function() {
     apiQuery.m = null;
@@ -150,7 +177,7 @@ $(document).ready(function() {
     call(apiCallback(field));
   }
   
-  loadTop('cast', 6);
+  loadTop('cast', 15);
   //loadTop('directors', 2);
   //loadTop('genres', 1);
   //loadTop('year', 1);
