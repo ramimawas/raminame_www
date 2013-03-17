@@ -78,7 +78,7 @@ $(document).ready(function() {
   };
   
   var api = {
-    host: "http://rami.name/movies/api.php"
+    host: "http://www.rami.name/movies/api.php"
     //host: 'http://localhost/rami.name/movies/api.php'
   };
   
@@ -94,7 +94,6 @@ $(document).ready(function() {
       if (value != null)
         qs.push(key + "=" + encodeURIComponent(value));
     });
-    //qs.push('callback=?');
     return qs.join("&");
   }
   
@@ -116,21 +115,24 @@ $(document).ready(function() {
       url: buildApiUrl(),
       //dataType: 'jsonp',
       dataType: 'json',
-      success: function(result){
-        console.log("token recieved: " + result.token);
+      success: function(data, textStatus){
+        //console.log("token recieved: " + result.token);
+        console.log(arguments);
+        if (textStatus=='success')
+          fn(data);
       },
       error: function(request, textStatus, errorThrown) {
         console.log('error');
-        console.log(textStatus);
+        console.log(arguments);
       },
       complete: function(request, textStatus) { //for additional info
         console.log('complete');
+        console.log(arguments);
         console.log(request.responseText);
         console.log(textStatus);
         var data = $.parseJSON(request.responseText);
-        console.log(data);
-        if (textStatus=='success')
-          fn(data);
+        //if (textStatus=='success')
+        //  fn(data);
       }
     });
     //*/
