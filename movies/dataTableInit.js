@@ -104,48 +104,11 @@ $(document).ready(function() {
     f: null
   };
   
-  //$(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError) {
-  //  console.log(arguments);
-  //});
-  
-  var call = function(fn)  {
-    
-    ///*
-    $.ajax({
-      url: buildApiUrl(),
-      //dataType: 'jsonp',
-      dataType: 'json',
-      success: function(data, textStatus){
-        //console.log("token recieved: " + result.token);
-        console.log(arguments);
-        if (textStatus=='success')
-          fn(data);
-      },
-      error: function(request, textStatus, errorThrown) {
-        console.log('error');
-        console.log(arguments);
-      },
-      complete: function(request, textStatus) { //for additional info
-        console.log('complete');
-        console.log(arguments);
-        console.log(request.responseText);
-        console.log(textStatus);
-        var data = $.parseJSON(request.responseText);
-        //if (textStatus=='success')
-        //  fn(data);
-      }
-    });
-    //*/
-    
-    /*
+  var call = function(fn)  {    
     $.getJSON(
       buildApiUrl(),
       fn
-     ).done(function() { console.log("second success"); })
-      .fail(function() { console.log("error"); console.log(arguments); })
-      .always(function() { console.log("finished");
-    });
-    */
+     )
   };
   
   var reset = function() {
