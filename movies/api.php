@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once("mongohq.php");
@@ -167,7 +167,6 @@ class API {
   
   public function dispatch() {
     $response = new Response();
-    header('Access-Control-Allow-Origin: *');
     try {
       $method = $_GET["m"];
       if(isset ($method) ) {
