@@ -28,7 +28,7 @@ $(document).ready(function() {
       y = $(b).text();
     x = x == '_' ? -1 : parseFloat(x);
     y = y == '_' ? -1 : parseFloat(y);
-    return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+    return ((x > y) ? -1 : ((x < y) ?  1 : 0));
   };
   
   var afnFiltering = function() {
@@ -336,7 +336,7 @@ $(document).ready(function() {
           var url = filter == 'imdb_rating' ? ('http://www.imdb.com/title/' + obj.aData['imdb_id']): ('http://www.rottentomatoes.com/m/' + obj.aData['rotten_id']);
           if (value == -1)
             value = "_";
-          strArray.push('<a href="' + url + '/" target="_blank"><span>' + cap(value) + '</span></a>');
+          strArray.push('<a style="border-bottom: 1px dotted violet; text-decoration: none;" href="' + url + '/" target="_blank"><span>' + cap(value) + '</span></a>');
         } else {
           if (filter == 'cast' && index == maxVisibleList)
             longList = true;

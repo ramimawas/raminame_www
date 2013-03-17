@@ -43,6 +43,7 @@ Class Status {
     302=>'rating must be between 1 and 5',
     303=>'imdb_id or title must be specified',
     304=>'method is missing',
+    305=>'number of rotten ids is different from number imdb ids',
     400=>'movie not found',
     401=>'movie is already in DB',
     402=>'movies not found',

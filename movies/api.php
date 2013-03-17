@@ -79,24 +79,36 @@ class API {
     return $response;
   }
   
-  public function fixMovie($imdb_ids) {
+  public function fixMovie($imdb_ids, $rotten_ids) {
     $response = new Response();
     if (!isset($imdb_ids))
       throw new Exception("API", 300);
+    if(isset($rotten_ids))
+      $rottenIds = explode(',', $rotten_ids);
+    $imdbIds = explode(',', $imdb_ids);
     
     if($imdb_ids == "_fixall") {
       $query = array();
     } else {
-      $query = array("imdb_id"=>array('$in' => explode(',', $imdb_ids)));
+      if (isset($rottenIds)) {
+        if(count($rottenIds) != count($imdbIds))
+          throw new Exception("API", 305);
+        else {
+          $rottenIdsMap = array();
+          for($i = 0; $i<count($imdbIds) ; $i++)
+            $rottenIdsMap[$imdbIds[$i]] = $rottenIds[$i];
+        }
+      }
+      $query = array("imdb_id"=>array('$in' => $imdbIds));
     }
     if (!isset($query))
       throw new Exception("API", 501);
     $movies_db = $this->db->find($query);
+    $i = 0;
     foreach ($movies_db as $movie_db) {
       $movieRami = new Movie($movie_db);
       $imdb_id = $movieRami->IMDB_ID;
-      //echo "processing {$imdb_id}";
-      //echo "========= Original movie in DB: ";var_dump($movieRami);
+      //echo "processing {$imdb_id}";echo "========= Original movie in DB: ";var_dump($movieRami);
 
       $movieOMDB = OMDB::getMovieByImdbId($imdb_id);
       //echo "========= omdb movie: ";var_dump($movieOMDB);
@@ -114,11 +126,14 @@ class API {
           $movieRami[$field] = $movieOMDB[$field];
       }
       //echo "========= After omdb merge: ";var_dump($movieRami);
+      if (isset($rottenIds))
+        $movieRami->ROTTEN_ID = $rottenIdsMap[$imdb_id];
       $this->rotten->augmentMovie($movieRami);
       //echo "========= After rotten merge: ";var_dump($movieRami);
       $this->db->save($movieRami->get());
+      $i++;
     }
-    $response->set(new Status(200), $movie->get());
+    $response->set(new Status(200), $movieRami->get());
     return $response;
   }
   
@@ -181,7 +196,7 @@ class API {
             $response = $this->findMovie($_GET["i"], $_GET["rid"], $_GET["t"]);
             break;
           case 'fix':
-            $response = $this->fixMovie($_GET["i"]);
+            $response = $this->fixMovie($_GET["i"], $_GET["rid"]);
             break;
           case 'top':
             $response = $this->top($_GET["f"], $_GET["c"]);
