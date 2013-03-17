@@ -104,15 +104,20 @@ $(document).ready(function() {
     f: null
   };
   
+  //$(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError) {
+  //  console.log(arguments);
+  //});
+  
   var call = function(fn) {
-    console.log('Call API: ', apiQuery);
-    $.get(
-      buildApiUrl(),
-      {},
-      fn,
-      "json"
-    );
-  };
+    $.ajax( {
+      dataType: "json",
+      url: buildApiUrl(),
+      success: fn
+    }
+    ).done(function() { console.log("second success"); })
+.fail(function() { console.log("error"); console.log(arguments); })
+.always(function() { console.log("finished"); });
+  };  
   
   var reset = function() {
     apiQuery.m = null;
@@ -121,7 +126,9 @@ $(document).ready(function() {
   }
 
   var apiCallback = function(field) {
+    console.log(field);
     return function(data) {
+      console.log(data);
       if (data && data.status && data.status.code == 200 && data.data) {
         data = data.data;
         var html = [];
@@ -143,10 +150,10 @@ $(document).ready(function() {
     call(apiCallback(field));
   }
   
-  loadTop('cast', 8);
-  loadTop('directors', 4);
-  loadTop('genres', 0);
-  loadTop('year', 0);
+  loadTop('cast', 6);
+  //loadTop('directors', 2);
+  //loadTop('genres', 1);
+  //loadTop('year', 1);
   
 
   var tableId = "dataTable";
@@ -288,13 +295,14 @@ $(document).ready(function() {
               .append($('<button style="width: 100%;" filter="clear">').text("Clear")));
       $("button").button();
       $filters.show();
-    } else
+    } else {
       $filters.hide();
+    }
   }
 
   var clearFilters = function () {
     console.log("clearFilters:");
-    $(tagIds.filters).hide();
+    $(tagIds.filters).hide().html('');
     for(var key in query)
       query[key] = null;
   }
@@ -317,6 +325,11 @@ $(document).ready(function() {
           strArray.push('<span filter="' + filter +'" value="' + value + '"><a href="' + url + value + '/" target="_blank">' + img + '</a></span>');
         } else if (filter == 'added') {
           strArray.push(new Date(value*1000).toLocaleDateString());
+        } else if (filter == 'imdb_rating' || filter == 'rotten_critics_score') {
+          var url = filter == 'imdb_rating' ? ('http://www.imdb.com/title/' + obj.aData['imdb_id']): ('http://www.rottentomatoes.com/m/' + obj.aData['rotten_id']);
+          if (value == -1)
+            value = "_";
+          strArray.push('<a href="' + url + '/" target="_blank"><span>' + cap(value) + '</span></a>');
         } else {
           if (filter == 'cast' && index == maxVisibleList)
             longList = true;
@@ -352,8 +365,8 @@ $(document).ready(function() {
     //{"sTitle": "RT Aud", "mDataProp": "rotten_audience_score", fnRender: render('rotten_audience_score'), "sWidth": "90px"},
     //{"sTitle": "MPAA", "mDataProp": "mpaa_rating", fnRender: render('mpaa_rating'), "sWidth": "70px" },
     //{"sTitle": "Title Type", "mDataProp": "type", fnRender: render('type'), "sWidth": "70px" },
-    {"sTitle": "IMDB", "mDataProp": "imdb_id", "sWidth": "30px", fnRender: render('imdb_id')},
-    {"sTitle": "RT", "mDataProp": "rotten_id", "sWidth": "30px", fnRender: render('rotten_id')},
+    {"sTitle": "IMDB", "mDataProp": "imdb_id", "sWidth": "30px", fnRender: render('imdb_id'), bVisible: false},
+    {"sTitle": "RT", "mDataProp": "rotten_id", "sWidth": "30px", fnRender: render('rotten_id'), bVisible: false},
     //{"sTitle": "Released", "mDataProp": "released", "sWidth": "170px"},
     //{"sTitle": "P", "mDataProp": "position", "sWidth": "75px"}
     {"sTitle": "Added", "mDataProp": "added", "sWidth": "100px", fnRender: render('added')}
