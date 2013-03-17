@@ -165,7 +165,7 @@ class API {
     return $response;
   }
   
-  public function dispatch($api) {
+  public function dispatch() {
     $response = new Response();
     try {
       $method = $_GET["m"];

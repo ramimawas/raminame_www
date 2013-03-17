@@ -5,10 +5,10 @@ $(document).ready(function() {
     cumulativeFiltersFlag: false,
     showFiltersFlag: false,
     slideHeader: false,
-    limitPerRequest: 99,
-    //limitPerRequest: 25,
-    maxLimit: 1999,
-    //maxLimit: 25,
+    //limitPerRequest: 99,
+    limitPerRequest: 25,
+    //maxLimit: 1999,
+    maxLimit: 25,
     allOptionsValue: '*',
     maxVisibleCast: 3
   };
@@ -78,8 +78,8 @@ $(document).ready(function() {
   };
   
   var api = {
-    //host: "http://rami.name/localhost/api.php"
-    host: 'http://localhost/rami.name/movies/api.php'
+    host: "http://rami.name/movies/api.php"
+    //host: 'http://localhost/rami.name/movies/api.php'
   };
   
   var buildApiUrl = function() {
@@ -608,6 +608,7 @@ $(document).ready(function() {
   
   $(function() {
     $( "#sidebar" ).accordion({
+      //autoHeight: false,
       collapsible: true,
       heightStyle: 'content'
     });
