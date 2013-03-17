@@ -20,6 +20,10 @@
   font-size: 95%;
 }
 
+table.display thead th {
+  padding: 3px 0px 3px 3px  
+}
+
 .more {
   display: inline;
   width: 100%;

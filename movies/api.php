@@ -30,7 +30,10 @@ class API {
     if(empty($minimumCount))
       $minimumCount = 0;
     $minimumCount = intval($minimumCount);
-    //db.watched.aggregate({ $project : {cast: 1, title: 1} }, {$unwind: "$cast"}, {$group: {_id: "$cast", titles: { $addToSet: "$title"}, count: {$sum: 1} }}, {$sort: {count: -1}}, {$limit: 20})
+    
+    $secondarySort = 1;
+    if ($field == 'year')
+      $secondarySort = -1;
     
     $project = array(
           '$project' => array(
@@ -48,7 +51,7 @@ class API {
           '$match'=> array(
               'count' => array('$gte' => $minimumCount))
       );
-    $sort = array('$sort'=> array('count' => -1));
+    $sort = array('$sort'=> array('count' => -1, "_id" => $secondarySort));
     
     if (in_array($field, array('cast', 'directors', 'genres'))) {
       $pipeline = array(

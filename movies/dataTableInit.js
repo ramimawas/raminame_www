@@ -5,16 +5,31 @@ $(document).ready(function() {
     cumulativeFiltersFlag: false,
     showFiltersFlag: false,
     slideHeader: false,
-    //limitPerRequest: 99,
-    limitPerRequest: 25,
-    //maxLimit: 1999,
-    maxLimit: 25,
+    limitPerRequest: 99,
+    maxLimit: 1999,
+    //maxLimit: 25,
     allOptionsValue: '*',
     maxVisibleCast: 3
   };
   
   //$.fn.dataTableExt.sErrMode = 'throw';
   $.fn.dataTableExt.afnFiltering = [];
+  
+  $.fn.dataTableExt.oSort['RT-asc']  = function(a, b) {
+    var x = $(a).text(),
+      y = $(b).text();
+    x = x == '_' ? -1 : parseFloat(x);
+    y = y == '_' ? -1 : parseFloat(y);
+    return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+  };
+  
+  $.fn.dataTableExt.oSort['RT-desc']  = function(a, b) {
+    var x = $(a).text(),
+      y = $(b).text();
+    x = x == '_' ? -1 : parseFloat(x);
+    y = y == '_' ? -1 : parseFloat(y);
+    return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+  };
   
   var afnFiltering = function() {
     return function(oSettings, aData, iDataIndex ) {
@@ -142,10 +157,10 @@ $(document).ready(function() {
     call(apiCallback(field));
   }
   
-  loadTop('cast', 15);
-  //loadTop('directors', 2);
-  //loadTop('genres', 1);
-  //loadTop('year', 1);
+  loadTop('cast', 8);
+  loadTop('directors', 4);
+  loadTop('genres', 1);
+  loadTop('year', 1);
   
 
   var tableId = "dataTable";
@@ -308,7 +323,7 @@ $(document).ready(function() {
       if(filterValue.constructor != Array)
         filterValue = [filterValue];
       var longList = false;
-      var maxVisibleList = settings.maxVisibleCast-1;
+      var maxVisibleList = settings.maxVisibleCast;
       var strArrayExtra = [];
       $.each(filterValue, function(index, value) {
         if (filter == 'imdb_id' || filter == 'rotten_id') {
@@ -345,15 +360,15 @@ $(document).ready(function() {
   }
   
   var structure = [
-    {"sTitle": "Title", "mDataProp": "title", "sWidth": "150px"},
+    {"sTitle": "Title", "mDataProp": "title", "sWidth": "120px"},
     {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "65px"},
     {"sTitle": String.fromCharCode(0x2764), "mDataProp": "rating", fnRender: render('rating'), "sWidth": "10px"},
-    {"sTitle": "RT", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "10px"},
-    {"sTitle": "IMDB", "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "10px"},
+    {"sTitle": "RT " + String.fromCharCode(0x27A6), "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "79px", "sType": "RT"},
+    {"sTitle": "IMDB " + String.fromCharCode(0x27A6), "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "100px"},
     {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres')},
     {"sTitle": "Cast", "mDataProp": "cast", fnRender: render('cast')},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
-    {"sTitle": "Min", "mDataProp": "runtime", fnRender: render('runtime'), "sWidth": "10px"},
+    {"sTitle": "Min", "mDataProp": "runtime", "sWidth": "10px"},
     //{"sTitle": "RT Aud", "mDataProp": "rotten_audience_score", fnRender: render('rotten_audience_score'), "sWidth": "90px"},
     //{"sTitle": "MPAA", "mDataProp": "mpaa_rating", fnRender: render('mpaa_rating'), "sWidth": "70px" },
     //{"sTitle": "Title Type", "mDataProp": "type", fnRender: render('type'), "sWidth": "70px" },
