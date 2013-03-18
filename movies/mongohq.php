@@ -7,13 +7,16 @@ class MongoHQ {
     'username' => 'rami',
     'password' => 'rami.name',
     'host' => 'alex.mongohq.com',
+    //'host' => 'localhost',
     'port' => '10091',
+    //'port' => '27017',
     'dbName' => 'Movies',
     'collectionName' => 'watched'
    );
 
   public function buildUrl () {
     $url = "mongodb://" . $this->config['username'] . ":" . $this->config['password'] . "@" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
+    //$url = "mongodb://" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
     //echo $url;
     return $url;
   }
@@ -59,16 +62,22 @@ class MongoHQ {
     return $results;
   }
   
-  public function find($query=null, $collection=null, $limit=-1) {
+  public function find($query=null, $limit=-1, $skip=-1, $collection=null) {
     $results = array();
     if($query == null)
       $query = array();
+    if (empty($limit))
+      $limit = -1;
+    if (empty($skip))
+      $skip = -1;
     try {
       $collection = $this->getCollection($collection);
+      $cursor = $collection->find($query);
+      
       if ($limit != null && $limit != -1)
-        $cursor = $collection->find($query)->limit($limit);
-      else
-        $cursor = $collection->find($query);
+        $cursor = $cursor->limit($limit);
+      if ($skip != null && $skip != -1)
+        $cursor = $cursor->skip($skip);
       foreach ($cursor as $obj)
         $results[] = $obj;
     } catch (Exception $e) {

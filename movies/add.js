@@ -42,19 +42,19 @@ $(document).ready(function() {
   }
   
   var query = {
-    m: null,
-    t: null,
-    i: null,
+    method: null,
+    title: null,
+    imdbid: null,
     rid: null,
-    r: null
+    rating: null
   };
   
   var reset = function() {
-    query.m = null;
-    query.t = null;
-    query.i = null;
+    query.method = null;
+    query.title = null;
+    query.imdbid = null;
     query.rid = null;
-    query.r = null;
+    query.rating = null;
   }
   
   var paint = function(data) {

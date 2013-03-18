@@ -183,23 +183,44 @@ class API {
     return $response;
   }
   
+  public function listMovie($imdb_id, $rotten_id, $limit, $skip) {
+    $response = new Response();
+    
+    if(isset($imdb_id))
+      $imdbIds = explode(',', $imdb_id);
+    if(isset($rotten_id))
+      $rottenIds = explode(',', $rotten_id);
+    
+    $query = array();
+    if (isset($imdbIds))
+      $query = array('imdb_id' => array( '$in' => $imdbIds));
+    else if (isset($rottenIds))
+      $query = array('rotten_id' => array( '$in' => $rottenIds));
+    $movies_db = $this->db->find($query, $limit, $skip);
+    $response->set(new Status(200), $movies_db);
+    return $response;
+  }
+  
   public function dispatch() {
     $response = new Response();
     try {
-      $method = $_GET["m"];
+      $method = $_GET["method"];
       if(isset ($method) ) {
         switch($method) {
           case 'add':
-            $response = $this->addMovie($_GET["i"], $_GET["rid"], $_GET["r"]);
+            $response = $this->addMovie($_GET["imdbid"], $_GET["rid"], $_GET["rating"]);
             break;
           case 'find':
-            $response = $this->findMovie($_GET["i"], $_GET["rid"], $_GET["t"]);
+            $response = $this->findMovie($_GET["imdbid"], $_GET["rid"], $_GET["title"]);
+            break;
+          case 'list':
+            $response = $this->listMovie($_GET["imdbid"], $_GET["rid"], $_GET["limit"], $_GET["skip"]);
             break;
           case 'fix':
-            $response = $this->fixMovie($_GET["i"], $_GET["rid"]);
+            $response = $this->fixMovie($_GET["imdbid"], $_GET["rid"]);
             break;
           case 'top':
-            $response = $this->top($_GET["f"], $_GET["c"]);
+            $response = $this->top($_GET["field"], $_GET["count"]);
             break;
           default:
             throw new Exception("API", 304);

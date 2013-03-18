@@ -1,12 +1,17 @@
 $(document).ready(function() {
-    
+  
+  var timers = {};
+  var counter = 0;
+  timers[counter++] = new Date();
+  
   var settings = {
     resetAllFiltersFlag: false,
     cumulativeFiltersFlag: false,
     showFiltersFlag: false,
     slideHeader: false,
     limitPerRequest: 99,
-    maxLimit: 1999,
+    //limitPerRequest: 1999,
+    maxLimit: 2000,
     //maxLimit: 25,
     allOptionsValue: '*',
     maxVisibleCast: 3
@@ -92,69 +97,23 @@ $(document).ready(function() {
     token: "cqebxoajr6eueff6j7ax"
   };
   
-  var api = {
-    host: "http://www.rami.name/movies/api.php"
-    //host: 'http://localhost/rami.name/movies/api.php'
-  };
-  
-  var buildApiUrl = function() {
-    url = [api.host] + "?" + buildApiQs()
-    console.log(url);
-    return url;
-  }
-
-  var buildApiQs = function() {
-    var qs = [];
-    $.each(apiQuery, function(key, value) {
-      if (value != null)
-        qs.push(key + "=" + encodeURIComponent(value));
+  var topCallback = function(data, map) {
+    var field = map.field;
+    var html = [];
+    $.each(data, function(index, value) {
+      var name = value._id;
+      var count = value.count;
+      html.push('<div><span class="link" filter="' + field + '" value="' + name + '">' + cap(name) + '</span><span style="float: right; padding-right: 5px">' + count + '</span></div>');
     });
-    return qs.join("&");
-  }
-  
-  var apiQuery = {
-    m: null,
-    l: null,
-    n: null,
-    f: null
-  };
-  
-  var call = function(fn)  {    
-    $.getJSON(
-      buildApiUrl(),
-      fn
-     )
-  };
-  
-  var reset = function() {
-    apiQuery.m = null;
-    apiQuery.c = null;
-    apiQuery.f = null;
-  }
-
-  var apiCallback = function(field) {
-    console.log(field);
-    return function(data) {
-      console.log(data);
-      if (data && data.status && data.status.code == 200 && data.data) {
-        data = data.data;
-        var html = [];
-        $.each(data, function(index, value) {
-          var name = value._id;
-          var count = value.count;
-          html.push('<div><span class="link" filter="' + field + '" value="' + name + '">' + cap(name) + '</span><span style="float: right; padding-right: 5px">' + count + '</span></div>');
-        });
-        $(tagIds[field]).html(html.join(''));
-      }
-    }
+    $(tagIds[field]).html(html.join(''));
   };
   
   var loadTop = function(field, count) {
-    reset();
-    apiQuery.m = 'top';
-    apiQuery.c = count;
-    apiQuery.f = field;
-    call(apiCallback(field));
+    var query = API.query();
+    query.method = 'top';
+    query.count = count;
+    query.field = field;
+    API.call(query, topCallback, {field: field});
   }
   
   loadTop('cast', 8);
@@ -381,8 +340,41 @@ $(document).ready(function() {
   
   var allData = [];
   
+  var loadDataCallback = function(data, map) {
+    var skip = map.skip;
+    var limit = map.limit;
+    
+    if (data != null) {
+      var more = data.length > limit;
+      if (more)
+        data = _.initial(data);
+      allData = _.union(allData, data);
+      if(allData.length >= settings.maxLimit) {
+        allData = _.first(allData, settings.maxLimit);
+        more = false;
+      }
+      if (more) {
+        multiload2(skip+limit, limit);
+        progress.step(10);
+      } else {
+        buildTable(allData);
+        $.fn.dataTableExt.afnFiltering.push(afnFiltering());
+        progress.stop();
+      }
+    }
+  }
+  
+  var multiload2 = function(skip, limit) {
+    console.log('Multiload2 skip: ', skip, ' limit: ', limit);
+    var query = API.query();
+    query.method = 'list';
+    query.skip = skip;
+    query.limit = limit+1;
+    API.call(query, loadDataCallback, {skip: skip, limit: limit});
+  }
+  
   var multiload = function(skip, limit) {
-    console.log('LOAD skip: ', skip, ' limit: ', limit);
+    console.log('Multiload skip: ', skip, ' limit: ', limit);
     $.get(
       buildUrl(skip, limit+1),
       {},
@@ -434,6 +426,9 @@ $(document).ready(function() {
   };
   
   var buildTable = function (data) {
+    //timers[counter++] = new Date();
+    //console.log(timers);
+    //console.log(timers[1].getTime()-timers[0].getTime());
     //console.log(data);
     if(data && data.constructor == Array) {
       $(tagIds.table).html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="'+ tableId + '"></table>');
