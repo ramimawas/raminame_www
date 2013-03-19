@@ -1,6 +1,6 @@
 var API = {
-  //shost: "http://www.rami.name/movies/api.php",
-  host: 'http://localhost/rami.name/movies/api.php',
+  host: "http://www.rami.name/movies/api.php",
+  //host: 'http://localhost/rami.name/movies/api.php',
   buildApiUrl: function(query) {
     url = [API.host] + "?" + API.buildApiQs(query);
     console.log(url);
