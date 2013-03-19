@@ -8,7 +8,6 @@ var API = {
   },
   buildApiQs: function(query) {
     var qs = [];
-    console.log(query);
     $.each(query, function(key, value) {
       if (value != null)
         qs.push(key + "=" + encodeURIComponent(value));
@@ -33,9 +32,7 @@ var API = {
      )
   },
   callback: function(fn, map) {
-    console.log(map);
     return function(data) {
-      console.log(data);
       if (data && data.status && data.status.code == 200 && data.data) {
         fn(data.data, map);
       }

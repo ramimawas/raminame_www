@@ -52,7 +52,7 @@ $(document).ready(function() {
   var reset = function() {
     query.method = null;
     query.title = null;
-    query.imdbid = null;
+    query.imdbid = null;  
     query.rid = null;
     query.rating = null;
   }
@@ -80,18 +80,18 @@ $(document).ready(function() {
     reset();
     $ids.imdbText.val('');
     $ids.rottenText.val('');
-    query.m = 'find';
-    query.t = $ids.titleText.val();
+    query.method = 'find';
+    query.title = $ids.titleText.val();
     call(paint);
   });
   
   $ids.findByIdButton.click(function() {
     reset();
-    query.m = 'find';
+    query.method = 'find';
     var imdbId = $ids.imdbText.val(),
         rottenId = $ids.rottenText.val();
     if (imdbId != '')
-      query.i = imdbId;
+      query.imdbid = imdbId;
     if (rottenId != '')
       query.rid = rottenId;
     call(paint);
@@ -99,9 +99,9 @@ $(document).ready(function() {
   
   $ids.addButton.click(function() {
     reset();
-    query.m = 'add';
-    query.i = $ids.imdbText.val();
-    query.r = $ids.ratingText.val();
+    query.method = 'add';
+    query.imdbid = $ids.imdbText.val();
+    query.rating = $ids.ratingText.val();
     call(function(data) {
       console.log(data);
       var status = {code: 500, text: "No data!"};

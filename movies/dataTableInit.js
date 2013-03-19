@@ -10,6 +10,7 @@ $(document).ready(function() {
     showFiltersFlag: false,
     slideHeader: false,
     limitPerRequest: 99,
+    //limitPerRequest: 399,
     //limitPerRequest: 1999,
     maxLimit: 2000,
     //maxLimit: 25,
@@ -116,11 +117,6 @@ $(document).ready(function() {
     API.call(query, topCallback, {field: field});
   }
   
-  loadTop('cast', 8);
-  loadTop('directors', 4);
-  loadTop('genres', 1);
-  loadTop('year', 1);
-  
 
   var tableId = "dataTable";
   
@@ -163,7 +159,8 @@ $(document).ready(function() {
     cast: "#cast",
     directors: "#directors",
     genres: "#genres",
-    year: "#years"
+    year: "#years",
+    rating: "#ratings"
   };
 
   var buildUrl = function(skip, limit) {
@@ -354,7 +351,7 @@ $(document).ready(function() {
         more = false;
       }
       if (more) {
-        multiload2(skip+limit, limit);
+        //multiload2(skip+limit, limit);
         progress.step(10);
       } else {
         buildTable(allData);
@@ -389,7 +386,7 @@ $(document).ready(function() {
             more = false;
           }
           if (more) {
-            multiload(skip+limit, limit);
+            //multiload(skip+limit, limit);
             progress.step(10);
           } else {
             buildTable(allData);
@@ -401,7 +398,22 @@ $(document).ready(function() {
       },
       "json"
     );
-  };
+  }
+  
+   var load = function() {
+    progress.start();
+    var limit = settings.maxLimit < settings.limitPerRequest? settings.maxLimit: settings.limitPerRequest;
+    for (var i=0; i<11; i++)
+      multiload(limit*i, limit);
+  }
+  
+  var loadAllTops = function() {
+    loadTop('cast', 8);
+    loadTop('directors', 4);
+    loadTop('genres', 1);
+    loadTop('year', 1);
+    loadTop('rating', 1);
+  }
   
   var progress = {
     $: $(tagIds.progressBar),
@@ -418,12 +430,6 @@ $(document).ready(function() {
       progress.$.fadeOut(1000);
     }
   }
-  
-  var load = function() {
-    progress.start();
-    var limit = settings.maxLimit < settings.limitPerRequest? settings.maxLimit: settings.limitPerRequest;
-    multiload(0, limit);
-  };
   
   var buildTable = function (data) {
     //timers[counter++] = new Date();
@@ -446,6 +452,10 @@ $(document).ready(function() {
           "sZeroRecords": "No records to display"
         }
       });
+      var keys = new KeyTable( {
+        "table": document.getElementById(tableId),
+        "datatable": oTable
+    } );
       //refreshListFilters();
     }
   }
@@ -631,4 +641,5 @@ $(document).ready(function() {
 
 
   load();
+  loadAllTops();
 });
