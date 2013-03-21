@@ -386,7 +386,7 @@ $(document).ready(function() {
             more = false;
           }
           if (more) {
-            //multiload(skip+limit, limit);
+            multiload(skip+limit, limit);
             progress.step(10);
           } else {
             buildTable(allData);
@@ -403,8 +403,8 @@ $(document).ready(function() {
    var load = function() {
     progress.start();
     var limit = settings.maxLimit < settings.limitPerRequest? settings.maxLimit: settings.limitPerRequest;
-    for (var i=0; i<11; i++)
-      multiload(limit*i, limit);
+    //for (var i=0; i<11; i++)
+    multiload(0, limit);
   }
   
   var loadAllTops = function() {
