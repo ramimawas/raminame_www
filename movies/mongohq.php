@@ -6,17 +6,17 @@ class MongoHQ {
   private $config = array(
     'username' => 'rami',
     'password' => 'rami.name',
-    //'host' => 'alex.mongohq.com',
-    'host' => 'localhost',
-    //'port' => '10091',
-    'port' => '27017',
+    'host' => 'alex.mongohq.com',
+    //'host' => 'localhost',
+    'port' => '10091',
+    //'port' => '27017',
     'dbName' => 'Movies',
     'collectionName' => 'watched'
    );
 
   public function buildUrl () {
-    //$url = "mongodb://" . $this->config['username'] . ":" . $this->config['password'] . "@" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
-    $url = "mongodb://" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
+    $url = "mongodb://" . $this->config['username'] . ":" . $this->config['password'] . "@" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
+    //$url = "mongodb://" . $this->config['host'] . ":" . $this->config['port'] . "/" . $this->config['dbName'];
     //echo $url;
     return $url;
   }
