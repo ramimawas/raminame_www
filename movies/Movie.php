@@ -83,7 +83,7 @@ Class Movie extends ArrayObject{
         case "ROTTEN_AUDIENCE_SCORE":
           $value = intval($value);
           break;
-        case "IMDb Rating": //float
+        case "IMDB_RATING": //float
           $value = floatval($value);
           break;
         case "DATE_ADDED":  // int datetime

@@ -7,6 +7,21 @@
   color: blue;
 }
 
+.link2 {
+  display: inline;
+  width: 100%;
+  height: 100%;
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
+}
+
+.clicked {
+  text-decoration: none;
+  cursor: none;
+  color: black;
+}
+
 .ui-accordion .ui-accordion-content {
   padding: 0px;
 }
@@ -45,11 +60,11 @@ table.display thead th {
 }
 
 #sidebar {
-  width: 205px;
+  width: 240px;
 }
 
 .table {
-  padding-left: 205px;
+  padding-left: 240px;
   top: 10px
 }
 

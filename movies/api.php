@@ -8,13 +8,6 @@ include_once("movie.php");
 include_once("omdb.php");
 include_once("response.php");
 
-//$date = strtotime("Tue Jul  3 12:00:00 2007");
-//$date = strtotime("2008-11-26");
-//$date = strtotime("1 h 44 min");
-//$date = strtotime("0");
-//echo date('l dS \o\f F Y', $date);
-  
-
 class API {
   private $db;
   private $DEFAULT_RATING = 3;
@@ -25,33 +18,99 @@ class API {
     $this->rotten = new RottenTomatoes();
   }
   
-  public function top($field, $minimumCount=0) {
+  public function mean() {
+    
+    $response = new Response();
+    
+    $project = array(
+          '$project' => array(
+              "year" => 1,
+              "rating" => 1,
+              "imdb_rating" => 1,
+              "rotten_critics_score" => 1,
+              "rotten_audience_score" => 1
+          )
+      );
+    $group = array(
+          '$group' => array(
+              '_id' => 'averages',
+              'year'=> array('$avg' => '$year'),
+              'rating'=> array('$avg' => '$rating'),
+              'imdb_rating'=> array('$avg' => '$imdb_rating'),
+              'rotten_critics_score'=> array('$avg' => '$rotten_critics_score'),
+              'rotten_audience_score'=> array('$avg' => '$rotten_audience_score')
+          )
+      );
+    
+    $match = array('$match' => array('rotten_critics_score' => array('$ne' => -1)));
+    
+    $pipeline = array(
+      $match,
+      $project,
+      $group
+    );
+    
+    $results = $this->db->aggregate($pipeline);
+    if (!empty($results))
+      $results = $results[0];
+    else
+      throw new Exception("API", 501);
+    $rating = $results[0]['rating'];
+    $rating *= 20;
+    $results[0]['rating'] = round($rating, 2);
+    
+    $imdb_rating = $results[0]['imdb_rating'];
+    $imdb_rating *= 10;
+    $results[0]['imdb_rating'] = round($imdb_rating, 2);
+    
+    $results[0]['year'] = round($results[0]['year']);
+    
+    $rotten_critics_score = $results[0]['rotten_critics_score'];
+    $results[0]['rotten_critics_score'] = round($rotten_critics_score, 2);
+    
+    $rotten_audience_score = $results[0]['rotten_audience_score'];
+    $results[0]['rotten_audience_score'] = round($rotten_audience_score, 2);
+    
+    $response->set(new Status(200), $results);
+    return $response;
+  }
+  
+  public function top($field, $minimumCount=0, $sort='count') {
     $response = new Response();
     if(empty($minimumCount))
       $minimumCount = 0;
     $minimumCount = intval($minimumCount);
     
-    $secondarySort = 1;
-    if ($field == 'year')
-      $secondarySort = -1;
-    
     $project = array(
           '$project' => array(
-              $field => 1
+              $field => 1,
+              'rating' => 1
           )
       );
     $unwind = array('$unwind' => '$' . $field);
     $group = array(
           '$group' => array(
               '_id' => '$' . $field,
-              'count'=> array('$sum' => 1)
+              'count'=> array('$sum' => 1),
+              'rating'=> array('$avg' => '$rating')
           )
       );
     $match = array(
           '$match'=> array(
               'count' => array('$gte' => $minimumCount))
       );
-    $sort = array('$sort'=> array('count' => -1, "_id" => $secondarySort));
+    if ($field == 'year')
+      $hierarchy = array('count' => -1, "_id" => -1);
+    //else if ($field == 'cast')
+    //  $hierarchy = array("rating" => -1, 'count' => -1, "_id" => 1);
+    else {
+      if ($sort == 'rating')
+        $hierarchy = array("rating" => -1, 'count' => -1, "_id" => 1);
+      else
+        $hierarchy = array('count' => -1, "rating" => -1, "_id" => 1);
+    }
+    
+    $sort = array('$sort'=> $hierarchy);
     
     if (in_array($field, array('cast', 'directors', 'genres'))) {
       $pipeline = array(
@@ -71,6 +130,10 @@ class API {
     }
     
     $results = $this->db->aggregate($pipeline);
+    
+    foreach ($results[0] as &$row) 
+      $row['rating'] = round($row['rating'], 2);
+    
     if (!empty($results))
       $results = $results[0];
     else
@@ -220,7 +283,10 @@ class API {
             $response = $this->fixMovie($_GET["imdbid"], $_GET["rid"]);
             break;
           case 'top':
-            $response = $this->top($_GET["field"], $_GET["count"]);
+            $response = $this->top($_GET["field"], $_GET["count"], $_GET["sort"]);
+            break;
+          case 'mean':
+            $response = $this->mean();
             break;
           default:
             throw new Exception("API", 304);

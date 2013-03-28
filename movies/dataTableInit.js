@@ -101,22 +101,30 @@ $(document).ready(function() {
   var topCallback = function(data, map) {
     var field = map.field;
     var html = [];
+    top[field] = data;
     $.each(data, function(index, value) {
       var name = value._id;
       var count = value.count;
-      html.push('<div><span class="link" filter="' + field + '" value="' + name + '">' + cap(name) + '</span><span style="float: right; padding-right: 5px">' + count + '</span></div>');
+      var rating = value.rating.toString();
+      if (rating.length == 3)
+        rating += '0';
+      else if (rating.length == 1)
+        rating += '.00';
+      html.push('<div><span class="link" filter="' + field + '" value="' + name + '">' + cap(name) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
     });
     $(tagIds[field]).html(html.join(''));
   };
   
-  var loadTop = function(field, count) {
+  var top = {};
+  
+  var loadTop = function(field, count, sort) {
     var query = API.query();
     query.method = 'top';
     query.count = count;
     query.field = field;
+    query.sort = sort;
     API.call(query, topCallback, {field: field});
   }
-  
 
   var tableId = "dataTable";
   
@@ -162,6 +170,26 @@ $(document).ready(function() {
     year: "#years",
     rating: "#ratings"
   };
+  
+  var fields = {
+    cast: 8,
+    directors: 4,
+    genres: 1,
+    year: 1,
+    rating: 1
+  };
+
+  
+  $('.link2').live("click", function() {
+    var _this = $(this),
+      filter = _this.attr("filter"),
+      sort = _this.attr("sort");
+      otherSort = sort == 'count' ? 'rating' : 'count';
+      _this.toggleClass('clicked');
+      $('.link2' + '[filter="' + filter + '"][sort="' + otherSort + '"]').toggleClass('clicked');
+    loadTop(filter, fields[filter], sort);
+  });
+  
 
   var buildUrl = function(skip, limit) {
     url = [mongoDb.host, mongoDb.dbName, "collections", mongoDb.collectionName, "documents"].join("/") + "?" + buildQs(skip, limit)
@@ -408,11 +436,11 @@ $(document).ready(function() {
   }
   
   var loadAllTops = function() {
-    loadTop('cast', 8);
-    loadTop('directors', 4);
-    loadTop('genres', 1);
-    loadTop('year', 1);
-    loadTop('rating', 1);
+    loadTop('cast', 8, 'count');
+    loadTop('directors', 4,'count');
+    loadTop('genres', 1,'count');
+    loadTop('year', 1,'count');
+    loadTop('rating', 1,'count');
   }
   
   var progress = {

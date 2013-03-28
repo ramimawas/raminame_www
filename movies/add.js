@@ -1,8 +1,8 @@
 $(document).ready(function() {
   
   var api = {
-    //host: "http://rami.name/localhost/api.php"
-    host: "http://localhost/rami.name/movies/api.php",
+    host: "http://rami.name/localhost/api.php",
+    //host: "http://localhost/rami.name/movies/api.php",
     rotten: {
       host: "http://api.rottentomatoes.com/api/public/v1.0/movies.json?",
       apikey: "6k3szrykkcyqjpvxkkzpt2az"

@@ -1,25 +1,23 @@
 <html>
   <head>
     <link rel="icon" type="image/png" href="http://www.rami.name/myicon.png" />
-    <title>My Movies</title>
-    <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" type="text/css" charset="utf-8"/>
-    <link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/demo_page.css" type="text/css" charset="utf-8"/>
-    <link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/demo_table.css" type="text/css" charset="utf-8"/>
-    <link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/demo_table_jui.css" type="text/css" charset="utf-8"/>
-    <link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/themes/base/jquery-ui.css" type="text/css" charset="utf-8"/>
-    <!--<link rel="stylesheet" href="http://jquery-datatables-editable.googlecode.com/svn/trunk/media/css/themes/smoothness/jquery-ui-1.7.2.custom.css" type="text/css" charset="utf-8"/>-->
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" type="text/css" charset="utf-8"/>
-    <link rel="stylesheet" href="movies/styles.css" type="text/css" charset="utf-8"/>
+    <title>Movies Off The Shelf</title>
+    <link rel="stylesheet" href="movies/jquery/datatables/1.9.0/jquery.dataTables.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="movies/jquery/jqueryui/1.8.18/themes/base/jquery-ui.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="movies/css/styles.css" type="text/css" charset="utf-8"/>
     <link rel="stylesheet" href="movies/iphone-style/style.css"/>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="http://datatables.net/release-datatables/extras/KeyTable/js/KeyTable.js"></script>
-    <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
-    <script type="text/javascript" src="http://malsup.github.com/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="movies/dataTableInit.js"></script>
-    <script type="text/javascript" src="movies/API.js"></script>
+    <script src="movies/jquery/1.7.2/jquery.min.js"></script>
+    <script src="movies/jquery/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    
+    <script src="movies/jquery/datatables/1.9.0/jquery.dataTables.min.js"></script>
+    <script src="movies/jquery/datatables/keytable/1.1.7/KeyTable.js"></script>
+    
+    <script src="movies/js/underscore-min.js"></script>
+    <script src="movies/jquery/blockui/jquery.blockUI.js"></script>
+    
+    <script src="movies/dataTableInit.js"></script>
+    <script src="movies/API.js"></script>
     <script src="movies/iphone-style/iphone-style-checkboxes.js"></script>
     
     <style>
@@ -33,16 +31,67 @@
         <tr>
           <td valign="top">
             <div id="sidebar" class="fixed">
+              
               <h3>Actors</h3>
-              <div id="cast" style="height: 400px; padding-left: 5px;"></div>
+              <div style="height: 400px; padding-left: 5px;">
+                <div style="float: right;">
+                  <span class="link2 clicked" filter="cast" sort="count">#</span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="link2" filter="cast" sort="rating">&#10084;</span>
+                  &nbsp;&nbsp;
+                </div>
+                <br/>
+                <div id="cast"></div>
+              </div>
+              
               <h3>Directors</h3>
-              <div id="directors" style="height: 400px; padding-left: 5px;"></div>
+              <div style="height: 400px; padding-left: 5px;">
+                <div style="float: right;">
+                  <span class="link2 clicked" filter="directors" sort="count">#</span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="link2" filter="directors" sort="rating">&#10084;</span>
+                  &nbsp;&nbsp;
+                </div>
+                <br/>
+                <div id="directors"></div>
+              </div>
+              
               <h3>Genres</h3>
-              <div id="genres" style="height: 400px; padding-left: 5px;"></div>
+              <div style="height: 400px; padding-left: 5px;">
+                <div style="float: right;">
+                  <span class="link2 clicked" filter="genres" sort="count">#</span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="link2" filter="genres" sort="rating">&#10084;</span>
+                  &nbsp;&nbsp;
+                </div>
+                <br/>
+                <div id="genres"></div>
+              </div>
+              
               <h3>Years</h3>
-              <div id="years" style="height: 400px; padding-left: 5px;"></div>
+              <div style="height: 400px; padding-left: 5px;">
+                <div style="float: right;">
+                  <span class="link2 clicked" filter="years" sort="count">#</span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="link2" filter="years" sort="rating">&#10084;</span>
+                  &nbsp;&nbsp;
+                </div>
+                <br/>
+                <div id="years"></div>
+              </div>
+              
               <h3>My Ratings &#10084;</h3>
-              <div id="ratings" style="height: 400px; padding-left: 5px;"></div>
+                <div style="height: 400px; padding-left: 5px;">
+                <div style="float: right;">
+                  <span class="link2 clicked" filter="ratings" sort="count">#</span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="link2" filter="ratings" sort="rating">&#10084;</span>
+                  &nbsp;&nbsp;
+                </div>
+                <br/>
+                <div id="ratings"></div>
+              </div>
+              
               <h3>Filters</h3>
               <div id="filters"></div>
               <h3>Settings</h3>
