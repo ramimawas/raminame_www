@@ -99,11 +99,12 @@ class API {
           '$match'=> array(
               'count' => array('$gte' => $minimumCount))
       );
-    if ($field == 'year')
-      $hierarchy = array('count' => -1, "_id" => -1);
-    //else if ($field == 'cast')
-    //  $hierarchy = array("rating" => -1, 'count' => -1, "_id" => 1);
-    else {
+    if ($field == 'year') {
+      if ($sort == 'rating')
+        $hierarchy = array('rating' => -1, "_id" => -1);
+      else
+        $hierarchy = array('count' => -1, "_id" => -1);
+    } else {
       if ($sort == 'rating')
         $hierarchy = array("rating" => -1, 'count' => -1, "_id" => 1);
       else
