@@ -118,11 +118,12 @@ $(document).ready(function() {
   var top = {};
   
   var loadTop = function(field, count, sort) {
-    var query = API.query();
-    query.method = 'top';
-    query.count = count;
-    query.field = field;
-    query.sort = sort;
+    var query = {
+      method: 'top',
+      count: count,
+      field: field,
+      sort: sort
+    };
     API.call(query, topCallback, {field: field});
   }
 
@@ -391,10 +392,11 @@ $(document).ready(function() {
   
   var multiload2 = function(skip, limit) {
     console.log('Multiload2 skip: ', skip, ' limit: ', limit);
-    var query = API.query();
-    query.method = 'list';
-    query.skip = skip;
-    query.limit = limit+1;
+    var query = {
+      method: 'list',
+      skip: skip,
+      limit: limit+1
+    }
     API.call(query, loadDataCallback, {skip: skip, limit: limit});
   }
   

@@ -209,7 +209,7 @@ class API {
       throw new Exception("API", 301);
     if ($rating < 1 || $rating > 5)
       throw new Exception("API", 302);
-    $movie_db = $this->db->findOne(array("imdb_id"=>$imdb_id  ));
+    $movie_db = $this->db->findOne(array("imdb_id"=>$imdb_id));
     if (empty($movie_db)) {
       $movie = OMDB::getMovieByImdbId($imdb_id);
       if (isset($rotten_id))
