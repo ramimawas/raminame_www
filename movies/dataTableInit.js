@@ -177,7 +177,7 @@ $(document).ready(function() {
   };
   
   var fields = {
-    cast: 8,
+    cast: 6,
     directors: 2,
     genres: 1,
     year: 1,
