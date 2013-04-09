@@ -16,6 +16,7 @@ $(document).ready(function() {
     //maxLimit: 25,
     allOptionsValue: '*',
     maxVisibleCast: 2,
+    maxVisibleGenres: 4,
     maxVisibleDirectors: 1,
     empty: '_'
   };
@@ -330,9 +331,14 @@ $(document).ready(function() {
         } else {
           if (filter == 'cast' && index == settings.maxVisibleCast)
             longList = true;
-          if (filter == 'directors' && index == settings.maxVisibleDirectors)
+          else if (filter == 'directors' && index == settings.maxVisibleDirectors)
             longList = true;
-          var valueHtml = '<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>';
+          else if (filter == 'genres' && index == settings.maxVisibleGenres)
+            longList = true;
+          var text = cap(value);
+          if (filter == 'directors' || filter == 'cast')
+            text = text.replace(/\s+/g, '_');
+          var valueHtml = '<span class="link" filter="' + filter +'" value="' + value + '">' + text + '</span>';
           if (longList)
             strArrayExtra.push(valueHtml);
           else
@@ -343,7 +349,7 @@ $(document).ready(function() {
       allHtml.push(strArray.join(', '));
       if (longList) {
         allHtml.push('<div style="display:none;">');
-        allHtml.push(strArrayExtra.join(', '));
+        allHtml.push(', ' + strArrayExtra.join(', '));
         allHtml.push('</div>');
         allHtml.push('<span class="more" state="hidden" style="padding-left: 5px">&rarr;</span>');
       }
@@ -352,12 +358,12 @@ $(document).ready(function() {
   }
   
   var structure = [
-    {"sTitle": "Title", "mDataProp": "title", "sWidth": "120px"},
+    {"sTitle": "Title", "mDataProp": "title", "sWidth": "100px"},
     {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "65px"},
     {"sTitle": String.fromCharCode(0x2764), "mDataProp": "rating", fnRender: render('rating'), "sWidth": "10px"},
     {"sTitle": "RT " + String.fromCharCode(0x27A6), "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "79px", "sType": "RT"},
     {"sTitle": "IMDB " + String.fromCharCode(0x27A6), "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "100px"},
-    {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres')},
+    {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres'), "sWidth": "100px"},
     {"sTitle": "Cast", "mDataProp": "cast", fnRender: render('cast')},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
     {"sTitle": "Min", "mDataProp": "runtime", "sWidth": "10px"},
@@ -555,7 +561,9 @@ $(document).ready(function() {
     var hidden = $this.attr('state') == 'hidden';
     var arrow = hidden ? '&larr;' : '&rarr;';
     var state = hidden ? 'visible' : 'hidden';
-    $this.html(arrow).attr('state', state).prev().toggle();
+    var $div = $this.html(arrow).attr('state', state).prev().toggle();
+    if (hidden)
+      $div.css('display', 'inline');
   });
   
   $("button").live("click", function() {
