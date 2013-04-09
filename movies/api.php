@@ -75,10 +75,13 @@ class API {
     return $response;
   }
   
-  public function top($field, $minimumCount=0, $sort='count') {
+  public function top($field, $minimumCount=0, $sort='count', $direction=-1) {
     $response = new Response();
     if(empty($minimumCount))
       $minimumCount = 0;
+    if(empty($direction))
+      $direction = -1;
+    $direction = intval($direction);
     $minimumCount = intval($minimumCount);
     
     $project = array(
@@ -100,15 +103,19 @@ class API {
               'count' => array('$gte' => $minimumCount))
       );
     if ($field == 'year') {
-      if ($sort == 'rating')
-        $hierarchy = array('rating' => -1, "_id" => -1);
+      if ($sort == 'default')
+        $hierarchy = array('_id' => $direction);
+      else if ($sort == 'rating')
+        $hierarchy = array('rating' => $direction, "_id" => -1);
       else
-        $hierarchy = array('count' => -1, "_id" => -1);
+        $hierarchy = array('count' => $direction, "_id" => -1);
     } else {
-      if ($sort == 'rating')
-        $hierarchy = array("rating" => -1, 'count' => -1, "_id" => 1);
+      if ($sort == 'default')
+        $hierarchy = array('_id' => $direction, 'count' => -1, "rating" => -1);
+      else if ($sort == 'rating')
+        $hierarchy = array("rating" => $direction, 'count' => -1, "_id" => 1);
       else
-        $hierarchy = array('count' => -1, "rating" => -1, "_id" => 1);
+        $hierarchy = array('count' => $direction, "rating" => -1, "_id" => 1);
     }
     
     $sort = array('$sort'=> $hierarchy);
@@ -286,7 +293,7 @@ class API {
             $response = $this->fixMovie($_GET["imdbid"], $_GET["rid"], $_GET["rating"]);
             break;
           case 'top':
-            $response = $this->top($_GET["field"], $_GET["count"], $_GET["sort"]);
+            $response = $this->top($_GET["field"], $_GET["count"], $_GET["sort"], $_GET["direction"]);
             break;
           case 'mean':
             $response = $this->mean();

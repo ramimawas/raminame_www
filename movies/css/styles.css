@@ -18,8 +18,11 @@
 
 .clicked {
   text-decoration: none;
-  cursor: none;
   color: black;
+}
+
+.clicked:hover {
+  background-color: pink;
 }
 
 .ui-accordion .ui-accordion-content {

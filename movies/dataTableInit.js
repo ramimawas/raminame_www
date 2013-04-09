@@ -123,12 +123,13 @@ $(document).ready(function() {
   
   var top = {};
   
-  var loadTop = function(field, count, sort) {
+  var loadTop = function(field, count, sort, direction) {
     var query = {
       method: 'top',
       count: count,
       field: field,
-      sort: sort
+      sort: sort,
+      direction: direction
     };
     API.call(query, topCallback, {field: field});
   }
@@ -192,9 +193,36 @@ $(document).ready(function() {
       filter = _this.attr("filter"),
       sort = _this.attr("sort");
       otherSort = sort == 'count' ? 'rating' : 'count';
-      _this.toggleClass('clicked');
-      $('.link2' + '[filter="' + filter + '"][sort="' + otherSort + '"]').toggleClass('clicked');
-    loadTop(filter, fields[filter], sort);
+    var clicked = _this.hasClass('clicked');
+    _this.addClass('clicked');
+    $('.link2' + '[filter="' + filter + '"][sort!="' + sort + '"]').toggleClass('clicked', false);
+    var $nodes = {
+      def: $('.link2' + '[filter="' + filter + '"][sort="default"]'),
+      count: $('.link2' + '[filter="' + filter + '"][sort="count"]'),
+      rating: $('.link2' + '[filter="' + filter + '"][sort="rating"]')
+    };
+    
+    var oldDirection = parseInt(_this.attr('direction'));
+    var direction = oldDirection == -1 ? 1 : -1;
+    _this.attr('direction', direction)
+    if (sort == 'default')
+      _this.html(direction == 1 ? '&#9650;' : '&#9660;');
+    if (sort == 'default') {
+      $nodes.count.attr('direction', 1);
+      $nodes.rating.attr('direction', 1);
+    } else if (sort == 'count') {
+      $nodes.def.attr('direction', -1);
+      if (filter == 'year' || filter == 'rating')
+        $nodes.def.attr('direction', 1);
+      $nodes.rating.attr('direction', 1);
+    } else if (sort == 'rating') {
+      $nodes.def.attr('direction', -1);
+      if (filter == 'year' || filter == 'rating')
+        $nodes.def.attr('direction', 1);
+      $nodes.count.attr('direction', 1);
+    }
+    
+    loadTop(filter, fields[filter], sort, direction);
   });
   
 
@@ -452,11 +480,11 @@ $(document).ready(function() {
   }
   
   var loadAllTops = function() {
-    loadTop('cast', fields.cast, 'count');
-    loadTop('directors', fields.directors,'count');
-    loadTop('genres', fields.genres,'count');
-    loadTop('year', fields.year,'count');
-    loadTop('rating', fields.rating,'count');
+    loadTop('cast', fields.cast, 'count', -1);
+    loadTop('directors', fields.directors,'count', -1);
+    loadTop('genres', fields.genres,'count', -1);
+    loadTop('year', fields.year,'default', -1);
+    loadTop('rating', fields.rating,'default', -1);
   }
   
   var progress = {
