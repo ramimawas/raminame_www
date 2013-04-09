@@ -15,7 +15,8 @@ $(document).ready(function() {
     maxLimit: 2000,
     //maxLimit: 25,
     allOptionsValue: '*',
-    maxVisibleCast: 3,
+    maxVisibleCast: 2,
+    maxVisibleDirectors: 1,
     empty: '_'
   };
   
@@ -312,7 +313,6 @@ $(document).ready(function() {
       if(filterValue.constructor != Array)
         filterValue = [filterValue];
       var longList = false;
-      var maxVisibleList = settings.maxVisibleCast;
       var strArrayExtra = [];
       $.each(filterValue, function(index, value) {
         if (filter == 'imdb_id' || filter == 'rotten_id') {
@@ -328,7 +328,9 @@ $(document).ready(function() {
           var title =  filter == 'imdb_rating' ? 'IMDB' : 'Rotten Tomatoes';
           strArray.push('<a style="border-bottom: 1px dotted violet; text-decoration: none;" href="' + url + '/" target="_blank"><span title="Open On ' + title + '" >' + cap(value) + '</span></a>');
         } else {
-          if (filter == 'cast' && index == maxVisibleList)
+          if (filter == 'cast' && index == settings.maxVisibleCast)
+            longList = true;
+          if (filter == 'directors' && index == settings.maxVisibleDirectors)
             longList = true;
           var valueHtml = '<span class="link" filter="' + filter +'" value="' + value + '">' + cap(value) + '</span>';
           if (longList)
