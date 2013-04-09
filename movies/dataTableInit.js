@@ -463,7 +463,7 @@ $(document).ready(function() {
             buildTable(allData);
             $.fn.dataTableExt.afnFiltering.push(afnFiltering());
             progress.stop();
-            $('.focus').trigger('focus');
+            //$('.focus').trigger('focus');
           }
          
         }
@@ -524,10 +524,31 @@ $(document).ready(function() {
           "sZeroRecords": "No records to display"
         }
       });
-      var keys = new KeyTable( {
+        
+      $(document).keyup(function (event) {
+        $src = $(event.srcElement);
+        if (!$src.is("input")) {
+          if (event.keyCode == 37 || event.keyCode == 80) {
+            oTable.fnPageChange( 'previous' );
+          } else if (event.keyCode == 39 || event.keyCode == 78) {
+            oTable.fnPageChange( 'next' );
+          } else if (event.keyCode == 76) {
+            oTable.fnPageChange( 'last' );
+          } else if (event.keyCode == 70 || event.keyCode == 48) {
+            oTable.fnPageChange( 'first' );
+          } else if (event.keyCode > 48 && event.keyCode <= 57) {
+            oTable.fnPageChange(event.keyCode-49);
+          } else if (event.keyCode == 27) {
+            clearFilters();
+            doFilter();
+          }
+        }
+      });
+      /*var keys = new KeyTable( {
         "table": document.getElementById(tableId),
-        "datatable": oTable
-    } );
+        "datatable": oTable,
+        'focus': []
+      });*/
       //refreshListFilters();
     }
   }
