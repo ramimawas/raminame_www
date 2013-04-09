@@ -15,7 +15,8 @@ $(document).ready(function() {
     maxLimit: 2000,
     //maxLimit: 25,
     allOptionsValue: '*',
-    maxVisibleCast: 3
+    maxVisibleCast: 3,
+    empty: '_'
   };
   
   //$.fn.dataTableExt.sErrMode = 'throw';
@@ -24,16 +25,16 @@ $(document).ready(function() {
   $.fn.dataTableExt.oSort['RT-asc']  = function(a, b) {
     var x = $(a).text(),
       y = $(b).text();
-    x = x == '_' ? -1 : parseFloat(x);
-    y = y == '_' ? -1 : parseFloat(y);
+    x = x == settings.empty ? -1 : parseFloat(x);
+    y = y == settings.empty ? -1 : parseFloat(y);
     return ((x < y) ? -1 : ((x > y) ?  1 : 0));
   };
   
   $.fn.dataTableExt.oSort['RT-desc']  = function(a, b) {
     var x = $(a).text(),
       y = $(b).text();
-    x = x == '_' ? -1 : parseFloat(x);
-    y = y == '_' ? -1 : parseFloat(y);
+    x = x == settings.empty ? -1 : parseFloat(x);
+    y = y == settings.empty ? -1 : parseFloat(y);
     return ((x > y) ? -1 : ((x < y) ?  1 : 0));
   };
   
@@ -110,7 +111,10 @@ $(document).ready(function() {
         rating += '0';
       else if (rating.length == 1)
         rating += '.00';
-      html.push('<div><span class="link" filter="' + field + '" value="' + name + '">' + cap(name) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
+      var name2 = name;
+      if (name2.length >= 19)
+        name2 = name2.substring(0, 19-4) + '...';
+      html.push('<div><span class="link" filter="' + field + '" value="' + name + '" title="' + name + '">' + cap(name2) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
     });
     $(tagIds[field]).html(html.join(''));
   };
@@ -174,7 +178,7 @@ $(document).ready(function() {
   
   var fields = {
     cast: 8,
-    directors: 4,
+    directors: 2,
     genres: 1,
     year: 1,
     rating: 1
@@ -320,8 +324,9 @@ $(document).ready(function() {
         } else if (filter == 'imdb_rating' || filter == 'rotten_critics_score') {
           var url = filter == 'imdb_rating' ? ('http://www.imdb.com/title/' + obj.aData['imdb_id']): ('http://www.rottentomatoes.com/m/' + obj.aData['rotten_id']);
           if (value == -1)
-            value = "_";
-          strArray.push('<a style="border-bottom: 1px dotted violet; text-decoration: none;" href="' + url + '/" target="_blank"><span>' + cap(value) + '</span></a>');
+            value = settings.empty;
+          var title =  filter == 'imdb_rating' ? 'IMDB' : 'Rotten Tomatoes';
+          strArray.push('<a style="border-bottom: 1px dotted violet; text-decoration: none;" href="' + url + '/" target="_blank"><span title="Open On ' + title + '" >' + cap(value) + '</span></a>');
         } else {
           if (filter == 'cast' && index == maxVisibleList)
             longList = true;
@@ -422,6 +427,7 @@ $(document).ready(function() {
             buildTable(allData);
             $.fn.dataTableExt.afnFiltering.push(afnFiltering());
             progress.stop();
+            $('.focus').trigger('focus');
           }
          
         }
@@ -438,11 +444,11 @@ $(document).ready(function() {
   }
   
   var loadAllTops = function() {
-    loadTop('cast', 8, 'count');
-    loadTop('directors', 4,'count');
-    loadTop('genres', 1,'count');
-    loadTop('year', 1,'count');
-    loadTop('rating', 1,'count');
+    loadTop('cast', fields.cast, 'count');
+    loadTop('directors', fields.directors,'count');
+    loadTop('genres', fields.genres,'count');
+    loadTop('year', fields.year,'count');
+    loadTop('rating', fields.rating,'count');
   }
   
   var progress = {
@@ -668,7 +674,6 @@ $(document).ready(function() {
       heightStyle: 'content'
     });
   });
-
 
   load();
   loadAllTops();

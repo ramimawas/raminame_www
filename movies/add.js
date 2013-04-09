@@ -15,6 +15,7 @@ $(document).ready(function() {
     findByIdButton: $("#findById-button"),
     ratingText: $("#rating-text"),
     addButton: $("#add-button"),
+    fixButton: $("#fix-button"),
     confirm: $("#confirmation"),
     imdb: $("#imdb"),
     rotten: $("#rotten")
@@ -40,6 +41,7 @@ $(document).ready(function() {
   $ids.titleButton.click(function() {
     $ids.imdbText.val('');
     $ids.rottenText.val('');
+    $ids.ratingText.val('');
     var query = {};
     query.method = 'find';
     query.title = $ids.titleText.val();
@@ -65,8 +67,27 @@ $(document).ready(function() {
     query.rating = $ids.ratingText.val();
     API.call(query, function(data) {
       var status = {code: 200, text: "OK"};
-      $ids.confirm.html(status.code + " / " + status.text).show('fast');
+      $ids.confirm.html("Added: " + status.code + " / " + status.text).show('fast');
       setTimeout(function() {$ids.confirm.html('').hide('slow');}, 3000);
     });
   });
+
+  $ids.fixButton.click(function() {
+      var query = {};
+      query.method = 'fix';
+      var imdbId = $ids.imdbText.val(),
+        rottenId = $ids.rottenText.val(),
+        rating = $ids.ratingText.val();
+      if (imdbId != '' && rottenId != '') {
+        query.rid = rottenId;
+        query.imdbid = imdbId;
+        if (rating != '')
+          query.rating = rating;
+        API.call(query, function(data) {
+          var status = {code: 200, text: "OK"};
+          $ids.confirm.html("Fixed: " + status.code + " / " + status.text).show('fast');
+          setTimeout(function() {$ids.confirm.html('').hide('slow');}, 3000);
+        });
+      }
+    });
 });

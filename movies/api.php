@@ -143,7 +143,7 @@ class API {
     return $response;
   }
   
-  public function fixMovie($imdb_ids, $rotten_ids) {
+  public function fixMovie($imdb_ids, $rotten_ids, $rating) {
     $response = new Response();
     if (!isset($imdb_ids))
       throw new Exception("API", 300);
@@ -194,6 +194,8 @@ class API {
         $movieRami->ROTTEN_ID = $rottenIdsMap[$imdb_id];
       $this->rotten->augmentMovie($movieRami);
       //echo "========= After rotten merge: ";var_dump($movieRami);
+      if(isset($rating))
+        $movieRami->RATING = intval($rating);
       $this->db->save($movieRami->get());
       $i++;
     }
@@ -281,7 +283,7 @@ class API {
             $response = $this->listMovie($_GET["imdbid"], $_GET["rid"], $_GET["limit"], $_GET["skip"]);
             break;
           case 'fix':
-            $response = $this->fixMovie($_GET["imdbid"], $_GET["rid"]);
+            $response = $this->fixMovie($_GET["imdbid"], $_GET["rid"], $_GET["rating"]);
             break;
           case 'top':
             $response = $this->top($_GET["field"], $_GET["count"], $_GET["sort"]);

@@ -35,7 +35,7 @@
 }
 
 table.KeyTable td.focus {
-  border: 4px solid #3366FF;
+  border: 1px solid #3366FF;
 }
 
 table.display thead th {
