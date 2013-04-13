@@ -347,15 +347,15 @@ $(document).ready(function() {
         if (filter == 'imdb_id' || filter == 'rotten_id') {
           var url = filter == 'imdb_id' ? 'http://www.imdb.com/title/': 'http://www.rottentomatoes.com/m/';
           var img = value == -1 ? '': '<img src="movies/external.png" style="width: 30px">';
-          strArray.push('<span filter="' + filter +'" value="' + value + '"><a href="' + url + value + '/" target="_blank">' + img + '</a></span>');
+          strArray.push('<a href="' + url + value + '/" target="_blank"><span filter="' + filter +'" value="' + value + '">' + img + '</span></a>');
         } else if (filter == 'added') {
           strArray.push(new Date(value*1000).toLocaleDateString());
         } else if (filter == 'imdb_rating' || filter == 'rotten_critics_score') {
           var url = filter == 'imdb_rating' ? ('http://www.imdb.com/title/' + obj.aData['imdb_id']): ('http://www.rottentomatoes.com/m/' + obj.aData['rotten_id']);
           if (value == -1)
             value = settings.empty;
-          var title =  filter == 'imdb_rating' ? 'IMDB' : 'Rotten Tomatoes';
-          strArray.push('<a style="border-bottom: 1px dotted violet; text-decoration: none;" href="' + url + '/" target="_blank"><span title="Open On ' + title + '" >' + cap(value) + '</span></a>');
+          var title =  filter == 'imdb_rating' ? 'IMDb' : 'Rotten Tomatoes';
+          strArray.push('<div class="hover"><a style="border-bottom: 1px dotted violet; text-decoration: none;" href="' + url + '/" target="_blank"><span title="View on ' + title + '" >' + cap(value) + '</span></a></div>');
         } else {
           if (filter == 'cast' && index == settings.maxVisibleCast)
             longList = true;
@@ -389,8 +389,10 @@ $(document).ready(function() {
     {"sTitle": "Title", "mDataProp": "title", "sWidth": "100px"},
     {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "65px"},
     {"sTitle": String.fromCharCode(0x2764), "mDataProp": "rating", fnRender: render('rating'), "sWidth": "10px"},
-    {"sTitle": "RT " + String.fromCharCode(0x27A6), "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "79px", "sType": "RT"},
-    {"sTitle": "IMDB " + String.fromCharCode(0x27A6), "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "100px"},
+    //{"sTitle": "RT " + String.fromCharCode(0x27A6), "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "79px", "sType": "RT"},
+    {"sTitle": "RT", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "60px", "sType": "RT"},
+    //{"sTitle": "IMDB " + String.fromCharCode(0x27A6), "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "100px"},
+    {"sTitle": "IMDB", "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "80px"},
     {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres'), "sWidth": "100px"},
     {"sTitle": "Cast", "mDataProp": "cast", fnRender: render('cast')},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
@@ -421,7 +423,7 @@ $(document).ready(function() {
         more = false;
       }
       if (more) {
-        //multiload2(skip+limit, limit);
+        multiload2(skip+limit, limit);
         progress.step(10);
       } else {
         buildTable(allData);
@@ -476,7 +478,7 @@ $(document).ready(function() {
     progress.start();
     var limit = settings.maxLimit < settings.limitPerRequest? settings.maxLimit: settings.limitPerRequest;
     //for (var i=0; i<11; i++)
-    multiload(0, limit);
+    multiload2(0, limit);
   }
   
   var loadAllTops = function() {
@@ -604,6 +606,13 @@ $(document).ready(function() {
       refreshListFilters(filter);
     progress.stop();
   }
+  
+  $('.hover').live('mouseenter', function() {
+    $(this).append('<span class="external"> ' + String.fromCharCode(0x27A6) + '</span>');
+  }).live('mouseleave', function() {
+    $(this).children('.external').remove();
+  });
+  
   
   $(".more").live("click", function() {
     $this = $(this);

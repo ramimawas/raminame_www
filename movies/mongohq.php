@@ -6,10 +6,8 @@ class MongoHQ {
   private $config = array(
     'username' => 'rami',
     'password' => 'rami.name',
-    'host' => 'alex.mongohq.com',
-    //'host' => 'localhost',
-    'port' => '10091',
-    //'port' => '27017',
+    'host' => 'alex.mongohq.com', 'port' => '10091',
+    //'host' => 'localhost', 'port' => '27017',
     'dbName' => 'Movies',
     'collectionName' => 'watched'
    );
