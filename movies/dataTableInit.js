@@ -615,6 +615,7 @@ $(document).ready(function() {
   }
   
   $('.hover').live('mouseenter', function() {
+    $(this).children('.external').remove();
     $(this).append('<span class="external"> ' + String.fromCharCode(0x27A6) + '</span>');
   }).live('mouseleave', function() {
     $(this).children('.external').remove();
