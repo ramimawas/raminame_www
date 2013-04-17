@@ -180,7 +180,7 @@ $(document).ready(function() {
   };
   
   var fields = {
-    cast: 6,
+    cast: 4,
     directors: 2,
     genres: 1,
     year: 1,
@@ -543,6 +543,13 @@ $(document).ready(function() {
           } else if (event.keyCode == 27) {
             clearFilters();
             doFilter();
+          } else if (event.keyCode == 83) {
+            console.log($('.dataTable_filter input'));
+            $('#dataTable_filter input').focus().select();
+          } 
+        } else {
+          if (event.keyCode == 27) {
+            $('#dataTable_filter input').blur();
           }
         }
       });

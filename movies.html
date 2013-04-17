@@ -35,11 +35,11 @@
             <div id="sidebar" class="fixed">
               
               <h3>Actors</h3>
-              <div style="height: 400px; padding-left: 5px;">
+              <div class="panel" id="actors-panel" style="height: 400px; padding-left: 5px;">
                 <div style="float: right;">
-                  <span class="link2 clicked" filter="cast" sort="count" direction="-1">#</span>
+                  <span class="link2 clicked" filter="cast" sort="count" direction="-1" title="Sort by count">#</span>
                   &nbsp;&nbsp;&nbsp;
-                  <span class="link2" filter="cast" sort="rating" direction="1">&#10084;</span>
+                  <span class="link2" filter="cast" sort="rating" direction="1" title="Sort by my ratings">&#10084;</span>
                   &nbsp;&nbsp;
                 </div>
                 <br/>
@@ -47,11 +47,11 @@
               </div>
               
               <h3>Directors</h3>
-              <div style="height: 400px; padding-left: 5px;">
+              <div class="panel" id="directors-panel" style="height: 400px; padding-left: 5px;">
                 <div style="float: right;">
-                  <span class="link2 clicked" filter="directors" sort="count" direction="-1">#</span>
+                  <span class="link2 clicked" filter="directors" sort="count" direction="-1" title="Sort by count">#</span>
                   &nbsp;&nbsp;&nbsp;
-                  <span class="link2" filter="directors" sort="rating" direction="1">&#10084;</span>
+                  <span class="link2" filter="directors" sort="rating" direction="1" title="Sort by my ratings">&#10084;</span>
                   &nbsp;&nbsp;
                 </div>
                 <br/>
@@ -59,11 +59,11 @@
               </div>
               
               <h3>Genres</h3>
-              <div style="height: 400px; padding-left: 5px;">
+              <div class="panel" id="genres-panel" style="height: 400px; padding-left: 5px;">
                 <div style="float: right;">
-                  <span class="link2 clicked" filter="genres" sort="count" direction="-1">#</span>
+                  <span class="link2 clicked" filter="genres" sort="count" direction="-1" title="Sort by count">#</span>
                   &nbsp;&nbsp;&nbsp;
-                  <span class="link2" filter="genres" sort="rating" direction="1">&#10084;</span>
+                  <span class="link2" filter="genres" sort="rating" direction="1" title="Sort by my ratings">&#10084;</span>
                   &nbsp;&nbsp;
                 </div>
                 <br/>
@@ -71,14 +71,14 @@
               </div>
               
               <h3>Years</h3>
-              <div style="height: 400px; padding-left: 5px;">
+              <div class="panel" id="years-panel" style="height: 400px; padding-left: 5px;">
                 <div style="float: left;">
                   <span class="link2 clicked" filter="year" sort="default" direction="-1">&#9660;</span>
                 </div>
                 <div style="float: right;">
-                  <span class="link2" filter="year" sort="count" direction="1">#</span>
+                  <span class="link2" filter="year" sort="count" direction="1" title="Sort by count">#</span>
                   &nbsp;&nbsp;&nbsp;
-                  <span class="link2" filter="year" sort="rating" direction="1">&#10084;</span>
+                  <span class="link2" filter="year" sort="rating" direction="1" title="Sort by my ratings">&#10084;</span>
                   &nbsp;&nbsp;
                 </div>
                 <br/>
@@ -86,19 +86,16 @@
               </div>
               
               <h3>My Ratings &#10084;</h3>
-              <div style="height: 400px; padding-left: 5px;">
+              <div class="panel" id="rating-panel" style="height: 400px; padding-left: 5px;">
                 <div style="float: right;">
-                  <span class="link2" filter="rating" sort="count" direction="1">#</span>
+                  <span class="link2" filter="rating" sort="count" direction="1" title="Sort by count">#</span>
                   &nbsp;&nbsp;&nbsp;
-                  <span class="link2" filter="rating" sort="rating" direction="1">&#10084;</span>
+                  <span class="link2" filter="rating" sort="rating" direction="1" title="Sort by my ratings">&#10084;</span>
                   &nbsp;&nbsp;
                 </div>
                 <br/>
                 <div id="ratings"></div>
               </div>
-              
-              <h3>Filters</h3>
-              <div id="filters"></div>
               <h3>Settings</h3>
               <div>
                 <div class="filter">
@@ -119,6 +116,8 @@
                 </div>
                 <div style="height: 125px; visibility: none;"></div>
               </div>
+              <h3>Filters</h3>
+              <div id="filters"></div>
               <div id="progressbar" style="height: 23px; margin-top: 10px; margin-top: 20px;"></div>
             </div>
             <div id="back-top"><a href="#top"><span></span>Back to Top</a></div>
