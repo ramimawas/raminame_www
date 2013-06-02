@@ -331,7 +331,7 @@ $(document).ready(function() {
     $(tagIds.filters).hide().html('');
     for(var key in query)
       query[key] = null;
-  }
+  }//84204649
 
   var render = function(filter) {
     return function(obj) {
@@ -364,8 +364,8 @@ $(document).ready(function() {
           else if (filter == 'genres' && index == settings.maxVisibleGenres)
             longList = true;
           var text = cap(value);
-          if (filter == 'directors' || filter == 'cast')
-            text = text.replace(/\s+/g, '_');
+          //if (filter == 'directors' || filter == 'cast')
+            //text = text.replace(/\s+/g, '_');
           var valueHtml = '<span class="link" filter="' + filter +'" value="' + value + '">' + text + '</span>';
           if (longList)
             strArrayExtra.push(valueHtml);
