@@ -117,7 +117,8 @@ $(document).ready(function() {
       var name2 = name;
       if (name2.length >= 19)
         name2 = name2.substring(0, 19-4) + '...';
-      html.push('<div><span class="link" filter="' + field + '" value="' + name + '" title="' + name + '">' + cap(name2) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
+      var preview = (field=='cast' || field=='directors')? ' preview' : '';
+      html.push('<div><span class="link' + preview + '" filter="' + field + '" value="' + name + '" title="' + name + '">' + cap(name2) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
     });
     $(tagIds[field]).html(html.join(''));
   };
