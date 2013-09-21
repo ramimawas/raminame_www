@@ -8,6 +8,7 @@ $(document).ready(function() {
     resetAllFiltersFlag: false,
     cumulativeFiltersFlag: false,
     showFiltersFlag: false,
+    previewAvatars: true,
     slideHeader: false,
     limitPerRequest: 99,
     //limitPerRequest: 399,
@@ -357,16 +358,19 @@ $(document).ready(function() {
           var title =  filter == 'imdb_rating' ? 'IMDb' : 'Rotten Tomatoes';
           strArray.push('<div class="hover"><a style="border-bottom: 1px dotted violet; text-decoration: none;" href="' + url + '/" target="_blank"><span title="View on ' + title + '" >' + cap(value) + '</span></a></div>');
         } else {
+          var preview = '';
           if (filter == 'cast' && index == settings.maxVisibleCast)
             longList = true;
           else if (filter == 'directors' && index == settings.maxVisibleDirectors)
             longList = true;
           else if (filter == 'genres' && index == settings.maxVisibleGenres)
             longList = true;
+          if (filter == 'cast' || filter == 'directors')
+            preview = ' preview';
           var text = cap(value);
           //if (filter == 'directors' || filter == 'cast')
             //text = text.replace(/\s+/g, '_');
-          var valueHtml = '<span class="link" filter="' + filter +'" value="' + value + '">' + text + '</span>';
+          var valueHtml = '<span class="link' + preview + '" filter="' + filter +'" value="' + value + '">' + text + '</span>';
           if (longList)
             strArrayExtra.push(valueHtml);
           else
@@ -621,6 +625,32 @@ $(document).ready(function() {
     $(this).children('.external').remove();
   });
   
+  $('.preview').live('mouseenter', function() {
+    if (settings.previewAvatars) {
+      var offset_pop = $(this).offset();
+      http://api.themoviedb.org/3/search/person?api_key=a56c4c9722f90923979c4ed41b5c715f&query=Pete%20Travis
+      var data = {
+        api_key: 'a56c4c9722f90923979c4ed41b5c715f',
+        query: $(this).attr('value')
+      };
+      $.ajax({
+        dataType: 'json',
+        success: function(data, status) {
+          console.log(data, status);
+          if (data && data.results && data.results.length>0 && data.results[0].profile_path) {
+            //https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/w8zJQuN7tzlm6FY9mfGKihxp3Cb.jpg
+            var src = 'https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185' + data.results[0].profile_path;
+            $("#avatar").empty().css({'left':offset_pop.left, 'top': offset_pop.top+20, 'zIndex': 100}).append($('<img class="avatar" src="' + src + '">')).show();
+          }
+        },
+        url: 'http://api.themoviedb.org/3/search/person',
+        data: data
+      });
+    }
+  }).live('mouseleave', function() {
+    $('#avatar').hide();
+  });
+  
   
   $(".more").live("click", function() {
     $this = $(this);
@@ -690,6 +720,12 @@ $(document).ready(function() {
         enableHeaderSliding()
       else
         disableHeaderSliding()
+    }
+  });
+
+$('#previewAvatars').iphoneStyle({
+    onChange: function(button, value) {
+      settings.previewAvatars = value;
     }
   });
   

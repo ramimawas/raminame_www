@@ -28,6 +28,7 @@
     
   </head>
   <body id="top">
+    <div id="avatar" style="display:none; position:absolute; top:0; left:0px;"></div>
     <div>
       <table>
         <tr>
@@ -99,12 +100,16 @@
               <h3>Settings</h3>
               <div>
                 <div class="filter">
+                  <div style="padding-bottom: 2px;">Preview Avatars</div>
+                  <input id="previewAvatars" checked="checked" type="checkbox"/>
+                </div>
+                <div class="filter">
                   <div style="padding-bottom: 2px;">Slide Header</div>
-                  <input  id="slideHeader"  type="checkbox"/>
+                  <input id="slideHeader" type="checkbox"/>
                 </div>
                 <div class="filter">
                   <div style="padding-bottom: 2px;">Show Header Filters</div>
-                  <input  id="showFilters"  type="checkbox"/>
+                  <input id="showFilters" type="checkbox"/>
                 </div>
                 <div class="filter">
                   <div style="padding-bottom: 2px;">One Active Filter Only</div>
