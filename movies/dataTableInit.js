@@ -740,6 +740,10 @@ $(document).ready(function() {
     }
   });
   
+  $('.ui-widget-overlay').live('click', function(){
+    $('#dialog-message').dialog('close');
+  });
+  
   $('#showFilters').iphoneStyle({
     onChange: function(button, value) {
       settings.showFiltersFlag = value;
