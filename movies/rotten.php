@@ -1,6 +1,6 @@
 <?php
 include_once("mongohq.php");
-include_once("movie.php");
+include_once("Movie.php");
 
 class RottenTomatoes {
   
