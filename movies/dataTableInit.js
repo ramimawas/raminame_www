@@ -413,9 +413,9 @@ $(document).ready(function() {
     {"sTitle": "RT", "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "60px", "sType": "RT"},
     //{"sTitle": "IMDB " + String.fromCharCode(0x27A6), "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "100px"},
     {"sTitle": "IMDB", "mDataProp": "imdb_rating", fnRender: render('imdb_rating'), "sWidth": "80px"},
-    {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres'), "sWidth": "100px"},
     {"sTitle": "Cast", "mDataProp": "cast", fnRender: render('cast')},
     {"sTitle": "Directors", "mDataProp": "directors", fnRender: render('directors')},
+    {"sTitle": "Genres", "mDataProp": "genres", fnRender: render('genres'), "sWidth": "100px"},
     {"sTitle": "Min", "mDataProp": "runtime", "sWidth": "10px"},
     //{"sTitle": "RT Aud", "mDataProp": "rotten_audience_score", fnRender: render('rotten_audience_score'), "sWidth": "90px"},
     //{"sTitle": "MPAA", "mDataProp": "mpaa_rating", fnRender: render('mpaa_rating'), "sWidth": "70px" },
@@ -740,7 +740,7 @@ $(document).ready(function() {
   var cumulitiveButton = $('#cumulativeFilters').iphoneStyle({
     onChange: function(button, value) {
       settings.cumulativeFiltersFlag = value;
-      if (value)
+      if (value && settings.showFiltersFlag)
         refreshListFilters();
     }
   });
