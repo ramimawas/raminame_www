@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 
 include_once("mongohq.php");
 include_once("rotten.php");
-include_once("movie.php");
+include_once("Movie.php");
 include_once("omdb.php");
 include_once("response.php");
 
