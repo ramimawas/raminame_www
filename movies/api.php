@@ -100,7 +100,8 @@ class API {
       );
     $match = array(
           '$match'=> array(
-              'count' => array('$gte' => $minimumCount))
+              'count' => array('$gte' => $minimumCount),
+              '_id' => array('$ne' => null))
       );
     if ($field == 'year') {
       if ($sort == 'default')

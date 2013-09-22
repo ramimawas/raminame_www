@@ -29,6 +29,39 @@
   </head>
   <body id="top">
     <div id="avatar" style="display:none; position:absolute; top:0; left:0px;"></div>
+    <div id="dialog-message" title="Keyboard Shortcuts" style="display:none;">
+      <div>
+        <span style="float: left;">next page:</span>
+        <span style="float: right;" class="ui-icon ui-icon-circle-arrow-e"></span>
+        <span style="float: right;">n or </span>
+      </div>
+      <div>
+        <span style="float: left;">previous page:</span>
+        <span style="float: right;" class="ui-icon ui-icon-circle-arrow-w"></span>
+        <span style="float: right;">p or </span>
+      </div>
+      <div>
+        <span style="float: left;">first page: </span>
+        <span style="float: right;">f</span>
+        <span style="float: right;">1 or </span>
+      </div>
+      <div>
+        <span style="float: left;">last page: </span>
+        <span style="float: right;">l</span>
+      </div>
+      <div>
+        <span style="float: left;">jump to page #:</span>
+        <span style="float: right;">1...9</span>
+      </div>
+      <div>
+        <span style="float: left;">search:</span>
+        <span style="float: right;">s</span>
+      </div>
+      <div>
+        <span style="float: left;">clear filters/search:</span>
+        <span style="float: right;">[esc]</span>
+      </div>
+    </div>
     <div>
       <table>
         <tr>
@@ -97,6 +130,12 @@
                 <br/>
                 <div id="ratings"></div>
               </div>
+              
+              <h3>My Top Movies</h3>
+              <div class="panel" id="rating-panel" style="height: 400px; padding-left: 5px;">
+                <div id="tops"></div>
+              </div>
+              
               <h3>Settings</h3>
               <div>
                 <div class="filter">

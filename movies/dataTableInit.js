@@ -118,7 +118,19 @@ $(document).ready(function() {
       if (name2.length >= 19)
         name2 = name2.substring(0, 19-4) + '...';
       var preview = (field=='cast' || field=='directors')? ' preview' : '';
-      html.push('<div><span class="link' + preview + '" filter="' + field + '" value="' + name + '" title="' + name + '">' + cap(name2) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
+      if (field == 'top') {
+        var names = {
+          0: 'Unranked',
+          10: 'Top 10',
+          20: '11 to 20',
+          30: '21 to 30',
+          40: '31 to 40',
+          50: '41 to 50'
+        };
+        if(name != 0)
+          html.push('<div><span class="link" filter="' + field + '" value="' + name + '" title="' + name + '">' + names[name] + '</span></div>');  
+      } else
+        html.push('<div><span class="link' + preview + '" filter="' + field + '" value="' + name + '" title="' + name + '">' + cap(name2) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
     });
     $(tagIds[field]).html(html.join(''));
   };
@@ -142,12 +154,12 @@ $(document).ready(function() {
   
   var mongo = {
     and: ['cast', 'directors', 'genres'],
-    or: ['added', 'imdb_id', 'imdb_rating', 'mpaa_rating', 'position', 'rating', 'released', 'rotten_audience_score', 'rotten_critics_score', 'rotten_id', 'runtime', 'title', 'type', 'year']
+    or: ['added', 'imdb_id', 'imdb_rating', 'mpaa_rating', 'position', 'rating', 'released', 'rotten_audience_score', 'rotten_critics_score', 'rotten_id', 'runtime', 'title', 'type', 'year', 'top']
   };
   
   var types = {
     string: ['added', 'cast', 'directors', 'genres', 'imdb_id', 'mpaa_rating', 'released', 'title', 'type'],
-    integer: ['imdb_rating', 'position', 'rating', 'rotten_audience_score', 'rotten_critics_score', 'rotten_id', 'runtime', 'year']
+    integer: ['imdb_rating', 'position', 'rating', 'rotten_audience_score', 'rotten_critics_score', 'rotten_id', 'runtime', 'year', 'top']
   };
 
   var query = {
@@ -166,6 +178,7 @@ $(document).ready(function() {
     rotten_critics_score: null,
     rotten_id: null,
     title: null,
+    top: null,
     type: null,
     year: null
   };
@@ -178,7 +191,8 @@ $(document).ready(function() {
     directors: "#directors",
     genres: "#genres",
     year: "#years",
-    rating: "#ratings"
+    rating: "#ratings",
+    top: "#tops"
   };
   
   var fields = {
@@ -186,7 +200,8 @@ $(document).ready(function() {
     directors: 2,
     genres: 1,
     year: 1,
-    rating: 1
+    rating: 1,
+    top: 1
   };
 
   
@@ -407,6 +422,7 @@ $(document).ready(function() {
     //{"sTitle": "Title Type", "mDataProp": "type", fnRender: render('type'), "sWidth": "70px" },
     {"sTitle": "IMDB", "mDataProp": "imdb_id", "sWidth": "30px", fnRender: render('imdb_id'), bVisible: false},
     {"sTitle": "RT", "mDataProp": "rotten_id", "sWidth": "30px", fnRender: render('rotten_id'), bVisible: false},
+    {"sTitle": "Top", "mDataProp": "top", "sWidth": "30px", fnRender: render('top'), bVisible: false},
     //{"sTitle": "Released", "mDataProp": "released", "sWidth": "170px"},
     //{"sTitle": "P", "mDataProp": "position", "sWidth": "75px"}
     {"sTitle": "Added", "mDataProp": "added", "sWidth": "100px", fnRender: render('added')}
@@ -492,6 +508,7 @@ $(document).ready(function() {
     loadTop('genres', fields.genres,'count', -1);
     loadTop('year', fields.year,'default', -1);
     loadTop('rating', fields.rating,'default', -1);
+    loadTop('top', fields.top,'default', 1);
   }
   
   var progress = {
@@ -526,36 +543,9 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "bLengthChange": true,
         "bPaginate": true,
-        "aaSorting": [[11, "desc"]],
+        "aaSorting": [[12, "desc"]],
         "oLanguage": {
           "sZeroRecords": "No records to display"
-        }
-      });
-        
-      $(document).keyup(function (event) {
-        $src = $(event.srcElement);
-        if (!$src.is("input")) {
-          if (event.keyCode == 37 || event.keyCode == 80) {
-            oTable.fnPageChange( 'previous' );
-          } else if (event.keyCode == 39 || event.keyCode == 78) {
-            oTable.fnPageChange( 'next' );
-          } else if (event.keyCode == 76) {
-            oTable.fnPageChange( 'last' );
-          } else if (event.keyCode == 70 || event.keyCode == 48) {
-            oTable.fnPageChange( 'first' );
-          } else if (event.keyCode > 48 && event.keyCode <= 57) {
-            oTable.fnPageChange(event.keyCode-49);
-          } else if (event.keyCode == 27) {
-            clearFilters();
-            doFilter();
-          } else if (event.keyCode == 83) {
-            console.log($('.dataTable_filter input'));
-            $('#dataTable_filter input').focus().select();
-          } 
-        } else {
-          if (event.keyCode == 27) {
-            $('#dataTable_filter input').blur();
-          }
         }
       });
       /*var keys = new KeyTable( {
@@ -581,6 +571,53 @@ $(document).ready(function() {
     }
     return $select;
   }
+  
+  $(document).keyup(function (event) {
+    $src = $(event.srcElement);
+    if (!$src.is("input")) {
+      if(event.keyCode == 72) {
+        var dialog = $('#dialog-message');
+        dialog.dialog( "isOpen" )? dialog.dialog('close'): dialog.dialog('open');
+      } else if (event.keyCode == 37 || event.keyCode == 80) { // p or left-arrow-key
+        oTable.fnPageChange( 'previous' );
+      } else if (event.keyCode == 39 || event.keyCode == 78) { // n or right-arrow-key
+        oTable.fnPageChange( 'next' );
+      } else if (event.keyCode == 76) { // l
+        oTable.fnPageChange( 'last' );
+      } else if (event.keyCode == 70 || event.keyCode == 48) { // f or 1
+        oTable.fnPageChange( 'first' );
+      } else if (event.keyCode > 48 && event.keyCode <= 57) {
+        oTable.fnPageChange(event.keyCode-49);
+      } else if (event.keyCode == 27) {
+        var dialog = $('#dialog-message');
+        if(dialog.dialog('isOpen')) {
+          dialog.dialog('close');
+        } else {
+          clearFilters();
+          doFilter();
+        }
+      } else if (event.keyCode == 83) {
+        $('#dataTable_filter input').focus().select();
+      } 
+    } else {
+      if (event.keyCode == 27) {
+        $('#dataTable_filter input').blur();
+      }
+    }
+  });
+  
+  $( "#dialog-message" ).dialog({
+    modal: true,
+    closeOnEscape: false,
+    autoOpen: false,
+    draggable: false,
+    resizable: false,
+    buttons: {
+      Ok: function() {
+        $( this ).dialog( "close" );
+      }
+    }
+  });
   
   var refreshListFilters = function(doNotFilter) {
     var filteredLists = calculateFilteredLists();
@@ -637,7 +674,6 @@ $(document).ready(function() {
       $.ajax({
         dataType: 'json',
         success: function(data, status) {
-          console.log(data, status);
           if (data && data.results && data.results.length>0 && data.results[0].profile_path) {
             //https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/w8zJQuN7tzlm6FY9mfGKihxp3Cb.jpg
             var src = 'https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185' + data.results[0].profile_path;
@@ -651,7 +687,6 @@ $(document).ready(function() {
   }).live('mouseleave', function() {
     $('#avatar').hide();
   });
-  
   
   $(".more").live("click", function() {
     $this = $(this);
