@@ -6,7 +6,7 @@ include_once("mongohq.php");
 include_once("rotten.php");
 include_once("Movie.php");
 include_once("omdb.php");
-include_once("response.php");
+include_once("Response.php");
 
 class API {
   private $db;
