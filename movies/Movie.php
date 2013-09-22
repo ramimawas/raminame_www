@@ -140,7 +140,9 @@ Class Movie extends ArrayObject{
   }
 }
 
-// not being used currently
+
+/*
+ * not being used currently
 class Cast {
   private $data = array();
   
@@ -184,5 +186,5 @@ class Cast {
    $this->data[] = $cast;
   }
 }
-
+*/
 ?>

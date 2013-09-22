@@ -185,7 +185,6 @@ class RottenTomatoes {
       $movie->ROTTEN_AUDIENCE_SCORE = $ratings['audience_score'];
 
       $cast_json = $this->runCastInfo($rotten_id);
-      $cast = new Cast();
       $full_cast = $cast_json['cast'];
       $cast_list = array();
       foreach($full_cast as $actor)
