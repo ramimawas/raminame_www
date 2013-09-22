@@ -335,7 +335,7 @@ $(document).ready(function() {
     });
     if (count>0) {
       $filters.append($('<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix" style="padding:5px;">')
-              .append($('<button style="width: 100%;" filter="clear">').text("Clear")));
+              .append($('<button class="filter_button" style="width: 100%;" filter="clear">').text("Clear")));
       $("button").button();
       $filters.show();
     } else {
