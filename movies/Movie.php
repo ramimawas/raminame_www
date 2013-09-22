@@ -16,6 +16,7 @@ Class Movie extends ArrayObject{
     // PERSONAL
     'RATING'     => array('rating', -1),
     'DATE_ADDED' => array('added', ''),
+    'TOP'        => array('top', 0),
     
     // GENERIC
     'TITLE'        => array('title', ''),
@@ -181,14 +182,6 @@ class Cast {
   }
   public function add($cast) {
    $this->data[] = $cast;
-  }
-  
-  public function addDetail($actor, $rotten_id=0, $main=true) {
-    $one = array();
-    $one[Cast::$FIELDS['NAME']] = $actor;
-    $one[Cast::$FIELDS['ROTTEN_ID']] = $rotten_id;
-    $one[Cast::$FIELDS['MAIN']] = $main;
-    $this->data[] = $one;
   }
 }
 

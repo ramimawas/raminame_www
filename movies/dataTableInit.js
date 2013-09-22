@@ -327,7 +327,7 @@ $(document).ready(function() {
         var $filter = $('<div class="filter">').append($('<label>').text(cap(key))),
           $list = $('<div>');
         $.each(value, function(index, item) {
-          $list.append($('<button filter="' + key +'" value="' + item + '">').text(cap(item)));
+          $list.append($('<button class="filter_button" filter="' + key +'" value="' + item + '">').text(cap(item)));
           count++;
         });
         $filters.append($filter.append($list));
@@ -588,7 +588,7 @@ $(document).ready(function() {
         oTable.fnPageChange( 'first' );
       } else if (event.keyCode > 48 && event.keyCode <= 57) {
         oTable.fnPageChange(event.keyCode-49);
-      } else if (event.keyCode == 27) {
+      } else if (event.keyCode == 27 || event.keyCode == 67) { // esc or c
         var dialog = $('#dialog-message');
         if(dialog.dialog('isOpen')) {
           dialog.dialog('close');
@@ -663,29 +663,34 @@ $(document).ready(function() {
     $(this).children('.external').remove();
   });
   
-  $('.preview').live('mouseenter', function() {
-    if (settings.previewAvatars) {
-      var offset_pop = $(this).offset();
-      http://api.themoviedb.org/3/search/person?api_key=a56c4c9722f90923979c4ed41b5c715f&query=Pete%20Travis
-      var data = {
-        api_key: 'a56c4c9722f90923979c4ed41b5c715f',
-        query: $(this).attr('value')
-      };
-      $.ajax({
-        dataType: 'json',
-        success: function(data, status) {
-          if (data && data.results && data.results.length>0 && data.results[0].profile_path) {
-            //https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/w8zJQuN7tzlm6FY9mfGKihxp3Cb.jpg
-            var src = 'https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185' + data.results[0].profile_path;
-            $("#avatar").empty().css({'left':offset_pop.left, 'top': offset_pop.top+20, 'zIndex': 100}).append($('<img class="avatar" src="' + src + '">')).show();
-          }
-        },
-        url: 'http://api.themoviedb.org/3/search/person',
-        data: data
-      });
-    }
-  }).live('mouseleave', function() {
-    $('#avatar').hide();
+  
+  $('.preview').hoverIntent({
+    sensitivity: 3, // number = sensitivity threshold (must be 1 or higher)
+    interval: 200, // number = milliseconds for onMouseOver polling interval
+    timeout: 0, // number = milliseconds delay before onMouseOut
+    over: function() {
+      if (settings.previewAvatars) {
+        var offset_pop = $(this).offset();
+        http://api.themoviedb.org/3/search/person?api_key=a56c4c9722f90923979c4ed41b5c715f&query=Pete%20Travis
+        var data = {
+          api_key: 'a56c4c9722f90923979c4ed41b5c715f',
+          query: $(this).attr('value')
+        };
+        $.ajax({
+          dataType: 'json',
+          success: function(data, status) {
+            if (data && data.results && data.results.length>0 && data.results[0].profile_path) {
+              //https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/w8zJQuN7tzlm6FY9mfGKihxp3Cb.jpg
+              var src = 'https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185' + data.results[0].profile_path;
+              $("#avatar").empty().css({'left':offset_pop.left, 'top': offset_pop.top+20, 'zIndex': 100}).append($('<img class="avatar" src="' + src + '">')).show();
+            }
+          },
+          url: 'http://api.themoviedb.org/3/search/person',
+          data: data
+        });
+      }
+    }, // function = onMouseOver callback (REQUIRED)
+    out: function() { $('#avatar').hide(); } // function = onMouseOut callback (REQUIRED)
   });
   
   $(".more").live("click", function() {
@@ -698,7 +703,7 @@ $(document).ready(function() {
       $div.css('display', 'inline');
   });
   
-  $("button").live("click", function() {
+  $(".filter_button").live("click", function() {
     var _this = $(this),
       filter = _this.attr("filter");
     filter == "clear"? clearFilters(): removeFilter(filter, _this.attr("value"));
