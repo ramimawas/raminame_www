@@ -36,7 +36,10 @@ Class Movie extends ArrayObject{
     // ROTTEN
     'ROTTEN_ID'             => array('rotten_id', -1),
     'ROTTEN_CRITICS_SCORE'  => array('rotten_critics_score', -1),
-    'ROTTEN_AUDIENCE_SCORE' => array('rotten_audience_score', -1)
+    'ROTTEN_AUDIENCE_SCORE' => array('rotten_audience_score', -1),
+      
+    // THEMOVIEDB.ORG
+    'MOVIEDB_ID'   => array('moviedb_id', -1)
   );
   
   function __construct($movie=null) {
@@ -80,6 +83,7 @@ Class Movie extends ArrayObject{
         case 'YEAR':
         case 'RUNTIME':
         case "ROTTEN_ID":
+        case 'MOVIEDB_ID':
         case "ROTTEN_CRITICS_SCORE":
         case "ROTTEN_AUDIENCE_SCORE":
           $value = intval($value);

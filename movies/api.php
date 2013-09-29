@@ -6,6 +6,7 @@ include_once("mongohq.php");
 include_once("rotten.php");
 include_once("Movie.php");
 include_once("omdb.php");
+include_once("themoviedb.php");
 include_once("Response.php");
 
 class API {
@@ -16,6 +17,7 @@ class API {
   function __construct() {
     $this->db = new MongoHQ(array('collectionName'=>'watched'));
     $this->rotten = new RottenTomatoes();
+    $this->themoviedb = new MOVIEDB();
   }
   
   public function mean() {
@@ -226,6 +228,9 @@ class API {
         $movie->ROTTEN_ID = $rotten_id;
       $movie->RATING = $rating;
       $this->rotten->augmentMovie($movie);
+      if(empty($movie))
+        throw new Exception("API", 400);
+      $this->themoviedb->augmentMovie($movie);
       if(empty($movie))
         throw new Exception("API", 400);
       $position = $this->db->count();

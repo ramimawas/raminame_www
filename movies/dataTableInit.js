@@ -14,7 +14,7 @@ $(document).ready(function() {
     //limitPerRequest: 399,
     //limitPerRequest: 1999,
     maxLimit: 2000,
-    //maxLimit: 125,
+    //maxLimit: 90,
     allOptionsValue: '*',
     maxVisibleCast: 2,
     maxVisibleGenres: 4,
@@ -361,7 +361,9 @@ $(document).ready(function() {
       var longList = false;
       var strArrayExtra = [];
       $.each(filterValue, function(index, value) {
-        if (filter == 'imdb_id' || filter == 'rotten_id') {
+        if (filter == 'title') {
+          strArray.push('<span class="titlehover" moviedb_id="' + obj.aData['moviedb_id'] +'">' + value + '</span>');
+        } else if (filter == 'imdb_id' || filter == 'rotten_id') {
           var url = filter == 'imdb_id' ? 'http://www.imdb.com/title/': 'http://www.rottentomatoes.com/m/';
           var img = value == -1 ? '': '<img src="movies/external.png" style="width: 30px">';
           strArray.push('<a href="' + url + value + '/" target="_blank"><span filter="' + filter +'" value="' + value + '">' + img + '</span></a>');
@@ -406,7 +408,7 @@ $(document).ready(function() {
   }
   
   var structure = [
-    {"sTitle": "Title", "mDataProp": "title", "sWidth": "100px"},
+    {"sTitle": "Title", "mDataProp": "title", "sWidth": "100px", fnRender: render('title')},
     {"sTitle": "Year", "mDataProp": "year", fnRender: render('year'), "sWidth": "65px"},
     {"sTitle": String.fromCharCode(0x2764), "mDataProp": "rating", fnRender: render('rating'), "sWidth": "10px"},
     //{"sTitle": "RT " + String.fromCharCode(0x27A6), "mDataProp": "rotten_critics_score", fnRender: render('rotten_critics_score'), "sWidth": "79px", "sType": "RT"},
@@ -422,6 +424,7 @@ $(document).ready(function() {
     //{"sTitle": "Title Type", "mDataProp": "type", fnRender: render('type'), "sWidth": "70px" },
     {"sTitle": "IMDB", "mDataProp": "imdb_id", "sWidth": "30px", fnRender: render('imdb_id'), bVisible: false},
     {"sTitle": "RT", "mDataProp": "rotten_id", "sWidth": "30px", fnRender: render('rotten_id'), bVisible: false},
+    {"sTitle": "MOVIEDB", "mDataProp": "moviedb_id", "sWidth": "30px", fnRender: render('moviedb_id'), bVisible: false},
     {"sTitle": "Top", "mDataProp": "top", "sWidth": "30px", fnRender: render('top'), bVisible: false},
     //{"sTitle": "Released", "mDataProp": "released", "sWidth": "170px"},
     //{"sTitle": "P", "mDataProp": "position", "sWidth": "75px"}
@@ -543,7 +546,7 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "bLengthChange": true,
         "bPaginate": true,
-        "aaSorting": [[12, "desc"]],
+        "aaSorting": [[13, "desc"]],
         "oLanguage": {
           "sZeroRecords": "No records to display"
         }
@@ -663,6 +666,36 @@ $(document).ready(function() {
     $(this).children('.external').remove();
   });
   
+ $('.titlehover').hoverIntent({
+    sensitivity: 3, // number = sensitivity threshold (must be 1 or higher)
+    interval: 200, // number = milliseconds for onMouseOver polling interval
+    timeout: 0, // number = milliseconds delay before onMouseOut
+    over: function() {
+      var id = $(this).attr('moviedb_id');
+      console.log($(this));
+     //$(this).css('color', 'red');
+      if (settings.previewAvatars) {
+        var offset_pop = $(this).offset();
+        http://api.themoviedb.org/3/search/person?api_key=a56c4c9722f90923979c4ed41b5c715f&query=Pete%20Travis
+        var data = {
+          api_key: 'a56c4c9722f90923979c4ed41b5c715f'
+        };
+        $.ajax({
+          dataType: 'json',
+          success: function(data, status) {
+            if (data && data.poster_path) {
+              //https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/w8zJQuN7tzlm6FY9mfGKihxp3Cb.jpg
+              var src = 'https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185' + data.poster_path;
+              $("#avatar").empty().css({'left':offset_pop.left, 'top': offset_pop.top+20, 'zIndex': 100}).append($('<img class="avatar" src="' + src + '">')).show();
+            }
+          },
+          url: 'http://api.themoviedb.org/3/movie/' + id,
+          data: data
+        });
+      }
+    }, // function = onMouseOver callback (REQUIRED)
+    out: function() { $('#avatar').hide(); } // function = onMouseOut callback (REQUIRED)
+  });
   
   $('.preview').hoverIntent({
     sensitivity: 3, // number = sensitivity threshold (must be 1 or higher)

@@ -7,6 +7,11 @@
   color: blue;
 }
 
+.titlehover:hover {
+  border-bottom: dotted 1px black;
+  cursor: default;
+}
+
 .link2 {
   display: inline;
   width: 100%;
