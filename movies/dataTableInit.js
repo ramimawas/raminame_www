@@ -245,7 +245,7 @@ $(document).ready(function() {
 
   var buildUrl = function(skip, limit) {
     url = [mongoDb.host, mongoDb.dbName, "collections", mongoDb.collectionName, "documents"].join("/") + "?" + buildQs(skip, limit)
-    console.log(url);
+    //console.log(url);
     return url;
   }
 
@@ -273,13 +273,13 @@ $(document).ready(function() {
   }
   
   var resetFilter = function(key) {
-    console.log('resetFilter: ' + key);
+    //console.log('resetFilter: ' + key);
     query[key] = null;
     buildFilterButttons();
   }
   
   var setFilter = function(key, value) {
-    console.log("setFilter: " + key + "/" + value);
+    //console.log("setFilter: " + key + "/" + value);
     if($.inArray(key, types.integer) != -1)
       value = parseInt(value);
     query[key] = [value];
@@ -287,7 +287,7 @@ $(document).ready(function() {
   }
 
   var addFilter = function(key, value, resetAll) {
-    console.log("addFilter: " + key + "/" + value + ", " + resetAll);
+    //console.log("addFilter: " + key + "/" + value + ", " + resetAll);
     if($.inArray(key, types.integer) != -1)
       value = parseInt(value);
     if (resetAll)
@@ -301,7 +301,7 @@ $(document).ready(function() {
   }
 
   var removeFilter = function(key, value) {
-    console.log("removeFilter: " + key + "/" + value);
+    //console.log("removeFilter: " + key + "/" + value);
     if (value == null) {
       query[key] = null;
     } else if (query[key] != null) {
@@ -319,7 +319,7 @@ $(document).ready(function() {
   }
 
   var buildFilterButttons = function () {
-    console.log("buildFilterButttons");
+    //console.log("buildFilterButttons");
     var $filters = $(tagIds.filters).html(""),
         count = 0;
     $.each(query, function(key, value) {
@@ -344,7 +344,7 @@ $(document).ready(function() {
   }
 
   var clearFilters = function () {
-    console.log("clearFilters:");
+    //console.log("clearFilters:");
     $(tagIds.filters).hide().html('');
     for(var key in query)
       query[key] = null;
@@ -458,7 +458,7 @@ $(document).ready(function() {
   }
   
   var multiload2 = function(skip, limit) {
-    console.log('Multiload2 skip: ', skip, ' limit: ', limit);
+    //console.log('Multiload2 skip: ', skip, ' limit: ', limit);
     var query = {
       method: 'list',
       skip: skip,
@@ -468,7 +468,7 @@ $(document).ready(function() {
   }
   
   var multiload = function(skip, limit) {
-    console.log('Multiload skip: ', skip, ' limit: ', limit);
+    //console.log('Multiload skip: ', skip, ' limit: ', limit);
     $.get(
       buildUrl(skip, limit+1),
       {},
@@ -672,8 +672,6 @@ $(document).ready(function() {
     timeout: 0, // number = milliseconds delay before onMouseOut
     over: function() {
       var id = $(this).attr('moviedb_id');
-      console.log($(this));
-     //$(this).css('color', 'red');
       if (settings.previewAvatars) {
         var offset_pop = $(this).offset();
         http://api.themoviedb.org/3/search/person?api_key=a56c4c9722f90923979c4ed41b5c715f&query=Pete%20Travis
