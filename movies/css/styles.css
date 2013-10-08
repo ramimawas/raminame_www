@@ -8,7 +8,7 @@
 }
 
 .titlehover:hover {
-  border-bottom: dotted 1px black;
+  border-bottom: dotted 1px violet;
   cursor: default;
 }
 

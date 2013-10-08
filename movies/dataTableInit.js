@@ -106,6 +106,8 @@ $(document).ready(function() {
     var field = map.field;
     var html = [];
     top[field] = data;
+    if (field == 'top')
+      html.push('<div><span class="link" filter="' + field + '" value="all" title="' + name + '">All</span></div>');
     $.each(data, function(index, value) {
       var name = value._id;
       var count = value.count;
@@ -128,7 +130,7 @@ $(document).ready(function() {
           50: '41 to 50'
         };
         if(name != 0)
-          html.push('<div><span class="link" filter="' + field + '" value="' + name + '" title="' + name + '">' + names[name] + '</span></div>');  
+          html.push('<div><span class="link" filter="' + field + '" value="' + name + '" title="' + name + '">' + names[name] + '</span></div>');
       } else
         html.push('<div><span class="link' + preview + '" filter="' + field + '" value="' + name + '" title="' + name + '">' + cap(name2) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
     });
@@ -196,7 +198,7 @@ $(document).ready(function() {
   };
   
   var fields = {
-    cast: 4,
+    cast: 8,
     directors: 2,
     genres: 1,
     year: 1,
@@ -376,7 +378,9 @@ $(document).ready(function() {
           var title =  filter == 'imdb_rating' ? 'IMDb' : 'Rotten Tomatoes';
           strArray.push('<div class="hover"><a style="border-bottom: 1px dotted violet; text-decoration: none;" href="' + url + '/" target="_blank"><span title="View on ' + title + '" >' + cap(value) + '</span></a></div>');
         } else {
-          var preview = '';
+          var preview = '', style = '';
+          if (filter == 'rating')
+            style = ' style="color: violet; font-weight:bold;"';
           if (filter == 'cast' && index == settings.maxVisibleCast)
             longList = true;
           else if (filter == 'directors' && index == settings.maxVisibleDirectors)
@@ -388,7 +392,7 @@ $(document).ready(function() {
           var text = cap(value);
           //if (filter == 'directors' || filter == 'cast')
             //text = text.replace(/\s+/g, '_');
-          var valueHtml = '<span class="link' + preview + '" filter="' + filter +'" value="' + value + '">' + text + '</span>';
+          var valueHtml = '<span class="link' + preview + '" filter="' + filter +'" value="' + value + '" ' + style + '>' + text + '</span>';
           if (longList)
             strArrayExtra.push(valueHtml);
           else
@@ -666,6 +670,7 @@ $(document).ready(function() {
     $(this).children('.external').remove();
   });
   
+  var count = 0;
  $('.titlehover').hoverIntent({
     sensitivity: 3, // number = sensitivity threshold (must be 1 or higher)
     interval: 200, // number = milliseconds for onMouseOver polling interval
@@ -685,6 +690,11 @@ $(document).ready(function() {
               //https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/w8zJQuN7tzlm6FY9mfGKihxp3Cb.jpg
               var src = 'https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185' + data.poster_path;
               $("#avatar").empty().css({'left':offset_pop.left, 'top': offset_pop.top+20, 'zIndex': 100}).append($('<img class="avatar" src="' + src + '">')).show();
+              var snap_count = ++count;
+              setTimeout(function() {
+                if (snap_count == count)
+                  $('#avatar').hide();
+              }, 5000);
             }
           },
           url: 'http://api.themoviedb.org/3/movie/' + id,
@@ -694,6 +704,10 @@ $(document).ready(function() {
     }, // function = onMouseOver callback (REQUIRED)
     out: function() { $('#avatar').hide(); } // function = onMouseOut callback (REQUIRED)
   });
+  
+  var clear =  function() {
+    
+  }
   
   $('.preview').hoverIntent({
     sensitivity: 3, // number = sensitivity threshold (must be 1 or higher)
@@ -714,6 +728,11 @@ $(document).ready(function() {
               //https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/w8zJQuN7tzlm6FY9mfGKihxp3Cb.jpg
               var src = 'https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185' + data.results[0].profile_path;
               $("#avatar").empty().css({'left':offset_pop.left, 'top': offset_pop.top+20, 'zIndex': 100}).append($('<img class="avatar" src="' + src + '">')).show();
+              var snap_count = ++count;
+              setTimeout(function() {
+                if (snap_count == count)
+                  $('#avatar').hide();
+              }, 5000);
             }
           },
           url: 'http://api.themoviedb.org/3/search/person',
@@ -745,11 +764,17 @@ $(document).ready(function() {
     var _this = $(this),
       filter = _this.attr("filter"),
       value = _this.attr("value");
-    if(settings.resetAllFiltersFlag) {
+    if (filter == 'top' && value == 'all') {
+        addFilter(filter, 10);
+        addFilter(filter, 20);
+        addFilter(filter, 30);
+        addFilter(filter, 40);
+        addFilter(filter, 50);
+    } else if(settings.resetAllFiltersFlag) {
       clearFilters();
       setFilter(filter, value);
     } else  if(settings.cumulativeFiltersFlag) {
-      addFilter(filter, value);
+        addFilter(filter, value);
     } else {
       setFilter(filter, value);
     }
