@@ -631,7 +631,7 @@ $(document).ready(function() {
     doNotFilter = doNotFilter || '';
     $("thead th").each( function (i) {
       var filter = structure[i].mDataProp;
-      if(doNotFilter != filter) {
+      if(doNotFilter != filter && _.indexOf(['year', 'rating', 'rotten_critics_score', 'imdb_rating', 'directors', 'genres'], filter) != -1) {
         $this = $(this);
         $this.children('select').remove();
         var $select = fnCreateSelect(filter, _.sortBy(_.unique(_.flatten(_.pluck(filteredLists[filter], filter))), function(v){return v;}));
