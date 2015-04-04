@@ -688,7 +688,7 @@ $(document).ready(function() {
           success: function(data, status) {
             if (data && data.poster_path) {
               //https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/w8zJQuN7tzlm6FY9mfGKihxp3Cb.jpg
-              var src = 'https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185' + data.poster_path;
+              var src = 'https://image.tmdb.org/t/p/w185' + data.poster_path;
               $("#avatar").empty().css({'left':offset_pop.left, 'top': offset_pop.top+20, 'zIndex': 100}).append($('<img class="avatar" src="' + src + '">')).show();
               var snap_count = ++count;
               setTimeout(function() {
