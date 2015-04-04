@@ -24,7 +24,7 @@ $(document).ready(function() {
   var paint = function(data) {
     console.log(data);
     $ids.imdbText.val(data.imdb_id);
-    $ids.imdb.attr('src', 'http://www.imdb.com/title/' + data.imdb_id);
+    $ids.imdb.attr('href', 'http://www.imdb.com/title/' + data.imdb_id);
     $ids.rottenText.val(data.rotten_id);
     console.log('http://www.rottentomatoes.com/m/' + data.rotten_id);
     $ids.rotten.attr('src', 'http://www.rottentomatoes.com/m/' + data.rotten_id);
