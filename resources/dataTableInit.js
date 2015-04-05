@@ -367,8 +367,7 @@ $(document).ready(function() {
           strArray.push('<span class="titlehover" moviedb_id="' + obj.aData['moviedb_id'] +'">' + value + '</span>');
         } else if (filter == 'imdb_id' || filter == 'rotten_id') {
           var url = filter == 'imdb_id' ? 'http://www.imdb.com/title/': 'http://www.rottentomatoes.com/m/';
-          var img = value == -1 ? '': '<img src="movies/external.png" style="width: 30px">';
-          strArray.push('<a href="' + url + value + '/" target="_blank"><span filter="' + filter +'" value="' + value + '">' + img + '</span></a>');
+          strArray.push('<a href="' + url + value + '/" target="_blank"><span filter="' + filter +'" value="' + value + '"></span></a>');
         } else if (filter == 'added') {
           strArray.push(new Date(value*1000).toLocaleDateString());
         } else if (filter == 'imdb_rating' || filter == 'rotten_critics_score') {
