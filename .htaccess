@@ -2,3 +2,7 @@ RewriteEngine on
 RewriteCond %{HTTP_HOST} ^rami\.name$
 RewriteRule (.*) http://www.rami.name/$1 [R=301,L]
 RewriteRule ^$ http://goo.gl/Tqjjl [L]
+
+Options -Indexes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
