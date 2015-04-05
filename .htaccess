@@ -1,4 +1,4 @@
 RewriteEngine on
 RewriteCond %{HTTP_HOST} ^rami\.name$
 RewriteRule (.*) http://www.rami.name/$1 [R=301,L]
-RewriteRule ^$ movies.html [L]
+RewriteRule ^$ http://goo.gl/Tqjjl [L]
