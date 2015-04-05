@@ -1,0 +1,997 @@
+N,Movie Title,Release,Rate,Genre 1,Genre 2,Genre 3,Genre 4,Genres
+1,Tin Man,2007,3,Action/Adventure,Fantasy/Sci-Fi,,,Adventure | Fantasy | Sci-Fi
+2,Wonders of the Solar System,2010,4,,,,Documentary,Documentary
+3,(500) Days of Summer,2009,4,Comedy,Drama,Romance,,Comedy | Drama | Romance
+4,10 Things I Hate About You,1999,4,Comedy,,Romance,,Comedy | Romance
+5,101 Dalmatians,1996,3,Comedy,,Family,,Family | Comedy | Adventure
+6,102 Dalmatians,2000,3,Comedy,,Family,,Comedy | Family
+7,12 Angry Men,1957,5,,Drama,,,Drama
+8,12 Dates of Christmas,2011,2,Comedy,Drama,Romance,,Comedy | Drama | Romance
+9,16 Blocks,2006,4,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Thriller
+10,17 Again,2009,3,Comedy,Drama,Romance,,Comedy | Drama | Romance
+11,2 Fast 2 Furious,2003,3,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Thriller
+12,20000 Leagues Under the Sea,1954,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Drama | Family | Sci-Fi
+13,2001: A Space Travesty,2001,3,Comedy,Fantasy/Sci-Fi,,,Comedy | Sci-Fi
+14,21,2008,3,,Drama,,,Drama
+15,21 Grams,2003,5,,Drama,Crime,,Crime | Drama | Thriller
+16,27 Dresses,2008,3,Comedy,,Romance,,Comedy | Romance
+17,28 Days Later...,2002,4,,Fantasy/Sci-Fi,Horror,,Horror | Sci-Fi | Thriller
+18,28 Weeks Later ,2007,4,,,Horror,,Horror | Thriller 
+19,3 Men and a Little Lady,1990,3,Comedy,Drama,Family,,Comedy | Drama | Family | Romance
+20,3:10 to Yuma,2007,5,Action/Adventure,Drama,Crime,Western,Action | Crime | Drama | Western
+21,300,2006,4,Action/Adventure,Drama,War,,Action | Drama | History | War
+22,40 days and 40 nights,2002,3,Comedy,Drama,Romance,,Comedy | Romance | Drama
+23,50 First Dates,2004,3,Comedy,,Romance,,Comedy | Romance
+24,8 Mile,2002,3,,Drama,Music,,Drama | Music 
+25,A Beautiful Mind,2001,5,,Drama,,Biography,Biography | Drama
+26,A Bug's Life,1998,5,Comedy,,Family,Animation,Family | Animation | Comedy | Adventure
+27,A Christmas Carol,2009,3,Comedy,Drama,Family,Animation,Animation | Comedy | Drama | Family | Fantasy | Horror | Sci-Fi
+28,A Few Good Men,1992,4,,Drama,Crime,,Crime | Drama | Mystery | Thriller
+29,A Guy Thing,2003,3,Comedy,,Romance,,Comedy | Romance
+30,A Knight's Tale,2001,3,Action/Adventure,,Romance,,Action | Adventure | Comedy | Romance
+31,A Mighty Heart,2007,3,,Drama,,Biography,Biography | Drama | History | Thriller
+32,A Serious Man,2009,4,,Drama,,,Drama
+33,A Time to Kill,1996,3,,Drama,Crime,,Crime | Drama | Thriller
+34,About a Boy,2002,5,Comedy,Drama,Romance,,Comedy | Drama | Romance
+35,Accepted,2006,4,Comedy,,,,Comedy
+36,Ace Ventura: Pet Detective,1994,3,Action/Adventure,,,,Action | Comedy | Mystery | Thriller
+37,Ace Ventura: When Nature Calls,1995,2,Comedy,,,,Action | Adventure | Comedy | Mystery
+38,Adventureland,2009,4,Comedy,Drama,Romance,,Comedy | Drama | Romance
+39,The Adventures of Tintin,2011,5,Action/Adventure,,Family,Animation,Animation | Action | Adventure | Family | Mystery
+40,After School Special,2005,2,Comedy,,,,Comedy
+41,Air Bud,1997,2,Comedy,,Family,Sport,Comedy | Family | Sport
+42,Air Force One,1997,4,Action/Adventure,Drama,,,Action | Thriller | Drama
+43,Airheads,1994,4,Comedy,,Music,,Comedy | Music | Crime
+44,Airplane II: The Sequel,1982,3,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Romance | Sci-Fi
+45,Airplane!,1980,3,Comedy,,Romance,,Comedy | Romance
+46,Airport,1970,3,,Drama,,,Drama | Thriller
+47,Destiny,1997,5,Comedy,Drama,Romance,Foreign,Comedy | Drama | History | Musical | Romance
+48,Aladdin,1992,5,Action/Adventure,Fantasy/Sci-Fi,Musical,Animation,Animation | Adventure | Family | Fantasy | Musical | Romance
+49,Alexander,2004,4,Action/Adventure,Drama,War,Biography,Action | Adventure | Biography | Drama | Romance | War
+50,Alice in Wonderland,1951,4,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Family | Fantasy | Musical
+51,Alice in Wonderland,2010,4,Action/Adventure,Fantasy/Sci-Fi,Family,, Adventure | Family | Fantasy
+52,Alien,1979,3,,Fantasy/Sci-Fi,Horror,,Horror | Sci-Fi
+53,Aliens,1986,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller 
+54,Along Came Polly,2004,4,Comedy,,Romance,,Comedy | Romance
+55,Alvin and the Chipmunks,2007,2,Comedy,Fantasy/Sci-Fi,Music,,Comedy | Family | Fantasy | Music
+56,American Beauty,1999,5,,Drama,,,Drama
+57,American Gangster,2007,5,,Drama,Crime,,Crime | Drama
+58,American Pie,1999,4,Comedy,,Romance,,Comedy | Romance
+59,American Pie 2,2001,3,Comedy,,Romance,,Comedy | Romance
+60,American Pie Presents The Naked Mile,2006,3,Comedy,,,,Comedy
+61,American Wedding,2003,3,Comedy,,Romance,,Comedy | Romance
+62,Amistad,1997,4,,Drama,,,Drama | History | Mystery
+63,Anaconda,1997,2,Action/Adventure,,Horror,,Thriller | Horror | Adventure | Action
+64,Analyze This,1999,5,Comedy,,Crime,,Comedy | Crime
+65,Angels & Demons,2009,4,,Drama,Crime,,Mystery | Thriller  
+66,Angels in the Outfield,1994,2,Comedy,Drama,Family,Sport,Comedy | Drama | Family | Fantasy | Sport
+67,Anger Management,2003,3,Comedy,,Romance,,Comedy | Romance
+68,Animal Farm,1954,4,,Drama,,Animation,Animation | Drama
+69,Antz,1998,4,Action/Adventure,,Family,Animation,Animation | Adventure | Comedy | Family
+70,Apocalypto,2006,4,Action/Adventure,Drama,,,Action | Adventure | Drama
+71,Appaloosa,2008,5,,Drama,Crime,Western,Crime | Drama | Western
+72,Armageddon,1998,4,Action/Adventure,Fantasy/Sci-Fi,Romance,,Action | Romance | Sci-Fi | Thriller
+73,A.I. Artificial Intelligence,2001,3,Action/Adventure,Drama,,,Adventure | Drama | Sci-Fi
+74,As Good as It Gets,1997,5,Comedy,Drama,Romance,,Comedy | Drama | Romance 
+75,Asterix and Obelix Meet Cleopatra,2002,5,Comedy,Fantasy/Sci-Fi,Family,Foreign,Adventure | Comedy | Family | Fantasy
+76,Atlantis: The Lost Empire ,2001,3,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Family | Sci-Fi
+77,Austin Powers: International Man of Mystery,1997,3,Comedy,,Crime,,Action | Adventure | Comedy | Crime
+78,Austin Powers: The Spy Who Shagged Me,1999,3,Comedy,,Crime,,Action | Adventure | Comedy | Crime
+79,Avatar,2009,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi
+80,AVP: Alien vs. Predator,2004,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+81,Babylon A.D.,2008,1,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+82,Back to the Future,1985,5,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Comedy | Family | Sci-Fi
+83,Back to the Future Part II,1989,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Comedy | Family | Sci-Fi | Thriller
+84,Back to the Future Part III,1990,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Comedy | Family | Sci-Fi | Thriller
+85,Bad Boys,1996,3,Action/Adventure,,Crime,,Action | Comedy | Crime | Thriller
+86,Bad Boys II,2003,3,Action/Adventure,,Crime,,Action | Comedy | Crime | Thriller
+87,Bad Santa,2003,4,Comedy,,Crime,,Comedy | Crime
+88,Balls of Fury,2007,3,Comedy,,Crime,Sport,Action | Comedy | Crime | Romance | Sport
+89,Bambi,1942,3,,Drama,Family,Animation,Animation | Drama | Family | Romance
+90,Batman,1989,3,Action/Adventure,,Crime,,Action | Crime | Thriller
+91,Batman Begins,2005,5,Action/Adventure,,Crime,,Action | Adventure | Crime | Thriller
+92,Batman Forever,1995,3,Action/Adventure,Fantasy/Sci-Fi,Crime,,Action | Crime | Fantasy | Romance | Thriller
+93,Batman Returns,1992,3,Action/Adventure,,Crime,,Action | Crime | Thriller
+94,Batman: Mask of the Phantasm,1993,4,Action/Adventure,,Crime,Animation,Animation | Action | Crime | Family | Mystery | Romance | Thriller
+95,Battle Los Angeles,2011,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+96,,2000,2,Action/Adventure,,Family,,Adventure | Family
+97,Beauty and the Beast,1991,5,,Drama,Musical,Animation,Animation | Drama | Family | Fantasy | Musical | Romance
+98,Beavis and Butt-Head Do America,1996,3,Comedy,,Crime,Animation,Animation | Adventure | Comedy | Crime
+99,Because I Said So,2006,2,Comedy,,Romance,,Comedy | Romance
+100,Bedazzled,2000,5,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Fantasy | Romance
+101,Bedazzled,1967,4,Comedy,,Romance,,Comedy | Fantasy | Romance
+102,Bedtime Stories,2008,2,Comedy,,Family,,Comedy | Family | Fantasy
+103,Bee Movie,2007,5,Comedy,,Family,Animation,Animation | Comedy | Family
+104,Beetlejuice,1988,4,Comedy,Fantasy/Sci-Fi,,,Comedy | Fantasy
+105,Behind Enemy Lines,2001,4,Action/Adventure,Drama,War,,Action | War | Drama | Thriller 
+106,Being John Malkovich,1999,5,Comedy,Drama,,,Comedy | Drama | Fantasy
+107,Beverly Hills Chihuahua,2008,2,Comedy,Drama,Family,,Adventure | Comedy | Drama | Family | Romance
+108,Beowulf,2007,4,Action/Adventure,Fantasy/Sci-Fi,,Animation,Animation | Action | Adventure | Fantasy
+109,Beyond a Reasonable Doubt,2009,3,,Drama,Crime,,Crime | Drama | Mystery | Thriller
+110,Big,1988,4,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Drama | Family | Fantasy | Romance
+111,Big Daddy,1999,2,Comedy,Drama,,,Comedy | Drama
+112,Big Fat Liar,2002,2,Comedy,,Family,,Adventure | Comedy | Family
+113,Bikur Ha-Tizmoret (Band's Visit),2007,3,Comedy,Drama,,Foreign,Comedy | Drama
+114,Billy Madison,1995,3,Comedy,,Romance,,Comedy | Romance
+115,Black Hawk Down,2001,5,Action/Adventure,Drama,War,,Action | Drama | History | War
+116,Black Sheep,1996,3,Comedy,,,,Comedy
+117,Blade,1998,3,Action/Adventure,,Horror,,Action | Horror | Thriller
+118,Blades of Glory,2007,3,Comedy,,,Sport,Comedy | Sport
+119,Blow,2001,4,,Drama,Crime,Biography,Biography | Crime | Drama
+120,Blue Streak,1999,3,Comedy,,Crime,,Action | Comedy | Crime | Thriller
+121,Body of Lies,2008,4,Action/Adventure,Drama,,,Action | Drama | Thriller
+122,Bolt,2008,5,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Comedy | Family | Fantasy
+123,Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan,2006,4,Comedy,,,,Comedy
+124,Bowfinger,1999,5,Comedy,,,,Comedy
+125,Braveheart,1995,5,Action/Adventure,Drama,War,Biography,Action | Biography | Drama | War
+126,Bride of Chucky,1998,2,Comedy,,Horror,,Comedy | Horror | Romance | Thriller
+127,Bridge to Terabithia,2007,2,Action/Adventure,Drama,Family,,Adventure | Drama | Family | Fantasy
+128,Bridget Jones: The Edge of Reason,2004,4,Comedy,,Romance,,Comedy | Romance
+129,Bridget Jones's Diary,2001,5,Comedy,Drama,Romance,,Comedy | Drama | Romance
+130,Bring It On,2000,2,Comedy,,,Sport,Comedy | Sport
+131,Bringing Down the House,2003,3,Comedy,,,,Comedy
+132,Brother Bear,2003,3,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Family | Fantasy
+133,Bruce Almighty,2003,4,Comedy,Fantasy/Sci-Fi,,,Comedy | Fantasy
+134,Brüno,2009,2,Comedy,,,,Comedy
+135,Burn After Reading,2008,4,Comedy,Drama,Crime,,Comedy | Crime | Drama
+136,Cars,2006,4,Action/Adventure,,Family,Animation,Animation | Adventure | Comedy | Family
+137,Casino Royale,2006,4,Action/Adventure,,,,Action | Adventure | Thriller
+138,Cast Away,2000,5,Action/Adventure,Drama,,,Adventure | Drama
+139,Catch Me If You Can,2002,5,,Drama,Crime,Biography,Biography | Crime | Drama
+140,Charlie and the Chocolate Factory,2005,5,Comedy,Fantasy/Sci-Fi,Family,,Adventure | Comedy | Family | Fantasy
+141,Charlie Wilson's War ,2007,5,Comedy,Drama,,Biography,Biography | Comedy | Drama
+142,Charlie's Angels,2000,3,Action/Adventure,,Crime,,Action | Adventure | Comedy | Thriller
+143,Charlie's Angels: Full Throttle,2003,3,Action/Adventure,,Crime,,Action | Adventure | Comedy | Crime | Thriller
+144,Charlotte's Web,2006,2,Comedy,Fantasy/Sci-Fi,Family,,Comedy | Family | Fantasy
+145,Chelsea F.C. Centenary,2005,4,,,,Sport,Sport
+146,Chicago,2002,5,Comedy,Drama,Musical,,Comedy | Crime | Drama | Musical
+147,Children of Men,2006,4,Action/Adventure,Fantasy/Sci-Fi,,, Adventure | Drama | Mystery | Sci-Fi | Thriller
+148,Chinatown,1974,5,,Drama,Crime,,Crime | Drama | Mystery | Thriller 
+149,Cinderella,1950,3,,Fantasy/Sci-Fi,Family,Animation,Animation | Family | Fantasy | Musical | Romance
+150,Cinderella Man,2005,5,,Drama,,Sport,Biography | Drama | Sport
+151,City of Ember,2008,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Sci-Fi
+152,Clash of the Titans,2010,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+153,Clash of the Titans,1981,2,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Fantasy | Family | Romance
+154,Click,2006,3,Comedy,Fantasy/Sci-Fi,,,Comedy | Drama | Fantasy
+155,Clockstoppers ,2002,2,Action/Adventure,Fantasy/Sci-Fi,,,Adventure | Sci-Fi | Thriller
+156,Cloudy With a Chance of Meatballs,2009,4,Comedy,,Family,Animation,Animation | Comedy | Family
+157,Cloverfield,2008,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Mystery | Sci-Fi | Thriller
+158,Clue,1985,4,Comedy,,Crime,,Comedy | Crime | Mystery | Thriller
+159,Clueless,1995,3,Comedy,,Romance,,Comedy | Romance
+160,Collateral Damage,2001,3,Action/Adventure,,,,Action | Thriller
+161,Like Water for Chocolate,1992,4,,Drama,Romance,Foreign,Drama | Romance
+162,Con Air,1997,4,Action/Adventure,,Crime,,Action | Crime | Thriller
+163,Congo,1995,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Mystery | Sci-Fi
+164,Conspiracy Theory,1997,5,,Drama,Crime,,Crime | Mystery | Romance | Thriller
+165,Cool Runnings,1993,3,Comedy,,,Sport,Adventure | Comedy | Sport
+166,Coraline,2009,5,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Family | Fantasy
+167,Crash,2004,5,,Drama,Crime,,Drame | Crime
+168,Cruel Intentions,1999,3,,Drama,Romance,,Drama | Romance | Thriller
+169,Crusoe,1989,3,,Drama,,,Drama
+170,Cube,1997,3,,Fantasy/Sci-Fi,Horror,,Drama | Horror | Mystery | Sci-Fi | Thriller
+171,Curse of the Golden Flower,2006,4,Action/Adventure,Drama,Romance,Foreign,Action | Drama | Romance
+172,Daredevil,2003,4,Action/Adventure,Fantasy/Sci-Fi,Crime,,Action | Crime | Fantasy | Thriller
+173,Date Night,2010,4,Comedy,,Crime,,Comedy | Crime | Romance | Thriller
+174,Deadly Invasion: The Killer Bee Nightmare,1995,2,,,Horror,,Horror | Thriller
+175,Death Race,2008,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+176,Deep Blue Sea,1999,3,Action/Adventure,,Horror,,Action | Horror | Thriller
+177,Deep Impact,1998,4,,Fantasy/Sci-Fi,,,Sci-Fi | Thriller
+178,Deep Rising,1998,3,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Horror | Sci-Fi | Thriller
+179,Downfall,2004,5,,Drama,War,Foreign,Biography | Drama | History | War
+180,Desperado,1995,4,Action/Adventure,,Crime,,Action | Crime | Thriller
+181,Despicable Me,2010,3,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Fantasy
+182,Devil's Pond,2003,3,,Drama,,,Drama | Thriller
+183,Diabolique,1996,4,,Drama,Horror,,Drama | Horror | Thriller | Mystery
+184,The Motorcycle Diaries,2004,4,Action/Adventure,Drama,,Foreign,Adventure | Biography | Drama
+185,Die Another Day,2002,3,Action/Adventure,,,,Action | Adventure | Thriller
+186,The Counterfeiters,2007,4,,Drama,Crime,Foreign,Crime | Drama | War
+187,Die Hard,1988,3,Action/Adventure,,,,Action | Thriller
+188,Die Hard 2,1990,3,Action/Adventure,,Crime,,Action | Crime | Thriller
+189,Die Hard: With a Vengeance,1995,3,Action/Adventure,,Crime,,Action | Crime | Thriller
+190,Dinner for Schmucks,2010,3,Comedy,,,,Comedy
+191,Dinosaur,2000,3,Action/Adventure,,Family,Animation,Animation | Adventure | Family | Thriller
+192,Dirty War,2004,2,,Drama,,,Thriller | Drama
+193,Disaster Movie,2008,1,Comedy,,,,Comedy
+194,District 9,2009,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Drama | Sci-Fi | Thriller
+195,Doctor Dolittle,1998,2,Comedy,,Family,,Family | Comedy
+196,Dodgeball: A True Underdog Story,2004,3,Comedy,,,Sport,Comedy | Sport
+197,Donnie Brasco,1997,4,,Drama,Crime,,Crime | Drama | Thriller
+198,Doom,2005,2,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Horror | Sci-Fi | Thriller
+199,Double Jeopardy,1999,4,,Drama,Crime,,Thriller | Drama | Mystery | Crime
+200,Dr. Dolittle 2,2001,2,Comedy,,Family,,Comedy | Family | Romance
+201,Dr. Jekyll and Ms. Hyde,1995,3,Comedy,,Horror,,Comedy | Horror
+202,Dracula,1992,3,,Drama,Horror,,Drama | Fantasy | Horror | Romance | Thriller
+203,Dragonfly,2002,3,,Drama,Romance,, Drama | Fantasy | Mystery | Romance
+204,Due Date,2010,3,Comedy,Drama,,,Comedy | Drama
+205,Dumb & Dumber,1994,3,Comedy,,Romance,,Adventure | Comedy | Romance
+206,Dumbo,1941,3,,Drama,Musical,Animation,Drama | Family | Animation | Musical
+207,Duplex,2003,4,Comedy,,,,Comedy
+208,E.T. the Extra-Terrestrial,1982,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Drama | Family | Fantasy | Sci-Fi
+209,Eagle Eye,2008,3,Action/Adventure,,Crime,,Action | Crime | Mystery | Thriller
+210,Eastern Promises,2007,5,,Drama,Crime,,Crime | Drama | Mystery | Thriller
+211,Eat Pray Love,2010,3,,Drama,Romance,,Drama | Romance
+212,Edward Scissorhands,1990,5,Comedy,,Romance,,Comedy | Crime | Drama | Fantasy | Romance
+213,Eight Days a Week,1997,3,Comedy,,,,Comedy
+214,The Island,2007,5,Action/Adventure,,,Foreign,Action | Biography
+215,Pan's Labyrinth,2005,5,,Drama,War,Foreign,Drama | Fantasy | Mystery | War
+216,Elf,2003,3,Comedy,Fantasy/Sci-Fi,Family,,Comedy | Family | Fantasy
+217,Elizabeth,1998,3,,Drama,Romance,Biography,Biography | Drama | History | Romance
+218,Elsellem wel te'ban,2001,2,,Drama,Romance,Foreign,Drama | Romance
+219,Employee of the Month,2006,3,Comedy,,Romance,,Comedy | Romance
+220,Enchanted,2007,4,Comedy,Fantasy/Sci-Fi,Musical,,Comedy | Family | Fantasy | Musical
+221,End of Days,1999,4,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Fantasy | Horror | Mystery | Thriller
+222,Enemy of the State,1998,4,Action/Adventure,Drama,,,Action | Drama | Thriller
+223,Entrapment,1999,5,,,Crime,,Crime | Romance | Thriller
+224,Envy,2004,2,Comedy,,,,Comedy
+225,Epic Movie,2007,1,Comedy,,,,Adventure | Comedy
+226,Equilibrium,2002,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Drama | Sci-Fi | Thriller
+227,Eragon,2006,2,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Family | Fantasy
+228,Eternal Sunshine of the Spotless Mind,2004,4,,Drama,Romance,,Drama | Romance
+229,EuroTrip,2004,3,Comedy,,,,Comedy | Adventure
+230,Evan Almighty,2007,3,Comedy,Fantasy/Sci-Fi,,,Comedy | Fantasy
+231,Evening,2007,3,,Drama,Romance,,Drama | Romance
+232,Evita,1996,3,,Drama,Musical,Biography,Biography | Drama | Musical
+233,Evolution,2001,3,Comedy,Fantasy/Sci-Fi,,,Comedy | Sci-Fi
+234,Exit Wounds,2001,3,Action/Adventure,Drama,Crime,,Action | Comedy | Crime | Drama | Thriller
+235,Fahrenheit 9/11,2004,5,Comedy,Drama,,Documentary,Documentary | Comedy | Drama | History
+236,Fantasia,1940,4,,Fantasy/Sci-Fi,Music,,Animation | Family | Fantasy | Music
+237,Fantastic Four,2005,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi
+238,Father of the Bride Part II,1995,3,Comedy,,Family,,Comedy | Family | Romance
+239,Fever Pitch,2005,5,Comedy,Drama,Romance,Sport,Comedy | Drama | Romance | Sport
+240,Fight Club,1999,5,,Drama,,,Drama | Mystery | Thriller
+241,Final Destination,2000,4,,Fantasy/Sci-Fi,Horror,,Horror | Thriller | Mystery | Fantasy
+242,Final Destination 2,2003,3,,Fantasy/Sci-Fi,Horror,,Horror | Thriller | Fantasy
+243,Finding Nemo,2003,5,Action/Adventure,,,Animation,Animation | Adventure | Comedy | Family
+244,Finding Neverland,2004,4,,Drama,Family,Biography,Biography | Drama | Family
+245,Fired Up!,2009,1,Comedy,,,,Comedy
+246,Flags of Our Fathers,2006,4,Action/Adventure,Drama,War,,Action | Drama | History | War
+247,Flightplan,2005,4,Action/Adventure,,,,Action | Mystery | Thriller
+248,Flubber,1997,3,Comedy,Fantasy/Sci-Fi,Family,,Family | Comedy | Fantasy
+249,Flushed Away,2006,4,Comedy,,Family,Animation,Animation | Adventure | Comedy | Family
+250,For Your Eyes Only,1981,4,Action/Adventure,,,,Action | Adventure
+251,Forgetting Sarah Marshall,2008,3,Comedy,Drama,Romance,,Comedy | Drama | Romance
+252,Forrest Gump,1994,5,Comedy,Drama,Romance,,Comedy | Drama | Romance
+253,Four Brothers,2005,4,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Mystery | Thriller
+254,Frailty,2001,3,,Drama,Crime,,Crime | Drama | Thriller
+255,Freaky Friday,2003,3,Comedy,Fantasy/Sci-Fi,Family,,Comedy | Family | Fantasy
+256,Fred Claus,2007,3,Comedy,Fantasy/Sci-Fi,Family,,Comedy | Family | Fantasy
+257,Free Willy,1993,3,Action/Adventure,Drama,Family,,Family | Adventure | Drama
+258,Frida,2002,3,,Drama,Romance,Biography,Biography | Drama | Romance
+259,Friday,1995,3,Comedy,Drama,,,Comedy | Drama
+260,Futurama: Bender's Big Score,2007,4,Comedy,Fantasy/Sci-Fi,,Animation,Animation | Action | Adventure | Comedy | Romance | Sci-Fi
+261,Futurama: Bender's Game,2008,5,Comedy,Fantasy/Sci-Fi,,Animation,Animation | Comedy | Sci-Fi
+262,Futurama: The Beast with a Billion Backs,2008,4,Comedy,Fantasy/Sci-Fi,,Animation,Animation | Comedy | Sci-Fi
+263,G.I. Jane,1997,4,Action/Adventure,Drama,,,Action | Drama
+264,G.I. Joe: The Rise of Cobra,2009,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+265,Ponyo,2008,5,Action/Adventure,Fantasy/Sci-Fi,Family,Animation, Animation | Adventure | Family | Fantasy
+266,George of the Jungle,1997,3,Comedy,,Family,,Action | Adventure | Comedy | Family | Romance
+267,Get Him to the Greek,2010,4,Comedy,,,,Comedy
+268,Get Smart,2008,3,Comedy,,,,Action | Adventure | Comedy
+269,Getting Played,2005,3,Comedy,,Romance,,Comedy | Romance
+270,Ghostbusters,1984,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Comedy | Sci-Fi
+271,Ghost Rider,2007,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Fantasy | Thriller
+272,Ghost Town,2008,4,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Fantasy | Romance
+273,Ghostbusters II,1989,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Comedy | Fantasy | Sci-Fi
+274,Girl with a Pearl Earring,2003,4,,Drama,Romance,Biography,Biography | Drama | Romance
+275,"Girl, Interrupted",1999,3,,Drama,,Biography,Biography | Drama
+276,Gladiator,2000,5,Action/Adventure,Drama,War,,Action | Adventure | Drama | War
+277,Glory Road,2006,3,,Drama,,Sport, Drama | Sport
+278,Gnomeo & Juliet,2011,3,Comedy,Fantasy/Sci-Fi,Romance,Animation,Animation | Adventure | Comedy | Family | Fantasy | Romance
+279,Goal Dreams,2006,3,,,,Documentary,Documentary | Sport
+280,Godzilla,1998,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+281,GoldenEye,1995,3,Action/Adventure,,,,Action | Adventure | Thriller
+282,Good Luck Chuck,2007,1,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Drama | Fantasy | Romance
+283,Good Will Hunting,1997,5,,Drama,,,Drama
+284,Goodfellas,1990,5,,Drama,Crime,Biography,Biography | Crime | Drama | Thriller
+285,Gothika,2003,4,,,Horror,,Horror | Thriller | Mystery
+286,Gran Torino,2008,4,,Drama,,,Drama
+287,Green Zone,2010,5,Action/Adventure,Drama,War,,Action | Drama | Thriller | War
+288,Gremlins,1984,3,Comedy,Fantasy/Sci-Fi,Horror,,Comedy | Fantasy | Horror
+289,Gremlins 2: The New Batch,1990,2,Comedy,Fantasy/Sci-Fi,Horror,,Comedy | Fantasy | Horror | Sci-Fi
+290,Grilled,2006,5,Comedy,,,,Comedy
+291,Groundhog Day,1993,5,Comedy,Drama,Romance,,Comedy | Drama | Fantasy | Romance
+292,Half Past Dead,2002,2,Action/Adventure,,Crime,,Action | Crime | Thriller
+293,Hancock,2008,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Crime | Fantasy
+294,Hanna,2011,3,Action/Adventure,,Crime,,Action | Crime | Mystery | Thriller
+295,Hannibal,2001,3,,,Crime,,Crime | Thriller
+296,Happy Feet,2006,3,Comedy,,Musical,Animation,Animation | Adventure | Comedy | Family | Musical
+297,Happy Gilmore,1996,3,Comedy,,Romance,Sport,Comedy | Romance | Sport
+298,Harold & Kumar Go to White Castle,2004,4,Comedy,,,,Adventure | Comedy
+299,Harold & Kumar Escape from Guantanamo Bay,2008,3,Comedy,,,,Adventure | Comedy
+300,Harry Brown,2009,4,,Drama,Crime,,Crime | Drama | Thriller
+301,Harry Potter and the Chamber of Secrets,2002,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Mystery
+302,Harry Potter and the Deathly Hallows: Part 1,2010,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Drama | Fantasy | Mystery
+303,Harry Potter and the Deathly Hallows: Part 2,2011,5,Action/Adventure,Fantasy/Sci-Fi,Family,, Adventure | Drama | Fantasy | Mystery
+304,Harry Potter and the Goblet of Fire,2005,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Mystery
+305,Harry Potter and the Half-Blood Prince,2009,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Mystery
+306,Harry Potter and the Order of the Phoenix,2007,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Mystery
+307,Harry Potter and the Prisoner of Azkaban,2004,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Mystery
+308,Harry Potter and the Sorcerer's Stone,2001,5,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Mystery
+309,Hellboy,2004,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+310,Hellboy II: The Golden Army,2008,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+311,Herbie Fully Loaded,2005,3,Comedy,Fantasy/Sci-Fi,Family,Sport,Adventure | Comedy | Family | Fantasy | Romance | Sport
+312,Hercules,1997,4,Action/Adventure,Fantasy/Sci-Fi,Musical,Animation,Animation | Adventure | Family | Fantasy | Musical
+313,Hitch,2005,5,Comedy,,Romance,,Comedy | Romance
+314,Hitman,2007,3,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Thriller
+315,Hollow Man,2000,3,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Drama | Horror | Sci-Fi | Thriller
+316,Home Alone,1990,4,Comedy,,Family,,Comedy | Crime | Family
+317,Home Alone 2: Lost in New York,1992,4,Comedy,,Family,,Adventure | Comedy | Crime | Family
+318,Home Alone 3,1997,3,Comedy,,Family,,Action | Comedy | Crime | Family
+319,Home Alone 4,2002,2,Comedy,,Family,,Comedy | Family
+320,"Honey, I Shrunk the Audience",1994,3,Comedy,Fantasy/Sci-Fi,,Short,Short | Comedy | Sci-Fi
+321,"Honey, I Shrunk the Kids",1989,4,Comedy,Fantasy/Sci-Fi,Family,,Adventure | Comedy | Family | Fantasy | Sci-Fi
+322,Hoodwinked Too! Hood vs. Evil,2011,1,Comedy,,Family,Animation,Animation | Comedy | Family
+323,Hook,1991,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy
+324,Horrible Bosses,2011,4,Comedy,,Crime,,Comedy | Crime
+325,Horton Hears a Who!,2008,4,Comedy,,Family,Animation,Animation | Adventure | Comedy | Family
+326,Hot Fuzz,2007,3,Comedy,,Crime,,Action | Comedy | Crime | Mystery
+327,House on Haunted Hill,1999,3,,Drama,Horror,,Drama | Horror | Thriller
+328,How the Grinch Stole Christmas,2000,3,Comedy,Fantasy/Sci-Fi,Family,,Comedy | Family | Fantasy
+329,How to Train Your Dragon,2010,5,Action/Adventure,Fantasy/Sci-Fi,Family,Animation, Animation | Adventure | Comedy | Family | Fantasy
+330,Howl's Moving Castle,2004,5,Action/Adventure,Fantasy/Sci-Fi,Romance,Animation,Animation | Action | Adventure | Fantasy | Romance
+331,Hulk,2003,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+332,I Am Legend,2007,4,,Fantasy/Sci-Fi,Horror,,Drama | Horror | Sci-Fi | Thriller
+333,I Am Sam,2001,4,,Drama,,,Drama
+334,I Know What You Did Last Summer,1997,3,,,Horror,,Horror | Mystery | Thriller
+335,"I Love You, Man",2009,3,Comedy,,Romance,,Comedy | Romance
+336,"I, Robot",2004,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Mystery | Sci-Fi | Thriller
+337,Ice Age: The Meltdown,2006,3,Action/Adventure,,Family,Animation,Animation | Adventure | Comedy | Family
+338,Immortals,2011,4,Action/Adventure,Drama,,,Action | Drama | Fantasy
+339,Inception,2010,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Mystery | Sci-Fi | Thriller
+340,Independence Day,1996,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+341,Indiana Jones and the Last Crusade,1989,3,Action/Adventure,,,,Action | Adventure
+342,Indiana Jones and the Temple of Doom,1984,1,Action/Adventure,,,,Action | Adventure
+343,Inferno,1998,3,Action/Adventure,,,,Action/Adventure
+344,Inglourious Basterds,2009,5,,Drama,War,,Drama | Thriller | War
+345,Innerspace,1987,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Comedy | Crime | Sci-Fi
+346,Inside Man,2006,4,,Drama,Crime,,Crime | Drama | Thriller
+347,Inspector Gadget,1999,3,Action/Adventure,,Family,,Family | Action | Adventure | Comedy
+348,Intolerable Cruelty,2003,5,Comedy,,Romance,,Comedy | Romance | Crime
+349,Iron Man,2008,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Drama | Sci-Fi | Thriller
+350,Iron Man 2,2010,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi
+351,Irreversible,2002,3,,Drama,,Foreign,Crime | Drama | Mystery | Thriller
+352,Jackass: The Movie,2002,3,Comedy,,,,Action | Comedy
+353,Jaws,1975,3,,,Horror,,Adventure | Horror | Thriller
+354,Jeepers Creepers,2001,2,Action/Adventure,Drama,Horror,,Adventure | Drama | Horror | Thriller
+355,Jerry Maguire,1996,4,Comedy,Drama,Romance,Sport,Comedy | Drama | Romance | Sport
+356,Jingle All the Way,1996,3,Action/Adventure,,Family,,Action | Family | Adventure | Comedy
+357,The Messenger: The Story of Joan of Arc,1999,4,,Drama,War,Biography,Biography | Drama | History | War
+358,Joe's Apartment,1996,3,Comedy,Fantasy/Sci-Fi,Musical,,Comedy | Musical | Fantasy
+359,Johnny English,2003,3,Comedy,,,,Action | Adventure | Comedy
+360,Journey to the Center of the Earth,2008,1,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Family | Sci-Fi | Thriller
+361,Julie & Julia,2009,5,,Drama,Romance,Biography,Biography | Drama | Romance
+362,Jumanji,1995,5,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Comedy | Family | Fantasy | Romance | Thriller
+363,Jungle 2 Jungle,1997,3,Comedy,,Family,,Comedy | Family
+364,Juno,2007,4,Comedy,Drama,,,Comedy | Drama
+365,Jurassic Park,1993,5,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Horror | Sci-Fi | Thriller
+366,Jurassic Park III,2001,3,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Horror | Sci-Fi | Thriller
+367,Just Friends,2005,4,Comedy,,Romance,,Comedy | Romance
+368,Just Married,2003,4,Comedy,,Romance,,Comedy | Romance
+369,Just Visiting,2001,4,Comedy,Fantasy/Sci-Fi,,,Comedy | Fantasy
+370,Juwanna Mann,2002,3,Comedy,,,Sport,Comedy | Sport
+371,Kama Sutra: A Tale of Love,1996,3,,Drama,Romance,Foreign,Crime | Drama | History | Romance
+372,Keeping the Faith,2000,4,Comedy,Drama,Romance,,Comedy | Drama | Romance
+373,Kick-Ass,2010,4,Action/Adventure,,Crime,,Action | Crime | Thriller
+374,Kill Bill: Vol. 1,2003,3,Action/Adventure,,Crime,,Action | Crime | Thriller
+375,King Arthur,2004,3,Action/Adventure,,War,,Action | Adventure | History | War
+376,King Kong,2005,4,Action/Adventure,Drama,Romance,,Adventure | Drama | Romance
+377,Kingdom of Heaven,2005,5,Action/Adventure,Drama,War,,Action | Adventure | Drama | History | War
+378,Kingpin,1996,3,Comedy,,,Sport,Comedy | Sport
+379,Kiss Kiss Bang Bang,2005,5,Action/Adventure,,Crime,,Action | Comedy | Crime | Mystery
+380,Knocked Up,2007,3,Comedy,Drama,Romance,,Comedy | Drama | Romance
+381,Kung Fu Panda,2008,4,Comedy,,Family,Animation,Animation | Action | Comedy | Family
+382,Kung Fu Panda 2,2011,4,Comedy,,Family,Animation,Animation | Action | Adventure | Comedy | Family
+383,Delusions of Grandeur,1971,2,Comedy,,,Foreign,Comedy | History
+384,La Haine,1995,4,,Drama,Crime,,Crime | Drama
+385,Ladder 49,2004,3,Action/Adventure,Drama,,,Action | Drama | Thriller
+386,Lady in the Water,2006,3,,Fantasy/Sci-Fi,,,Fantasy | Mystery | Thriller
+387,Lakeview Terrace,2008,2,,Drama,Crime,,Crime | Drama | Thriller
+388,Land of the Lost,2009,1,Comedy,Fantasy/Sci-Fi,,, Action | Adventure | Comedy | Fantasy 
+389,Lara Croft Tomb Raider: The Cradle of Life,2003,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Thriller
+390,Larry Crowne,2010,4,Comedy,Drama,Romance,,Comedy | Drama | Romance
+391,Le Fabuleux destin d'Amélie Poulain,2001,5,Comedy,Drama,Romance,Foreign,Comedy | Drama | Romance
+392,Le Gendarme et Les Extra-Terrestres,1979,4,,,Crime,Foreign,Comedy | Crime
+393,Leatherheads,2008,4,Comedy,Drama,Romance,Sport,Comedy | Drama | Romance | Sport
+394,Legally Blonde,2001,4,Comedy,,,,Comedy
+395,"Legally Blonde 2: Red, White & Blonde",2003,2,Comedy,,,,Comedy
+396,Legend of the Guardians: The Owls of Ga'Hoole,2010,3,Action/Adventure,Fantasy/Sci-Fi,,Animation,Animation | Adventure | Fantasy
+397,Lemony Snicket's A Series of Unfortunate Events,2004,5,Comedy,Fantasy/Sci-Fi,Family,,Adventure | Comedy | Family | Fantasy
+398,Les Couloirs du temps: Les Visiteurs 2,1998,4,Comedy,Fantasy/Sci-Fi,Family,Foreign,Comedy | Family | Sci-Fi | Fantasy
+399,Les Misérables,1998,5,,Drama,Crime,,Crime | Drama | Romance
+400,Les Visiteurs,1993,5,Comedy,Fantasy/Sci-Fi,,Foreign,Fantasy | Comedy
+401,Let's Go to Prison,2006,3,Comedy,,Crime,,Comedy | Crime
+402,Liar Liar,1997,4,Comedy,Fantasy/Sci-Fi,,,Comedy | Fantasy
+403,Limitless,2011,3,Action/Adventure,,,,Mystery | Thriller
+404,Lion of the Desert,1981,4,,Drama,War,Biography,Biography | Drama | War
+405,Little Fockers,2010,2,Comedy,,,,Comedy
+406,Live Free or Die Hard,2007,3,Action/Adventure,,Crime,, Action | Crime | Thriller
+407,Lolita,1997,5,,Drama,Romance,,Drama | Romance
+408,Look Who's Talking,1989,3,Comedy,,Romance,,Romance | Comedy
+409,Looking for Comedy in the Muslim World,2005,2,Comedy,,,,Comedy
+410,Loose Change: Second Edition,2006,5,,,,Documentary,Documentary | History | Mystery
+411,Lost in Space,1998,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+412,Lost in Translation,2003,4,,Drama,,,Drama
+413,Love & Sex,2000,3,Comedy,Drama,Romance,,Comedy | Romance | Drama
+414,Madagascar,2005,3,Comedy,,Family,Animation,Animation | Adventure | Comedy | Family
+415,Madagascar: Escape 2 Africa,2008,5,Comedy,,Family,Animation,Animation | Action | Adventure | Comedy | Family
+416,Magma: Volcanic Disaster,2006,3,Action/Adventure,,,,Action/Adventure
+417,Maid in Manhattan,2002,3,Comedy,,Romance,,Comedy | Romance
+418,Major League,1989,3,Comedy,,,Sport,Comedy | Sport
+419,Men in Black,1997,3,Action/Adventure,Fantasy/Sci-Fi,,, Action | Comedy | Sci-Fi
+420,Man on the Moon,1999,4,Comedy,Drama,,Biography,Biography | Comedy | Drama
+421,Mars Attacks!,1996,3,Comedy,Fantasy/Sci-Fi,,,Action | Comedy | Fantasy | Sci-Fi | Thriller
+422,Matilda,1996,4,Comedy,Fantasy/Sci-Fi,Family,,Adventure | Comedy | Family | Fantasy
+423,Maverick,1994,4,Comedy,,,Western,Adventure | Comedy | Western
+424,Max Payne,2008,3,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Mystery | Thriller
+425,Maybe Baby,2000,3,Comedy,,Romance,,Comedy | Romance
+426,"Me, Myself & Irene",2000,3,Comedy,,,,Comedy
+427,Meet the Fockers,2004,3,Comedy,,Romance,,Comedy | Romance
+428,Meet the Parents,2000,5,Comedy,,Romance,,Comedy | Romance
+429,Meet the Robinsons,2007,4,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Sci-Fi
+430,Megamind,2010,3,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Action | Comedy | Family | Sci-Fi
+431,Memento,2001,3,,Drama,Crime,,Crime | Drama | Mystery | Thriller
+432,Metro,1997,2,Action/Adventure,Drama,,,Action | Comedy | Crime | Drama | Thriller
+433,Michael Clayton,2007,5,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Thriller
+434,Mighty Joe Young,1998,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Family | Fantasy | Thriller
+435,Million Dollar Baby,2004,4,,Drama,,Sport,Drama | Sport
+436,Minority Report,2002,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Crime | Mystery | Sci-Fi | Thriller
+437,Miss Congeniality,2000,3,Comedy,,Crime,,Comedy | Crime | Mystery
+438,Miss Potter,2006,4,,Drama,,Biography,Biography | Drama
+439,Mission: Impossible,1996,3,Action/Adventure,,,,Action | Adventure | Thriller
+440,Mission: Impossible II,2000,3,Action/Adventure,,,,Action | Adventure | Thriller
+441,Mission: Impossible III,2006,3,Action/Adventure,,,,Action | Adventure | Thriller
+442,Monkeybone,2001,3,Comedy,Fantasy/Sci-Fi,Romance,Animation,Animation | Comedy | Fantasy | Romance
+443,Monster House,2006,4,,Fantasy/Sci-Fi,Family,Animation,Animation | Family | Fantasy | Mystery
+444,Monsters vs Aliens,2009,4,Comedy,,,Animation,Animation | Action | Adventure | Comedy
+445,"Monsters, Inc.",2001,5,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Comedy | Family | Fantasy
+446,Mortal Kombat,1995,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Thriller
+447,Mortal Kombat: Annihilation,1997,1,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi | Thriller
+448,Mousehunt,1997,3,Comedy,,Family,,Action | Comedy | Family
+449,Mr. Magoo,1997,3,Comedy,,Family,,Family | Comedy | Adventure | Romance
+450,Mulan,1998,4,Action/Adventure,Drama,Family,Animation,Animation | Adventure | Drama | Family | Musical
+451,Munich,2005,5,,Drama,,,Drama | History | Thriller
+452,My Best Friend's Wedding,1997,5,Comedy,,Romance,,Comedy | Romance
+453,My Boss's Daughter,2003,5,Comedy,,Romance,,Comedy | Romance
+454,My Neighbor Totoro,1988,4,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Family | Fantasy
+455,My Stepmother Is an Alien,1988,3,Comedy,Fantasy/Sci-Fi,,,Comedy | Sci-Fi
+456,My Super Ex-Girlfriend,2006,3,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Crime | Drama | Romance | Sci-Fi | Thriller
+457,Mystic River ,2003,5,,Drama,Crime,,Crime | Drama | Mystery | Thriller
+458,Nacho Libre,2006,3,Comedy,,Family,Sport,Comedy | Family | Sport
+459,Naked Gun 33 1/3: The Final Insult,1994,3,Comedy,,Crime,,Action | Comedy | Crime
+460,National Treasure,2004,4,Action/Adventure,,,,Action | Adventure | Thriller
+461,National Treasure: Book of Secrets,2007,3,Action/Adventure,,,,Action | Adventure | Thriller
+462,Night at the Museum,2006,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Comedy | Family | Fantasy
+463,Night At the Museum: Battle of the Smithsonian,2009,2,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Comedy | Family
+464,Nights in Rodanthe,2008,4,,Drama,Romance,,Drama | Romance
+465,No Country for Old Men,2007,5,,Drama,Crime,,Crime | Drama | Thriller
+466,Norbit,2007,2,Comedy,,Romance,,Comedy | Romance
+467,Not Another Teen Movie,2001,3,Comedy,,,,Comedy
+468,Notting Hill,1999,4,Comedy,,Romance,,Comedy | Romance
+469,Nurse Betty,2000,4,Comedy,,Romance,,Comedy | Crime | Romance | Thriller
+470,"O Brother, Where Art Thou?",2000,5,Comedy,,Music,,Comedy | Adventure | Crime | Music
+471,Obsessed,2009,3,,Drama,,,Drama | Thriller
+472,Occupation 101,2006,5,,,,Documentary,Documentary
+473,Ocean's Eleven,2001,5,Comedy,,Crime,,Comedy | Crime | Thriller
+474,Ocean's Thirteen,2007,5,Comedy,,Crime,,Comedy | Crime | Thriller
+475,Ocean's Twelve,2004,4,Comedy,,Crime,,Comedy | Crime | Thriller
+476,October Sky,1999,4,,Drama,Family,Biography,Biography | Drama | Family
+477,Office Space,1999,5,Comedy,,Crime,,Comedy | Crime | Romance
+478,One Hundred and One Dalmatians,1961,3,Action/Adventure,,Family,Animation,Animation | Adventure | Family
+479,One Night with the King,2006,2,,Drama,,,Drama
+480,Open Water,2003,2,,Drama,Horror,,Drama | Horror | Thriller
+481,Orange County,2002,3,Comedy,Drama,,,Comedy | Drama
+482,Orgazmo,1997,3,Comedy,Fantasy/Sci-Fi,,,Comedy | Sci-Fi
+483,Osama,2003,3,,Drama,,Foreign,Drama
+484,Out Cold,2001,3,Comedy,,,Sport,Comedy | Sport
+485,Outbreak,1995,2,Action/Adventure,Drama,,,Action | Drama | Thriller
+486,Over the Hedge,2006,4,Comedy,,,Animation,Animation | Adventure | Comedy | Family
+487,Partie de Campagne,1936,2,,Drama,,Foreign,Drama | Short | Romance
+488,Paycheck,2003,3,Action/Adventure,Fantasy/Sci-Fi,,,Sci-Fi | Thriller | Action | Mystery
+489,"Peace, Propaganda & the Promised Land",2004,5,,,,Documentary,Documentary
+490,Pearl Harbor,2001,3,Action/Adventure,Drama,War,,Action | Drama | Romance | War
+491,Percy Jackson & the Olympians: The Lightning Thief ,2010,2,Action/Adventure,Fantasy/Sci-Fi,,,Adventure | Fantasy
+492,Persepolis,2007,5,,Drama,War,Animation,Animation | Biography | Drama | War
+493,Peter Pan,2003,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Romance
+494,Peter Pan,1953,3,Action/Adventure,Fantasy/Sci-Fi,Musical,Animation,Family | Animation | Musical | Fantasy | Adventure
+495,Phone Booth,2003,4,Action/Adventure,,,,Mystery | Thriller
+496,Pinocchio,1940,5,,Fantasy/Sci-Fi,Family,Animation,Animation | Family | Fantasy | Musical
+497,Pirates of the Caribbean: At World's End,2007,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Comedy | Fantasy
+498,Pirates of the Caribbean: Dead Man's Chest,2006,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Comedy | Fantasy
+499,Pirates of the Caribbean: On Stranger Tides,2011,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+500,Pirates of the Caribbean: The Curse of the Black Pearl,2003,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Comedy | Fantasy
+501,Planet 51,2009,2,Comedy,,Family,Animation,Animation | Adventure | Comedy | Family
+502,Planet of the Apes,2001,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Drama | Sci-Fi
+503,Planet of the Apes,1968,3,Action/Adventure,Fantasy/Sci-Fi,Romance,,Action | Adventure | Drama | Mystery | Romance | Sci-Fi
+504,Pocahontas,1995,3,,Drama,Musical,Animation,Animation | Drama | Family | History | Musical | Romance
+505,Police Academy,1984,3,Comedy,,Crime,,Comedy | Crime
+506,Police Academy 2: Their First Assignment,1985,3,Comedy,,Crime,,Comedy | Crime
+507,Police Academy 3: Back in Training,1986,2,Comedy,,Crime,,Comedy | Crime
+508,Poseidon,2006,3,Action/Adventure,,,,Action | Adventure | Thriller
+509,Practical Magic,1998,2,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Fantasy | Mystery | Romance
+510,Precious,2008,3,,Drama,,,Drama
+511,Predator,1987,4,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Horror | Sci-Fi | Thriller
+512,Predator 2,1990,1,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+513,Predators,2010,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+514,Pretty Woman,1990,4,Comedy,Drama,Romance,,Comedy | Drama | Romance
+515,Pride & Prejudice,2005,4,,Drama,Romance,,Drama | Romance 
+516,Primeval,2007,2,Action/Adventure,,Horror,,Action | Adventure | Horror | Thriller
+517,Prince of Persia: The Sands of Time,2010,3,Action/Adventure,Fantasy/Sci-Fi,Romance,,Action | Adventure | Fantasy | Romance
+518,Princess Mononoke,1997,4,Action/Adventure,Fantasy/Sci-Fi,,Animation,Animation | Adventure | Fantasy
+519,Public Enemies,2009,4,,Drama,Crime,Biography,Biography | Crime | Drama | History
+520,Quantum of Solace,2008,3,Action/Adventure,,,,Action | Adventure | Thriller
+521,Race To Witch Mountain,2009,1,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Sci-Fi
+522,Rain Man,1988,4,,Drama,,,Drama
+523,Rambo,2008,4,Action/Adventure,,,,Action | Thriller 
+524,Rambo III,1988,3,Action/Adventure,,,,Action | Adventure | Thriller
+525,Rango,2011,4,Comedy,,Family,Animation,Animation | Action | Adventure | Comedy | Family | Western
+526,Rat Race,2001,3,Comedy,,,,Adventure | Comedy
+527,Ratatouille,2007,5,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Comedy | Family | Fantasy
+528,Religulous ,2008,2,Comedy,,,Documentary, Documentary | Comedy
+529,Rendition,2007,5,,Drama,,,Drama | Thriller
+530,Resident Evil,2002,4,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Horror | Sci-Fi | Thriller
+531,Resident Evil: Afterlife,2010,2,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Horror | Sci-Fi | Thriller
+532,Resident Evil: Apocalypse,2004,4,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Horror | Sci-Fi
+533,Resident Evil: Extinction,2007,5,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Horror | Sci-Fi | Thriller
+534,Ri¢hie Ri¢h,1994,2,Comedy,,Family,,Comedy | Family
+535,Rio,2011,3,Action/Adventure,,Musical,Animation,Animation | Adventure | Comedy | Family | Musical
+536,Rise of the Planet of the Apes,2011,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Drama | Sci-Fi | Thriller
+537,Road to Perdition,2002,5,Action/Adventure,Drama,Crime,,Adventure | Crime | Drama | Thriller
+538,Road Trip,2000,4,Comedy,,,,Adventure | Comedy
+539,Robin Hood,1973,3,Action/Adventure,,Musical,Animation,Animation | Adventure | Family | Musical | Romance
+540,Robin Hood,2010,4,Action/Adventure,Drama,,,Action | Adventure | Drama
+541,Robin Hood: Men in Tights,1993,3,Comedy,,,,Adventure | Comedy
+542,Robin Hood: Prince of Thieves,1991,4,Action/Adventure,Drama,Romance,,Action | Adventure | Drama | Romance
+543,Robinson Crusoe,1996,4,,Drama,,,Drama
+544,RoboCop,1987,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Crime | Drama | Sci-Fi | Thriller
+545,Robots ,2005,3,Action/Adventure,,Family,Animation,Animation | Adventure | Comedy | Family 
+546,Role Models,2008,3,Comedy,,,,Comedy
+547,Romeo Must Die,2000,3,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Romance | Thriller
+548,Rounders,1998,4,,Drama,,,Drama
+549,Roxanne,1987,5,Comedy,Drama,Romance,,Comedy | Drama | Romance
+550,Rumor Has It...,2005,3,Comedy,,Romance,,Comedy | Romance
+551,"Run, Fatboy, Run",2007,2,Comedy,,Romance,Sport,Comedy | Romance | Sport
+552,Rush Hour,1998,3,Comedy,,Crime,,Action | Comedy | Thriller | Crime
+553,Rush Hour 2,2001,3,Comedy,,Crime,,Action | Comedy | Thriller | Crime
+554,RV,2006,2,Comedy,,Family,,Adventure | Comedy | Family
+555,S.W.A.T.,2003,3,Action/Adventure,,Crime,,Action | Crime
+556,Salt,2010,3,Action/Adventure,,Crime,,Action | Crime | Mystery | Thriller
+557,Saving Private Ryan,1998,5,Action/Adventure,Drama,War,,Action | Drama | War
+558,Saving Silverman,2001,3,Comedy,,Romance,,Comedy | Romance | Crime
+559,Saw,2004,4,,,Horror,,Crime | Horror | Mystery | Thriller
+560,Saw II,2005,3,,,Horror,,Crime | Horror | Thriller
+561,Scarface,1983,5,,Drama,Crime,,Crime | Drama
+562,Scary Movie,2000,4,Comedy,,,,Comedy
+563,Scary Movie 2,2001,3,Comedy,,,,Comedy
+564,Scary Movie 3,2003,3,Comedy,,,,Comedy
+565,Schindler's List,1993,5,,Drama,War,Biography,Biography | Drama | History | War
+566,Scooby-Doo,2002,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Comedy | Family | Fantasy | Mystery
+567,Scream,1996,4,,,Horror,,Crime | Horror | Mystery | Thriller
+568,Scream 2,1997,3,,,Horror,,Horror | Mystery | Thriller
+569,Scream 3,2000,3,,,Horror,,Horror | Mystery | Thriller
+570,Snake in the Eagle's Shadow,1978,3,Action/Adventure,,,,Action | Comedy
+571,Seed of Chucky,2004,1,Comedy,,Horror,,Comedy | Horror | Romance | Thriller
+572,Serendipity,2001,3,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Romance | Fantasy
+573,Serenity,2005,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+574,Set It Off,1996,3,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Thriller
+575,Sex Drive,2008,4,Comedy,,Romance,, Adventure | Comedy | Romance
+576,Shallow Hal,2001,3,Comedy,Drama,Romance,,Comedy | Drama | Fantasy | Romance
+577,Shanghai Knights,2003,3,Comedy,,,,Action | Adventure | Comedy
+578,Shanghai Noon,2000,3,Comedy,,,Western,Action | Adventure | Comedy | Western
+579,Shark Tale,2004,3,Comedy,,Family,Animation,Animation | Comedy | Family
+580,Shaun of the Dead,2004,3,Comedy,,Horror,,Comedy | Horror | Romance
+581,She's the Man,2006,3,Comedy,,Romance,,Comedy | Romance
+582,Sherlock Holmes,2009,4,Action/Adventure,,Crime,,Action | Adventure | Crime | Mystery
+583,Sherlock Holmes: A Game of Shadows,2011,4,Action/Adventure,,Crime,,Action | Adventure | Crime | Mystery | Thriller
+584,Shoot 'Em Up,2007,4,Action/Adventure,,Crime,,Action | Comedy | Crime | Thriller
+585,Shooter,2007,4,Action/Adventure,,Crime,,Action | Crime | Mystery | Thriller
+586,Shrek,2001,5,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Fantasy | Romance
+587,Shrek 2,2004,4,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Fantasy
+588,Shrek the Third,2007,3,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Fantasy
+589,Signs,2002,4,,Fantasy/Sci-Fi,,,Mystery | Sci-Fi | Thriller
+590,Silent Hill,2006,4,,Fantasy/Sci-Fi,Horror,,Fantasy | Horror | Thriller
+591,Shaolin Soccer,2001,4,Comedy,,,Foreign,Action | Comedy | Sport
+592,Sky High,2005,2,Comedy,Fantasy/Sci-Fi,Family,,Adventure | Comedy | Family | Sci-Fi | Thriller
+593,Skyline,2010,1,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+594,Sleeping Beauty,1959,3,,Fantasy/Sci-Fi,Musical,Animation,Animation | Family | Fantasy | Musical | Romance
+595,Snakes on a Plane,2006,2,Action/Adventure,,,,Action | Thriller
+596,Snow White and the Seven Dwarfs,1937,3,,Fantasy/Sci-Fi,Musical,Animation,Animation | Family | Fantasy | Musical | Romance
+597,Soccer Mom,2008,1,,,Family,,Family
+598,Soldier,1998,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Drama | Sci-Fi
+599,Something's Gotta Give,2003,4,Comedy,,Romance,,Comedy | Romance
+600,Source Code,2011,3,,Fantasy/Sci-Fi,,,Mystery | Sci-Fi | Thriller
+601,Spaceballs,1987,3,Comedy,Fantasy/Sci-Fi,,,Adventure | Comedy | Sci-Fi
+602,Space Jam,1996,3,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Sci-Fi | Sport
+603,Speed,1994,4,Action/Adventure,,,,Action | Thriller
+604,Speed 2: Cruise Control,1997,2,Action/Adventure,,Romance,,Action | Romance | Thriller
+605,Sphere,1998,3,,Fantasy/Sci-Fi,,,Mystery | Sci-Fi | Thriller
+606,Spider-Man,2002,4,Action/Adventure,Fantasy/Sci-Fi,Crime,,Action | Crime | Sci-Fi | Thriller
+607,Spider-Man 2,2004,4,Action/Adventure,Fantasy/Sci-Fi,Crime,,Action | Crime | Sci-Fi | Thriller
+608,Spider-Man 3,2007,3,Action/Adventure,Fantasy/Sci-Fi,Crime,,Action | Crime | Sci-Fi | Thriller
+609,Spirited Away,2001,5,Action/Adventure,,Family,Animation,Animation | Adventure | Family | Fantasy
+610,Spy Kids,2001,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Comedy | Family | Sci-Fi
+611,Spy School,2008,1,Comedy,,Family,,Adventure | Comedy | Crime | Family | Mystery
+612,Star Trek,2009,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi 
+613,Star Trek IV: The Voyage Home,1986,4,Action/Adventure,Fantasy/Sci-Fi,,,Adventure | Comedy | Sci-Fi
+614,Star Trek: First Contact,1996,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+615,Star Wars,1977,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi
+616,Star Wars: Episode I - The Phantom Menace,1999,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi
+617,Star Wars: Episode II - Attack of the Clones,2002,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi
+618,Star Wars: Episode III - Revenge of the Sith,2005,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi
+619,Star Wars: Episode V - The Empire Strikes Back,1980,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi | Thriller
+620,Star Wars: Episode VI - Return of the Jedi,1983,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi
+621,Stardust,2007,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy | Romance
+622,Stargate,1994,4,Action/Adventure,Fantasy/Sci-Fi,,,Fantasy | Action | Adventure | Sci-Fi
+623,Starship Troopers,1997,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+624,State of Play,2009,4,,Drama,,,Drama | Mystery | Thriller
+625,Stealth,2005,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+626,Stir of Echoes,1999,4,,,Horror,,Thriller | Horror | Mystery
+627,Street Fighter,1994,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+628,Street Kings,2008,3,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Thriller
+629,Stuart Little,1999,3,Comedy,,Family,,Adventure | Comedy | Family | Fantasy
+630,Caramel,2007,5,Comedy,Drama,,Foreign,Comedy | Drama
+631,Sunshine,2007,4,,Fantasy/Sci-Fi,,,Adventure | Sci-Fi | Thriller
+632,Super 8,2011,4,,Fantasy/Sci-Fi,,,Mystery | Sci-Fi | Thriller
+633,Super Mario Bros.,1993,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Comedy | Family | Fantasy | Sci-Fi | Thriller
+634,Superbad,2007,5,Comedy,,,,Comedy
+635,Superman,1978,3,Action/Adventure,Fantasy/Sci-Fi,Romance,,Action | Adventure | Comedy | Fantasy | Romance | Sci-Fi | Thriller
+636,Superman II,1980,3,Action/Adventure,Fantasy/Sci-Fi,Romance,,Action | Adventure | Romance | Sci-Fi
+637,Superman Returns,2006,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi
+638,Super Size Me,2004,2,Comedy,Drama,,Documentary,Documentary | Comedy | Drama
+639,,1999,2,Comedy,,,,Comedy
+640,Surf's Up,2007,3,Comedy,,Family,Animation,Animation | Comedy | Family | Sport
+641,Surrogates,2009,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+642,Sweeney Todd: The Demon Barber of Fleet Street,2007,3,,,Crime,,Crime | Musical
+643,Swimming Pool,2003,3,,Drama,Crime,,Crime | Drama | Mystery | Thriller
+644,Swordfish,2001,2,Action/Adventure,,Crime,,Action | Thriller | Crime
+645,Syriana,2005,5,,Drama,,,Drama | Thriller
+646,Taken,2008,3,Action/Adventure,,Crime,,Action | Crime | Thriller
+647,Tangled,2010,4,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Comedy | Family | Fantasy | Musical | Romance
+648,Tarzan,1999,4,Action/Adventure,Drama,Family,Animation,Animation | Adventure | Drama | Family
+649,Taxi,1998,5,Comedy,,,Foreign,Action | Comedy | Crime
+650,Taxi 2,2000,4,Comedy,,,Foreign,Action | Comedy | Crime
+651,Taxi 3,2003,5,Comedy,,,Foreign,Action | Comedy | Crime
+652,Teenage Dirtbag,2009,3,,Drama,,,Drama
+653,,2003,3,Action/Adventure,Drama,,,Action | Drama | Thriller
+654,Teenage Mutant Ninja Turtles,1990,3,Action/Adventure,Fantasy/Sci-Fi,Crime,Animation,Action | Comedy | Crime | Drama | Family | Sci-Fi
+655,Terminator 2: Judgment Day,1991,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+656,Terminator 3: Rise of the Machines,2003,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+657,Terminator Salvation,2009,4,Action/Adventure,,,,Action | Adventure | Sci-Fi | Thriller
+658,The 13th Warrior,1999,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+659,The 40 Year Old Virgin,2005,3,Comedy,,Romance,,Comedy | Romance
+660,The Abyss,1989,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller | Drama
+661,The Addams Family,1991,3,Comedy,Fantasy/Sci-Fi,Family,,Comedy | Family | Fantasy
+662,The Adjustment Bureau,2011,3,,Fantasy/Sci-Fi,Romance,,Romance | Sci-Fi | Thriller
+663,The Adultress,1953,3,,Drama,Romance,Foreign,Crime | Drama | Romance
+664,The American,2010,4,,Drama,Crime,,Crime | Drama
+665,The Animatrix,2003,5,Action/Adventure,Fantasy/Sci-Fi,,Animation,Action | Drama | Animation | Sci-Fi
+666,The Ant Bully,2006,3,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Fantasy
+667,The Aristocats,1970,3,Action/Adventure,,Musical,Animation,Animation | Adventure | Family | Musical
+668,The Associate,1996,2,Comedy,,,,Comedy
+669,The Babysitters,2007,2,,Drama,,,Drama
+670,The Big Lebowski,1998,4,Comedy,,Crime,, Comedy | Crime
+671,The Blair Witch Project,2000,3,Action/Adventure,Drama,Horror,,Adventure | Drama | Horror | Mystery | Thriller
+672,The Bourne Identity,2002,4,Action/Adventure,,,,Action | Adventure | Mystery | Thriller
+673,The Bourne Supremacy,2004,5,Action/Adventure,,,,Action | Adventure | Mystery | Thriller
+674,The Bourne Ultimatum,2007,5,Action/Adventure,,,,Action | Adventure | Mystery | Thriller
+675,The Boy Who Could Fly,1986,3,,Fantasy/Sci-Fi,Family,,Family | Fantasy
+676,The Break-Up,2006,3,Comedy,Drama,Romance,,Comedy | Drama | Romance
+677,The Cable Guy,1996,3,Comedy,,,,Comedy | Thriller
+678,The Cell,2000,3,,Fantasy/Sci-Fi,Horror,,Crime | Drama | Fantasy | Horror | Sci-Fi | Thriller
+679,"The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",2005,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Family | Fantasy
+680,The Chronicles of Narnia: Prince Caspian ,2008,4,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Family | Fantasy
+681,The Chronicles of Narnia: The Voyage of the Dawn Treader,2010,2,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy
+682,The Chronicles of Riddick,2004,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+683,The Core,2003,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+684,The Count of Monte Cristo,2002,5,Action/Adventure,Drama,,,Action | Adventure | Drama
+685,The Curious Case of Benjamin Button,2008,5,,Drama,Romance,Biography,Drama | Fantasy | Mystery | Romance 
+686,The Da Vinci Code,2006,5,,Drama,,,Drama | Mystery | Thriller
+687,The Darjeeling Limited,2007,3,Comedy,Drama,,,Adventure | Comedy | Drama
+688,The Dark Knight,2008,5,Action/Adventure,,Crime,,Action | Crime | Thriller
+689,The Day After Tomorrow,2004,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+690,The Day the Earth Stood Still,2008,3,,Fantasy/Sci-Fi,,,Drama | Sci-Fi | Thriller 
+691,The Departed,2006,5,,Drama,Crime,,Crime | Drama | Thriller
+692,The Dreamers,2003,2,,Drama,Romance,,Drama | History | Romance
+693,The Duchess,2008,4,,Drama,,,Drama | History
+694,The Dukes of Hazzard,2005,3,Comedy,,,,Action | Adventure | Comedy
+695,The Emperor's New Groove,2000,3,Comedy,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Fantasy
+696,The Faculty,1998,3,,Fantasy/Sci-Fi,Horror,,Horror | Mystery | Sci-Fi | Thriller
+697,The Fast and the Furious,2001,4,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Thriller
+698,The Fifth Element,1997,5,Action/Adventure,Fantasy/Sci-Fi,Romance,,Action | Adventure | Romance | Sci-Fi | Thriller
+699,The Forbidden Kingdom,2008,2,Action/Adventure,Fantasy/Sci-Fi,Romance,, Action | Adventure | Fantasy | Romance
+700,The Ghost and the Darkness,1996,3,Action/Adventure,Drama,Horror,,Action | Adventure | Drama | Horror | Thriller
+701,The Girlfriend Experience,2009,1,,Drama,,,Drama
+702,The Godfather,1972,5,,Drama,Crime,, Crime | Drama
+703,The Godfather: Part II,1974,5,,Drama,Crime,, Crime | Drama
+704,The Godfather: Part III,1990,4,,Drama,Crime,, Crime | Drama
+705,The Good Shepherd,2006,5,,Drama,Crime,, Crime | Drama
+706,The Goonies,1985,3,Comedy,,Family,,Adventure | Comedy | Family | Mystery
+707,The Green Mile,1999,4,,Drama,Crime,,Crime | Drama | Fantasy
+708,The Guardian,2006,3,Action/Adventure,Drama,,,Action | Adventure | Drama
+709,The Hangover,2009,5,Comedy,,Crime,,Comedy | Crime
+710,The Hangover Part II,2011,4,Comedy,,,,Comedy
+711,The Happening,2008,2,,Fantasy/Sci-Fi,,,Sci-Fi | Thriller
+712,The Heartbreak Kid,2007,3,Comedy,,Romance,,Comedy | Romance
+713,The Hills Have Eyes,2006,3,,,Horror,,Horror | Thriller
+714,The Hobbit,1977,2,,Fantasy/Sci-Fi,Family,Animation,Animation | Fantasy | Family
+715,The Hunchback of Notre Dame,1996,4,Action/Adventure,Drama,Musical,Animation,Animation | Adventure | Drama | Family | Musical
+716,The Hunt For Gollum,2009,3,Action/Adventure,Fantasy/Sci-Fi,,Short,Short | Action | Adventure | Fantasy
+717,The Hurt Locker,2008,4,,Drama,War,,Drama | Thriller | War
+718,The Illusionist,2006,5,,Drama,Romance,,Drama | Mystery | Romance | Thriller
+719,The Imaginarium of Doctor Parnassus,2009,4,Action/Adventure,Fantasy/Sci-Fi,,, Adventure | Fantasy | Mystery
+720,The Incredible Hulk,2008,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+721,The Incredibles,2004,4,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Action | Adventure | Family | Sci-Fi | Thriller
+722,The Informant!,2009,4,Comedy,Drama,Crime,,Comedy | Drama | Thriller
+723,The Insider,1999,4,,Drama,,Biography,Biography | Drama | Thriller
+724,The Jerk,1979,4,Comedy,,,,Comedy
+725,The Jungle Book,1967,3,Action/Adventure,,Musical,Animation,Animation | Adventure | Family | Musical
+726,The Jungle Book 2,2003,3,Action/Adventure,,Musical,Animation,Adventure | Animation | Family | Musical
+727,The Karate Kid,1984,3,,,Family,Sport,Family | Sport
+728,The Karate Kid,2010,3,Action/Adventure,Drama,Family,Sport,Action | Drama | Family | Sport
+729,The Kid,2000,2,Comedy,Fantasy/Sci-Fi,Family,,Comedy | Family | Fantasy
+730,The Kite Runner,2007,5,,Drama,Romance,,Drama | Romance
+731,The Land Before Time,1988,3,Action/Adventure,Drama,Family,Animation,Adventure | Family | Drama | Animation
+732,The Last Boy Scout,1991,3,Comedy,,,,Action | Comedy | Mystery | Thriller
+733,The Last Castle,2001,5,Action/Adventure,Drama,,,Action | Drama | Thriller
+734,The Last King of Scotland,2006,4,,Drama,,Biography,Biography | Drama | History | Thriller
+735,The Last Samurai,2003,5,Action/Adventure,Drama,War,,Action | Adventure | Drama | War
+736,The League of Extraordinary Gentlemen,2003,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Fantasy | Sci-Fi
+737,The Lion King,1994,4,Action/Adventure,,Musical,Animation,Animation | Adventure | Drama | Family | Musical | Romance
+738,The Little Mermaid,1989,4,,Fantasy/Sci-Fi,Musical,Animation,Animation | Family | Fantasy | Musical | Romance
+739,The Longest Yard,2005,2,Comedy,Drama,Crime,Sport,Comedy | Crime | Drama | Sport
+740,The Lord of the Rings,1978,3,Action/Adventure,Fantasy/Sci-Fi,,Animation,Animation | Adventure | Drama | Fantasy
+741,The Lord of the Rings: The Fellowship of the Ring,2001,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+742,The Lord of the Rings: The Return of the King,2003,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+743,The Lord of the Rings: The Two Towers,2002,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+744,The Lost World: Jurassic Park,1997,5,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Horror | Sci-Fi | Thriller
+745,The Man in the Iron Mask,1998,4,Action/Adventure,Drama,,,Action | Adventure | Drama | History
+746,The Mask,1994,4,Comedy,Fantasy/Sci-Fi,Crime,,Action | Comedy | Crime | Fantasy
+747,The Mask of Zorro,1998,4,Action/Adventure,,Romance,Western,Action | Adventure | Comedy | Romance | Western
+748,The Matrix,1999,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+749,The Matrix Reloaded,2003,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+750,The Matrix Revolutions,2003,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+751,The Men Who Stare at Goats,2009,3,Comedy,,War,,Comedy | War
+752,The Message,1976,5,,Drama,,Foreign,Biography | Drama
+753,The Mighty,1998,4,Comedy,Drama,,,Comedy | Drama
+754,The Mist,2007,4,,Drama,Horror,,Drama | Horror | Sci-Fi | Thriller
+755,The Mummy,1999,3,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Comedy | Fantasy | Horror | Thriller
+756,The Mummy Returns,2001,3,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Fantasy | Horror | Thriller
+757,The Mummy: Tomb of the Dragon Emperor,2008,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Thriller
+758,The Musketeer,2001,3,Action/Adventure,Drama,Romance,,Action | Drama | Adventure | Romance
+759,The Naked Gun 2½: The Smell of Fear,1991,3,Comedy,,Crime,,Action | Comedy | Crime
+760,The Naked Gun: From the Files of Police Squad!,1988,4,Comedy,,Crime,,Action | Comedy | Crime
+761,The Nightmare Before Christmas,1993,3,,Fantasy/Sci-Fi,Musical,Animation,Animation | Family | Fantasy | Musical
+762,The Notebook,2004,5,,Drama,Romance,,Drama | Romance
+763,The Nutty Professor,1996,3,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Fantasy | Romance | Sci-Fi
+764,The Official Film of the 2006 FIFA World Cup (TM),2006,4,,,,Documentary,Documentary
+765,The Omen,2006,3,,,Horror,,Horror | Thriller
+766,The Other Boleyn Girl,2008,4,,Drama,Romance,Biography,Biography | Drama | History | Romance
+767,The Other Guys,2010,4,Comedy,,Crime,,Action | Comedy | Crime
+768,The Others,2001,4,,,Horror,,Horror | Mystery | Thriller
+769,The Patriot,2000,5,Action/Adventure,Drama,War,,Action | Drama | War
+770,The Perfect Storm,2000,3,Action/Adventure,Drama,,,Adventure | Drama | Action | Thriller
+771,The Pianist,2002,5,,Drama,War,Biography,Biography | Drama | War 
+772,The Pink Panther,2006,4,Comedy,,Crime,,Comedy | Crime | Mystery
+773,The Pink Panther 2 ,2009,3,Comedy,,Crime,,Adventure | Comedy | Crime | Mystery
+774,The Pink Panther Strikes Again,1976,3,Comedy,Fantasy/Sci-Fi,Crime,,Comedy | Crime | Family | Sci-Fi
+775,The Pixar Shorts: A Short History,2007,4,,,,Short,Documentary | Short
+776,The Polar Express,2004,4,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Family | Fantasy
+777,The Postman,1997,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Drama | Sci-Fi
+778,The Princess Bride,1987,4,Comedy,Fantasy/Sci-Fi,Romance,,Adventure | Comedy | Family | Fantasy
+779,The Proposal,2009,4,Comedy,Drama,Romance,,Comedy | Drama | Romance
+780,The Recruit,2003,5,Action/Adventure,,,,Action | Thriller
+781,The Return of the King,1980,2,Action/Adventure,Fantasy/Sci-Fi,Musical,Animation,Animation | Adventure | Fantasy | Musical
+782,The Ring,2002,4,,,Horror,,Horror | Mystery | Thriller
+783,The Road,2009,4,Action/Adventure,Drama,,,Adventure | Drama | Thriller
+784,The Road to El Dorado,2000,4,Action/Adventure,,Family,Animation,Animation | Adventure | Comedy | Family
+785,The Rock,1996,3,Action/Adventure,,,,Action | Adventure | Thriller
+786,The Running Man,1987,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Comedy | Sci-Fi | Thriller
+787,The Santa Clause 3: The Escape Clause,2006,1,Comedy,Fantasy/Sci-Fi,Family,,Adventure | Comedy | Family | Fantasy
+788,The School of Rock,2003,5,Comedy,,Music,,Comedy | Music
+789,The Scorpion King,2002,3,Action/Adventure,Fantasy/Sci-Fi,Romance,,Action | Adventure | Fantasy | Romance | Thriller
+790,The Shawshank Redemption,1994,5,,Drama,,,Drama
+791,The Silence of the Lambs,1991,3,,,Crime,,Crime | Thriller
+792,The Simpsons Movie,2007,5,Comedy,,,Animation,Animation | Comedy
+793,The Sixth Sense,1999,5,,Drama,Horror,,Drama | Mystery | Thriller
+794,The Spiderwick Chronicles,2008,3,Action/Adventure,Fantasy/Sci-Fi,Family,,Adventure | Family | Fantasy
+795,The Stepfather,2009,2,,,Horror,,Mystery | Thriller
+796,The Sword in the Stone,1963,3,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Family | Fantasy
+797,The Taking of Pelham 1 2 3,2009,3,,,Crime,,Action | Crime | Thriller 
+798,The Tale of Despereaux,2008,4,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Adventure | Animation | Comedy | Family | Fantasy
+799,The Terminal,2004,5,Comedy,,Romance,,Drama | Romance | Comedy
+800,The Terminator,1984,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi
+801,The Texas Chainsaw Massacre,2003,3,,,Horror,,Crime | Horror | Thriller
+802,The Three Musketeers,2011,2,Action/Adventure,,Romance,,Action | Adventure | Romance
+803,The Tourist,2010,4,Action/Adventure,,Romance,,Action | Mystery | Romance | Thriller
+804,The Town,2010,5,,Drama,Crime,,Crime | Drama | Thriller
+805,The Triangle,2001,3,Action/Adventure,,,,Thriller
+806,The Tuxedo,2002,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Comedy | Sci-Fi | Thriller
+807,The Upside of Anger,2005,4,Comedy,Drama,Romance,,Drama | Comedy | Romance
+808,The Usual Suspects,1994,5,,,Crime,,Crime | Mystery | Thriller
+809,The Weather Man,2005,3,Comedy,Drama,,,Comedy | Drama  
+810,The Wedding Singer,1998,4,Comedy,,Romance,,Comedy | Romance | Music
+811,The Whole Nine Yards,2000,3,Comedy,Drama,Crime,,Adventure | Comedy | Crime | Drama 
+812,The Whole Wide World,1996,5,,Drama,Romance,Biography,Biography | Drama | Romance
+813,The Wicker Man,2006,3,,Drama,Horror,,Drama | Horror | Mystery | Thriller
+814,The World Is Not Enough,1999,3,Action/Adventure,,,,Action | Adventure | Thriller
+815,The Young Victoria,2009,4,,Drama,Romance,Biography,Biography | Drama | History | Romance
+816,There Will be Blood,2007,5,,Drama,,,Drama
+817,There's Something About Mary,1998,5,Comedy,,Romance,,Comedy | Romance
+818,This Is It,2009,4,,,Music,Documentary,Documentary | Music
+819,Thor,2011,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy
+820,Three Kings,1999,4,Comedy,Drama,War,,Action | Adventure | Comedy | Drama | War
+821,Three to Tango,1999,2,Comedy,,Romance,,Comedy | Romance
+822,Titanic,1997,4,,Drama,Romance,,Drama | Romance
+823,"To Sir, with Love",1967,5,,Drama,,,Drama
+824,Tomcats,2001,3,Comedy,,,,Comedy
+825,Tommy Boy,1995,3,Comedy,Drama,,,Adventure | Comedy | Drama
+826,Tomorrow Never Dies,1997,3,Action/Adventure,,,,Action | Adventure | Thriller
+827,Top Gun,1986,3,Action/Adventure,,Romance,,Action | Romance
+828,Total Recall,1990,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+829,Toy Story,1995,4,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Fantasy
+830,Toy Story 2,1999,4,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Fantasy
+831,Toy Story 3,2010,5,Action/Adventure,Fantasy/Sci-Fi,Family,Animation, Animation | Adventure | Comedy | Family | Fantasy
+832,Trading Places,1983,4,Comedy,,,,Comedy
+833,Transformers,2007,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+834,Transformers: Dark of the Moon,2011,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi
+835,Transformers: Revenge of the Fallen,2009,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+836,Trapped in Paradise,1994,2,Comedy,,Crime,,Adventure | Comedy | Crime | Romance
+837,Treasure Planet,2002,3,Action/Adventure,,Romance,Animation,Animation | Adventure | Family | Romance
+838,TRON: Legacy,2010,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+839,Tropic Thunder,2008,4,Comedy,,War,,Action | Adventure | Comedy | War
+840,Troy,2004,5,Action/Adventure,Drama,War,,Action | Drama | History | Romance | War
+841,True Grit,2010,4,Action/Adventure,Drama,,Western,Adventure | Drama | Western
+842,Turbulence,1997,3,Action/Adventure,,,,Action | Thriller
+843,Turner & Hooch,1989,3,Comedy,,Crime,,Comedy | Crime | Thriller
+844,Twelve Monkeys,1995,3,,Fantasy/Sci-Fi,,,Mystery | Sci-Fi | Thriller
+845,Twisted,2004,2,,Drama,Crime,,Crime | Drama | Mystery | Thriller 
+846,Twister,1996,3,Action/Adventure,Drama,,,Action | Adventure | Drama | Thriller
+847,U-571,2000,4,Action/Adventure,Drama,War,,Action | Drama | War
+848,Ultraviolet,2006,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Fantasy | Sci-Fi | Thriller
+849,Un Indien dans la Ville,1994,3,Action/Adventure,,Family,Foreign,Comedy | Family | Adventure
+850,Undercover Brother,2002,4,Comedy,,,,Action | Comedy
+851,Unfaithful,2002,3,,Drama,,,Drama | Thriller
+852,Unknown,2011,4,,Drama,,,Drama | Mystery | Thriller
+853,Unstoppable,2010,4,Action/Adventure,Drama,,,Action | Drama | Thriller
+854,Up,2009,5,Action/Adventure,,Family,Animation,Animation | Adventure | Comedy | Family
+855,Up in the Air,2009,5,,Drama,Romance,,Drama | Romance
+856,V for Vendetta,2006,5,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+857,Valkyrie,2008,4,,Drama,War,,Drama | History | Thriller | War
+858,Van Helsing,2004,4,Action/Adventure,Fantasy/Sci-Fi,Horror,,Action | Adventure | Horror | Fantasy | Thriller
+859,Van Wilder,2002,3,Comedy,,Romance,,Comedy | Romance
+860,Van Wilder: Freshman Year,2009,1,Comedy,,,,Comedy
+861,Vanilla Sky,2001,4,,Fantasy/Sci-Fi,Romance,,Mystery | Romance | Sci-Fi | Thriller
+862,Vantage Point,2008,4,,Drama,Crime,,Crime | Drama | Thriller
+863,Vegas Vacation,1997,3,Comedy,,,,Comedy
+864,Vertical Limit,2000,3,Action/Adventure,,,,Action | Adventure | Thriller
+865,Very Bad Things,1998,3,Comedy,,Crime,,Comedy | Crime | Thriller
+866,Vicky Cristina Barcelona,2008,3,,Drama,Romance,, Drama | Romance
+867,Volcano,1997,3,Action/Adventure,Drama,,,Action | Thriller | Drama
+868,Waiting...,2005,4,Comedy,,,,Comedy
+869,Walk Hard: The Dewey Cox Story,2007,4,Comedy,Drama,Music,,Comedy | Drama | Music
+870,WALL·E,2008,5,Action/Adventure,Fantasy/Sci-Fi,Family,Animation,Animation | Adventure | Comedy | Family | Romance | Sci-Fi
+871,Wanted,2008,4,Action/Adventure,,Crime,,Action | Crime | Thriller
+872,War of the Worlds,2005,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi | Thriller
+873,Wasabi,2001,3,Comedy,Drama,Crime,,Action | Drama | Comedy | Crime | Thriller
+874,Waterworld,1995,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Drama | Sci-Fi | Thriller
+875,Wayne's World,1992,3,Comedy,,Music,,Comedy | Music
+876,Wedding Crashers,2005,4,Comedy,,Romance,,Comedy | Romance
+877,West Beyrouth,1998,4,,Drama,,Foreign,Drama
+878,What Women Want,2000,4,Comedy,Fantasy/Sci-Fi,Romance,,Comedy | Fantasy | Romance
+879,When a Stranger Calls,2006,2,,,Horror,,Horror | Thriller
+880,When We Left Earth: The NASA Missions,2008,4,,,,Documentary,Documentary | History
+881,Where Do We Go Now?,2011,5,Comedy,Drama,,Foreign,Comedy | Drama
+882,Where the Wild Things Are,2009,3,Action/Adventure,Drama,Family,, Adventure | Drama | Family | Fantasy
+883,White Oleander ,2002,4,,Drama,,,Drama
+884,Wild Target,2010,4,Comedy,Drama,Crime,,Action | Comedy | Crime | Drama | Romance | Thriller
+885,Wild Things,1998,4,Comedy,Drama,Crime,,Comedy | Crime | Drama | Mystery | Thriller
+886,Wild Wild West,1999,3,Comedy,Fantasy/Sci-Fi,,Western,Action | Western | Comedy | Sci-Fi
+887,Willy Wonka & the Chocolate Factory,1971,3,Comedy,,Family,,Family | Musical | Fantasy | Comedy
+888,Wimbledon,2004,2,Comedy,,Romance,Sport,Comedy | Romance | Sport
+889,Winnie The Pooh,2011,4,,,Musical,Animation,Animation | Family | Musical
+890,Without a Paddle,2004,2,Comedy,,,,Adventure | Comedy | Mystery
+891,X-Men,2000,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi
+892,X-Men 2,2003,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi
+893,X-Men: The Last Stand,2006,3,Action/Adventure,Fantasy/Sci-Fi,,,Action | Sci-Fi | Thriller
+894,xXx,2002,3,Action/Adventure,,,,Adventure | Action | Thriller
+895,Yamakasi - Les Samouraïs des Temps Modernes,2001,3,Action/Adventure,Drama,Crime,Foreign,Action | Drama | Crime
+896,Year One,2009,3,Comedy,,,,Adventure | Comedy 
+897,You've Got Mail,1998,5,Comedy,,Romance,,Comedy | Romance
+898,"Yours, Mine and Ours",2005,2,Comedy,,Family,,Comedy | Family | Romance
+899,Youth in Revolt,2009,4,Comedy,Drama,Romance,,Comedy | Drama | Romance
+900,Zombieland,2009,4,Comedy,,Horror,,Action | Adventure | Comedy | Horror 
+901,Zoolander,2001,3,Comedy,,,,Comedy
+902,Zoom,2006,2,Action/Adventure,Fantasy/Sci-Fi,Family,,Action | Adventure | Family | Sci-Fi
+,Senna,2010,4,,,,Documentary,Documentary | Biography | Sport
+,The Devil Wears Prada,2006,3,Comedy,Drama,Romance,,Comedy | Drama | Romance
+,Transporter 3,2008,3,Action/Adventure,`,Crime,, Action | Adventure | Crime | Thriller
+,9,2009,3,Action/Adventure,Fantasy/Sci-Fi,,Animation,Animation | Action | Adventure | Fantasy | Mystery | Sci-Fi | Thriller
+,Real Steel,2011,3,Action/Adventure,Fantasy/Sci-Fi,,Sport,Action | Drama | Sci-Fi | Sport
+,The Change-Up,2011,2,Comedy,,,,Comedy
+,Black Dynamite,2009,3,Comedy,,,,Action | Comedy
+,Beverly Hills Cop,1984,3,Action/Adventure,Drama,Crime,,Action | Comedy | Crime | Drama | Thriller
+,Beverly Hills Cop II,1987,3,Action/Adventure,,Crime,,Action | Comedy | Crime | Thriller
+,Jack,1996,1,Comedy,Fantasy,,,Comedy | Drama | Fantasy
+,L.A. Confidential,1997,5,,Drama,Crime,,Crime | Drama | Mystery | Thriller
+,Contagion,2011,3,,Drama,,,Drama | Thriller
+,Moon,2009,4,,Fantasy/Sci-Fi,,,Drama | Mystery | Sci-Fi
+,The Hills Have Eyes 2,2007,1,,,Horror,,Horror | Thriller  
+,The Secret World of Arrietty,2012,3,Action/Adventure,Fantasy/Sci-Fi,Family,Animation, Animation | Adventure | Family | Fantasy
+,Hugo,2011,4,Action/Adventure,Drama,Family,,Adventure | Drama | Family | Mystery
+,"Kill Bill, Volume 2",2004,4,,Drama,Crime,, Crime | Drama | Thriller
+,The Fugitive,1993,4,Action/Adventure,,Crime,, Action | Adventure | Crime | Mystery | Thriller
+,The Aviator,2004,5,,Drama,,Biography,Biography | Drama
+,The Lorax,2012,3,,Fantasy/Sci-Fi,Family,Animation,Animation | Family | Fantasy
+,Unforgiven,1992,4,,Drama,,Western,Drama | Western
+,Payback,1999,3,Action/Adventure,Drama,Crime,,Action | Crime | Drama | Thriller
+,Reservoir Dogs,1992,5,,,Crime,, Crime | Mystery | Thriller
+,Quick Change,1990,4,Comedy,,Crime,,Comedy | Crime
+,The Hunger Games,2012,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Drama | Sci-Fi | Thriller
+,The Dilemma,2011,2,Comedy,Drama,,,Comedy | Drama
+,Catching Hell,2011,3,,,,Documentary, Documentary | Sport
+,Green Lantern,2011,2,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Fantasy | Sci-Fi | Thriller
+,Pleasantville,1998,4,Comedy,Fantasy/Sci-Fi,,,Comedy | Drama | Fantasy
+,War Horse,2011,5,,Drama,War,, Drama | History | War
+,Armored,2009,2,Action/Adventure,,Crime,,Action | Crime | Thriller
+,Mission: Impossible - Ghost Protocol,2011,4,Action/Adventure,,,,Action | Adventure | Thriller
+,Big Fish,2003,4,Action/Adventure,Fantasy/Sci-Fi,,,Adventure | Drama | Fantasy | Mystery
+,Meet Joe Black,2003,3,,Fantasy/Sci-Fi,Romance,,Drama | Fantasy | Mystery | Romance
+,Letters from Iwo Jima,2006,5,,Drama,War,,Drama | History | War
+,Castle in the Sky,1989,5,Action/Adventure,,,Animation, Animation | Action | Adventure
+,The Village,2004,3,,Drama,,,Drama | Mystery | Thriller
+,City of God,2002,4,,Drama,Crime,,Crime | Drama
+,Babel,2006,4,,Drama,,,Drama
+,Chronicle,2012,3,,Fantasy/Sci-Fi,,,Drama | Sci-Fi | Thriller
+,Leon: The Professional,1994,4,,Drama,Crime,,Crime | Drama | Thriller
+,Mystery Man,1999,1,Comedy,Fantasy/Sci-Fi,,,Action | Comedy | Fantasy
+,The Vow,2012,2,,Drama,Romance,,Drama | Romance
+,The Girl with the Dragon Tattoo,2011,4,,Drama,Crime,,Crime | Drama | Mystery | Thriller
+,The Avengers ,2012,4,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi
+,The Guard,2011,4,Comedy,,Crime,,Comedy | Crime | Thriller
+,Shrek Forever After,2010,3,Comedy,,Family,Animation,Animation | Action | Adventure | Comedy | Family | Fantasy
+,Rambo: First Blood Part II,1985,3,Action/Adventure,,War,, Action | Adventure | Thriller | War
+,2001: A Space Odyssey,1968,4,Action/Adventure,Fantasy/Sci-Fi,,,Adventure | Sci-Fi
+,The Damned United,2009,5,Comedy,Drama,,Sport,Biography | Comedy | Drama | Sport
+,American History X,1998,4,,Drama,Crime,,Crime | Drama
+,Prometheus,2012,4,Action/Adventure,Fantasy/Sci-Fi,,,Adventure | Sci-Fi | Thriller
+,The Boogeyman,1980,2,,,Crime,,Crime | Horror
+,The Grey,2011,3,Action/Adventure,Drama,,,Action | Adventure | Drama | Thriller
+,MegaFault,2009,1,Action/Adventure,Fantasy/Sci-Fi,,,Action | Adventure | Sci-Fi
+,Miss March,2009,1,,,,,
+,Nausicaä of the Valley of the Wind,1984,4,Action/Adventure,Fantasy/Sci-Fi,,Animation,Animation | Action | Adventure | Fantasy | Sci-Fi
+,Casino,1995,5,,Drama,Crime,Biography,Biography | Crime | Drama
+,Red Cliff,2008,5,Action/Adventure,Drama,War,,Action | Adventure | Drama | History | War
+,Miami Vice,2006,3,,,,,
+,Seven Years in Tibet,1997,3,,,,,
+,Virus,1999,1,,,,,
+,Drop Dead Gorgeous,1999,2,,,,,
+,The Red Violin (Le violon rouge),1998,4,,,,,
+,A Thousand Words ,2012,1,,,,,
+,Wrath of the Titans,2012,2,,,,,
+,John Carter,2012,3,,,,,
+,21 Jump Street,2012,4,,,,,
+,"Good Night, And Good Luck",2005,5,,,,,
+,Mirror Mirror,2012,2,,,,,
+,The Bucket List,2007,3,,,,,
+,Captain America,2012,4,,,,,
+,The Italian Job,2003,4,,,,,
+,Monsters,2010,2,,,,,
+,Training Day,2001,4,,,,,
+,We Were Soldiers,2002,4,,,,,
+,The Crying Game,,4,,,,,
+,Winter's Bone,,4,,,,,
+,"The Cook, Thief, His Wife and Her Lover",,2,,,,,
+,The Piano Teacher,,2,,,,,
+,Coming to America,,3,,,,,
+,Fahrenheit 451,1966,4,,,,,
+,Cloud Atlas,,4,,,,,
+,Get The Gringo,,4,,,,,
+,The Man Who Wasn't There,2001,5,,,,,
+,The 6th Day,2000,2,,,,,
+,A Bronx Tale,1993,5,,,,,
+,Unthinkable,,3,,,,,
+,Primal Fear,,4,,,,,
+,Margin Call,,5,,,,,
+,Stripes,1981,3,,,,,
+,The Conversation,,4,,,,,
+,Argo,,5,,,,,
+,The Game,,4,,,,,
