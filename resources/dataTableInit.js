@@ -480,7 +480,8 @@ $(document).ready(function() {
   var loadAllMovies = function() {
     API.call({method: 'all'}, function(data) {
       if (data != null) {
-        buildTable(data);
+        allData = _.union(allData, data);
+        buildTable(allData);
         $.fn.dataTableExt.afnFiltering.push(afnFiltering());
         progress.stop();
       }
@@ -869,6 +870,7 @@ $('#previewAvatars').iphoneStyle({
   var loadPage = function() {
     progress.start();
     loadAllMovies();
+    //load(); // old way of multi-loading movies
     loadAllTops();
   }
   
