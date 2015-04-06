@@ -470,42 +470,19 @@ $(document).ready(function() {
     API.call(query, loadDataCallback, {skip: skip, limit: limit});
   }
   
-  var multiload = function(skip, limit) {
-    //console.log('Multiload skip: ', skip, ' limit: ', limit);
-    $.get(
-      buildUrl(skip, limit+1),
-      {},
-      function(data) {
-        if (data != null) {
-          var more = data.length > limit;
-          if (more)
-            data = _.initial(data);
-          allData = _.union(allData, data);
-          if(allData.length >= settings.maxLimit) {
-            allData = _.first(allData, settings.maxLimit);
-            more = false;
-          }
-          if (more) {
-            multiload(skip+limit, limit);
-            progress.step(10);
-          } else {
-            buildTable(allData);
-            $.fn.dataTableExt.afnFiltering.push(afnFiltering());
-            progress.stop();
-            //$('.focus').trigger('focus');
-          }
-         
-        }
-      },
-      "json"
-    );
-  }
-  
    var load = function() {
     progress.start();
     var limit = settings.maxLimit < settings.limitPerRequest? settings.maxLimit: settings.limitPerRequest;
-    //for (var i=0; i<11; i++)
     multiload2(0, limit);
+  }
+  
+  var loadAllMovies = function() {
+    API.call({method: 'all'}, function(data) {
+      if (data != null) {
+        buildTable(data);
+        $.fn.dataTableExt.afnFiltering.push(afnFiltering());
+      }
+    });
   }
   
   var loadAllTops = function() {
@@ -887,6 +864,6 @@ $('#previewAvatars').iphoneStyle({
     });
   });
 
-  load();
+  loadAllMovie();
   loadAllTops();
 });

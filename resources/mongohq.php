@@ -83,6 +83,16 @@ class MongoHQ {
     }
     return $results;
   }
+
+  public function all() {
+    return $this->_all($this->count(), 100, 0);
+  }
+
+  private function _all($total, $limit, $skip) {
+    if ($skip >= $total)
+      return array();
+    return array_merge($this->find(null, $limit, $skip), $this->_all($total, $limit, $skip+$limit));
+  }
   
   public function count() {
     return $this->getCollection($collection)->count();
@@ -122,10 +132,12 @@ class MongoHQ {
   }
 }
 /*
-$mongoHq = new MongoHQ();
-$results = $mongoHq->find();
+$mongoHq = new MongoHQ(array('collectionName'=>'watched'));
+$results = $mongoHq->all();
+$count = count($results);
+print "count: {$count}";
 foreach ($results as $movie) {
-  echo "<p>movie title: " . $movie['title'] . "</p></br>";
+  echo "<p>movie title: " . $movie['title'] . "</p>";
 }
-*/    
+*/
 ?>

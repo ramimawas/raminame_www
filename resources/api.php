@@ -279,6 +279,13 @@ class API {
     $response->set(new Status(200), $movies_db);
     return $response;
   }
+
+  public function listAllMovies() {
+    $response = new Response();
+    $movies_db = $this->db->all();
+    $response->set(new Status(200), $movies_db);
+    return $response;
+  }
   
   public function dispatch() {
     $response = new Response();
@@ -294,6 +301,9 @@ class API {
             break;
           case 'list':
             $response = $this->listMovie($_GET["imdbid"], $_GET["rid"], $_GET["limit"], $_GET["skip"]);
+            break;
+          case 'all':
+            $response = $this->listAllMovies();
             break;
           case 'fix':
             $response = $this->fixMovie($_GET["imdbid"], $_GET["rid"], $_GET["rating"]);
