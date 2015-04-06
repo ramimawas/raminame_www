@@ -69,6 +69,7 @@ class MongoHQ {
     if (empty($skip))
       $skip = -1;
     try {
+      $time_start1 = microtime(true);
       $collection = $this->getCollection($collection);
       $cursor = $collection->find($query);
       
@@ -76,8 +77,12 @@ class MongoHQ {
         $cursor = $cursor->limit($limit);
       if ($skip != null && $skip != -1)
         $cursor = $cursor->skip($skip);
-      foreach ($cursor as $obj)
-        $results[] = $obj;
+      $cursor->batchSize(4000);
+      //foreach ($cursor as $obj) $results[] = $obj;
+      $results = iterator_to_array($cursor, false);
+      $time_start4 = microtime(true);
+      $totalTime = $time_start4 - $time_start1;
+      //print "find: {$totalTime}<br/>";
     } catch (Exception $e) {
       var_dump($e);
     }
@@ -85,14 +90,7 @@ class MongoHQ {
   }
 
   public function all() {
-    //return $this->_all($this->count(), 100, 0);
-    return $this->find(null, $this->count(), 0);
-  }
-
-  private function _all($total, $limit, $skip) {
-    if ($skip >= $total)
-      return array();
-    return array_merge($this->find(null, $limit, $skip), $this->_all($total, $limit, $skip+$limit));
+    return $this->find();
   }
   
   public function count() {
