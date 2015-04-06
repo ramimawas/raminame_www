@@ -85,7 +85,8 @@ class MongoHQ {
   }
 
   public function all() {
-    return $this->_all($this->count(), 100, 0);
+    //return $this->_all($this->count(), 100, 0);
+    return $this->find(null, $this->count(), 0);
   }
 
   private function _all($total, $limit, $skip) {
