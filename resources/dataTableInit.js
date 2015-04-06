@@ -135,6 +135,7 @@ $(document).ready(function() {
         html.push('<div><span class="link' + preview + '" filter="' + field + '" value="' + name + '" title="' + name + '">' + cap(name2) + '</span><span style="float: right; padding-right: 5px">' + count + ' | ' + rating + '</span></div>');
     });
     $(tagIds[field]).html(html.join(''));
+    progress.step(14);
   };
   
   var top = {};
@@ -481,6 +482,7 @@ $(document).ready(function() {
       if (data != null) {
         buildTable(data);
         $.fn.dataTableExt.afnFiltering.push(afnFiltering());
+        progress.stop();
       }
     });
   }
@@ -498,7 +500,7 @@ $(document).ready(function() {
     $: $(tagIds.progressBar),
     start: function() {
       progress.$[0].style.display = 'block';
-      progress.$.progressbar({value: 10});
+      progress.$.progressbar({value: 4});
     },
     step: function(step) {
       progress.$.progressbar('value', progress.$.progressbar('value') + step);
@@ -864,6 +866,12 @@ $('#previewAvatars').iphoneStyle({
     });
   });
 
-  loadAllMovies();
-  loadAllTops();
+  var loadPage = function() {
+    progress.start();
+    loadAllMovies();
+    loadAllTops();
+  }
+  
+  loadPage();
+  
 });
