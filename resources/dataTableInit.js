@@ -864,6 +864,6 @@ $('#previewAvatars').iphoneStyle({
     });
   });
 
-  loadAllMovie();
+  loadAllMovies();
   loadAllTops();
 });
